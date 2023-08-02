@@ -1,0 +1,119 @@
+v1Replicator:
+  timeout: 60
+  name: ${self:provider.stage}-v1-${self:service}-rerlicator
+  handler: src/ledger-replicator/handler.handler
+  events:
+    - stream:
+        arn: arn:aws:kinesis:us-east-1:909101490035:stream/carbon-stream-${self:provider.stage}
+        batchSize: 2
+        startingPosition: LATEST
+        maximumRetryAttempts: 10
+        enabled: true
+  ssmToEnvironment:
+    - DB_PASSWORD
+    - MAPBOX_PK
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
+  iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-replicator-role
+  iamRoleStatementsInherit: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:*
+        - sns:*
+        - kinesis:*
+        - ses:*
+        - qldb:*
+        - rds:*
+        - s3:*
+      Resource: "*"
+
+v1DataImporter:
+  timeout: 60
+  name: ${self:provider.stage}-v1-${self:service}-data-importer
+  handler: src/data-importer/handler.handler
+  events:
+    - schedule:
+        rate: cron(0 1 * * ? *)
+        enabled: true
+        input:
+          importTypes: ITMO_SYSTEM
+  ssmToEnvironment:
+    - DB_PASSWORD
+    - ITMO_API_KEY
+    - ITMO_EMAIL
+    - ITMO_PASSWORD
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
+  iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-data-importer-role
+  iamRoleStatementsInherit: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:*
+        - sns:*
+        - kinesis:*
+        - ses:*
+        - qldb:*
+        - rds:*
+        - s3:*
+      Resource: "*"
+
+v1AsyncOperationsHandler:
+  name: ${self:provider.stage}-v1-${self:service}-async-operations-handler
+  timeout: 60
+  handler: src/async-operations-handler/handler.handler
+  events:
+    - sqs:
+        arn: arn:aws:sqs:us-east-1:909101490035:AsyncQueue${self:provider.stage}.fifo
+        batchSize: 10
+  ssmToEnvironment:
+    - SMTP_USERNAME
+    - SMTP_PASSWORD
+    - DB_PASSWORD
+    - MRV_API_TOKEN
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
+  iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-async-operations-role
+  iamRoleStatementsInherit: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:*
+        - sns:*
+        - kinesis:*
+        - ses:*
+        - qldb:*
+        - rds:*
+        - s3:*
+      Resource: "*"
+
+v1SetupHandler:
+  timeout: 60
+  name: ${self:provider.stage}-v1-${self:service}-setup-handler
+  handler: src/setup/handler.handler
+  ssmToEnvironment:
+    - DB_PASSWORD
+    - SMTP_USERNAME
+    - SMTP_PASSWORD
+  environment:
+    ASYNC_QUEUE_NAME: https://sqs.us-east-1.amazonaws.com/909101490035/AsyncQueuedev.fifo
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
+  iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-setup-role
+  iamRoleStatementsInherit: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:*
+        - sns:*
+        - kinesis:*
+        - ses:*
+        - qldb:*
+        - rds:*
+        - s3:*
+      Resource: "*"

@@ -1,0 +1,10 @@
+customDomain:
+  domainName: cr-api.perlin.net
+  stage: ${self:provider.stage}
+  basePath: ${self:provider.stage}
+  certificateName: 'perlin.net'
+  createRoute53Record: false
+  endpointType: 'edge'
+  securityPolicy: tls_1_2
+  apiType: rest
+  autoDomain: true

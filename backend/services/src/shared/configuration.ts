@@ -1,17 +1,17 @@
 export default () => ({
   stage: process.env.STAGE || "local",
-  systemCountry: process.env.systemCountryCode || "NG",
-  systemCountryName: process.env.systemCountryName || "CountryX",
+  systemCountry: process.env.COUNTRY_CODE || "BS",
+  systemCountryName: process.env.COUNTRY_NAME || "CountryX",
   defaultCreditUnit: process.env.defaultCreditUnit || "ITMO",
   dateTimeFormat: "DD LLLL yyyy @ HH:mm",
   dateFormat: "DD LLLL yyyy",
   database: {
     type: "postgres",
-    host: process.env.DB_HOST || "localhost",
+    host: process.env.DB_HOST || "carbondbdev.c0rjpojmhdkp.us-east-1.rds.amazonaws.com",
     port: parseInt(process.env.DB_PORT) || 5432,
-    username: process.env.DB_USER || "hquser",
-    password: process.env.DB_PASSWORD || "",
-    database: process.env.DB_NAME || "carbondev",
+    username: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME || "carbondbdev",
     synchronize: process.env.NODE_ENV == "prod" ? true : true,
     autoLoadEntities: true,
     logging: ["error"],
@@ -22,26 +22,28 @@ export default () => ({
     adminSecret: process.env.ADMIN_JWT_SECRET || "8654",
   },
   ledger: {
-    name: "carbon-registry-" + (process.env.NODE_ENV || "dev"),
+    host: process.env.LEDGER_TYPE === 'PGSQL' 
+          ? process.env.DB_LEDGER_HOST  || 'carbondbdevevents.c0rjpojmhdkp.us-east-1.rds.amazonaws.com' 
+          : undefined,
+    name: process.env.LEDGER_TYPE === 'PGSQL' ?  `${process.env.DB_NAME}Events` : "carbon-registry-" + (process.env.NODE_ENV || "dev"),
     table: "programmes",
     overallTable: "overall",
     companyTable: "company",
   },
   email: {
-    source: process.env.SOURCE_EMAIL || "info@xeptagon.com",
+    source: process.env.SOURCE_EMAIL || "admin@bioeconomy.co",
     endpoint:
-      process.env.SMTP_ENDPOINT ||
-      "vpce-02cef9e74f152b675-b00ybiai.email-smtp.us-east-1.vpce.amazonaws.com",
-    username: process.env.SMTP_USERNAME || "AKIAUMXKTXDJIOFY2QXL",
+      process.env.SMTP_ENDPOINT || "email-smtp.us-east-1.amazonaws.com",
+    username: process.env.SMTP_USERNAME,
     password: process.env.SMTP_PASSWORD,
     disabled: process.env.IS_EMAIL_DISABLED === "true" ? true : false,
     disableLowPriorityEmails:
       process.env.DISABLE_LOW_PRIORITY_EMAIL === "true" ? true : false,
   },
   s3CommonBucket: {
-    name: "carbon-common-" + (process.env.NODE_ENV || "dev"),
+    name: "cr-perlin-common-" + (process.env.NODE_ENV || "dev"),
   },
-  host: process.env.HOST || "https://test.carbreg.org",
+  host: process.env.HOST || "https://carbon-registry.perlin.net",
   liveChat: "https://undp2020cdo.typeform.com/to/emSWOmDo",
   mapbox: {
     key: process.env.MAPBOX_PK,
@@ -51,7 +53,7 @@ export default () => ({
   },
   asyncQueueName:
     process.env.ASYNC_QUEUE_NAME ||
-    "https://sqs.us-east-1.amazonaws.com/302213478610/AsyncQueuedev.fifo",
+    "https://sqs.us-east-1.amazonaws.com/909101490035/AsyncQueuedev.fifo",
   ITMOSystem: {
     endpoint:
       process.env.ITMO_ENDPOINT ||

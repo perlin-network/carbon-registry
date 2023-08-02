@@ -1,0 +1,111 @@
+service: cr-perlin-webui
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage}
+  region: ${opt:region, 'us-east-1'}
+custom:
+  webStaticBucketName: ${self:custom.stageProps.domainName}
+  assets:
+    auto: true
+    targets:
+      - bucket:
+          Ref: WebsiteStaticBucket
+        files:
+        - source: ./build
+          headers:
+            CacheControl: max-age=10
+          globs:
+            - 'pwa/**/*.*'
+            - '*.*'
+        - source: ./build
+          globs: '**/*.json'
+        - source: ./static
+          headers:
+            CacheControl: max-age=10
+          globs:
+            - '.well-known/**/*'
+        - source: ./build
+          headers:
+            CacheControl: max-age=2592000 # 1 month
+          globs:
+            - 'static/**/*.*'
+            - 'fonts/**/*.*'
+  stages:
+    dev:
+      domainName: carbon-registry.perlin.net
+      certificateArn: arn:aws:acm:us-east-1:909101490035:certificate/b10e0588-ab7f-4f83-8088-7da4b64d25a0
+  stageProps:
+    ${self:custom.stages.${self:provider.stage}}
+
+plugins:
+  - serverless-s3-deploy
+  - serverless-s3-remover
+
+resources:
+  Resources:
+    WebsiteStaticBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.webStaticBucketName}
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+          IgnorePublicAcls: false
+          RestrictPublicBuckets: false
+        WebsiteConfiguration:
+          ErrorDocument: index.html
+          IndexDocument: index.html
+    WebsiteBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref 'WebsiteStaticBucket'
+        PolicyDocument:
+          Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: s3:GetObject
+            Resource: !Join ['', ['arn:aws:s3:::', !Ref 'WebsiteStaticBucket', /*]]
+    WebsiteCloudfront:
+      Type: AWS::CloudFront::Distribution
+      DependsOn:
+      - WebsiteStaticBucket
+      Properties:
+        DistributionConfig:
+          Comment: Cloudfront Distribution pointing to S3 bucket
+          Origins:
+          - DomainName: !Select [2, !Split ["/", !GetAtt WebsiteStaticBucket.WebsiteURL]]
+            Id: S3Origin
+            CustomOriginConfig:
+              HTTPPort: '80'
+              HTTPSPort: '443'
+              OriginProtocolPolicy: http-only
+          Enabled: true
+          HttpVersion: 'http2'
+          DefaultRootObject: index.html
+          Aliases:
+          - ${self:custom.stageProps.domainName}
+          DefaultCacheBehavior:
+            AllowedMethods:
+            - GET
+            - HEAD
+            Compress: true
+            TargetOriginId: S3Origin
+            ForwardedValues:
+              QueryString: true
+              Cookies:
+                Forward: none
+            ViewerProtocolPolicy: redirect-to-https
+          PriceClass: PriceClass_100
+          ViewerCertificate:
+            AcmCertificateArn: ${self:custom.stageProps.certificateArn}
+            SslSupportMethod: sni-only
+  Outputs:
+    WebSiteUrl:
+      Value: {"Fn::GetAtt": [WebsiteStaticBucket, WebsiteURL]}
+    WebSiteBucket:
+      Value: {Ref: WebsiteStaticBucket}
+    WebsiteCloudfront:
+      Value: {Ref: WebsiteCloudfront}

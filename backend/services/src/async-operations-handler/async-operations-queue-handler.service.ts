@@ -13,10 +13,12 @@ export class AsyncOperationsQueueHandlerService
   constructor(
     private asyncOperationsHandlerService: AsyncOperationsHandlerService,
     private logger: Logger
-  ) {}
+  ) {
+    logger.log("Constructor initialized", 'AsyncOperationsQueueHandlerService');
+  }
 
   async asyncHandler(event: SQSEvent): Promise<Response> {
-    this.logger.log("Queue asyncHandler started");
+    this.logger.log("[asyncHandler] Queue asyncHandler started");
     const response: Response = { batchItemFailures: [] };
 
     for (const record of event.Records) {
@@ -28,7 +30,7 @@ export class AsyncOperationsQueueHandlerService
           JSON.parse(record.body)
         );
       } catch (exception) {
-        this.logger.log("queue asyncHandler failed", exception);
+        this.logger.log("[asyncHandler] queue asyncHandler failed", exception);
         if (actionType?.toString() === AsyncActionType.Email.toString()) {
           response.batchItemFailures.push({ itemIdentifier: record.messageId });
         } else {

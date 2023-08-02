@@ -6,7 +6,9 @@ import { ProgrammeApprove } from "../dto/programme.approve";
 
 @Injectable()
 export class RegistryClientService {
-  constructor(private configService: ConfigService, private logger: Logger) {}
+  constructor(private configService: ConfigService, private logger: Logger) {
+    logger.log("Constructor initialized", 'RegistryClientService');
+  }
 
   private async sendHttp(endpoint: string, data: any) {
     if (!this.configService.get("registry.syncEnable")) {

@@ -1,0 +1,39 @@
+Resources:
+  LedgerInstance:
+    Type: AWS::QLDB::Ledger
+    Properties: 
+      DeletionProtection: false
+      Name: carbon-registry-${self:provider.stage}
+      PermissionsMode: STANDARD
+
+  KinesisStream:
+    Type: AWS::Kinesis::Stream
+    Properties: 
+      Name: carbon-stream-${self:provider.stage}
+      ShardCount: 1
+
+  QLDBRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: ${self:provider.stage}-v1-${self:service}-qldb-role
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+            - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+                - qldb.amazonaws.com
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonQLDBFullAccess
+        - arn:aws:iam::aws:policy/AmazonKinesisFullAccess
+
+  QLDBStream:
+    Type: AWS::QLDB::Stream
+    Properties: 
+      InclusiveStartTime: '2020-05-29T00:00:00Z'
+      KinesisConfiguration: 
+        StreamArn: !GetAtt KinesisStream.Arn
+      LedgerName: !Ref LedgerInstance
+      RoleArn: !GetAtt QLDBRole.Arn
+      StreamName: qldb-${self:provider.stage}

@@ -6,9 +6,7 @@ import {
   AsyncAction,
   AsyncOperationsInterface,
 } from "./async-operations.interface";
-
-var AWS = require("aws-sdk");
-var sqs = new AWS.SQS();
+import { SQS } from 'aws-sdk';
 
 @Injectable()
 export class AsyncOperationsQueueService implements AsyncOperationsInterface {
@@ -20,34 +18,38 @@ export class AsyncOperationsQueueService implements AsyncOperationsInterface {
     private helperService: HelperService
   ) {
     this.emailDisabled = this.configService.get<boolean>("email.disabled");
+    console.info('[AsyncOperationsQueueService] constructor initialized');
   }
 
   public async AddAction(action: AsyncAction): Promise<boolean> {
-    var params = {};
-
-    if (action.actionType === AsyncActionType.Email) {
-      if (this.emailDisabled) {
-        return false;
-      }
-    }
-
-    params = {
-      MessageAttributes: {
-        actionType: {
-          DataType: "Number",
-          StringValue: action.actionType.toString(),
-        },
-      },
-      MessageBody: JSON.stringify(action.actionProps),
-      MessageGroupId: action.actionType.toString() + new Date().getTime(),
-      QueueUrl: this.configService.get("asyncQueueName"),
-    };
+    console.info('[AddAction] Preparing data %j', action);
 
     try {
-      await sqs.sendMessage(params).promise();
-      this.logger.log("Succefully added to the queue", action.actionType);
+      if (action.actionType === AsyncActionType.Email) {
+        if (this.emailDisabled) {
+          console.info('[AddAction] Email is disabled, skipping the SQS publish', action);
+          return false;
+        }
+      }
+  
+      const request: SQS.Types.SendMessageRequest = {
+        MessageAttributes: {
+          actionType: {
+            DataType: "Number",
+            StringValue: action.actionType.toString(),
+          },
+        },
+        MessageBody: JSON.stringify(action.actionProps),
+        MessageGroupId: action.actionType.toString() + new Date().getTime(),
+        QueueUrl: this.configService.get("asyncQueueName"),
+      };
+
+      console.info('[AddAction] SQS message %j', request);
+      const sqs = new SQS();
+      await sqs.sendMessage(request).promise();
+      this.logger.log("[AddAction] Succefully added to the queue", action.actionType);
     } catch (error) {
-      this.logger.error("Failed when adding to queue", action.actionType);
+      this.logger.error("[AddAction] Failed when adding to queue", action.actionType);
       throw new HttpException(
         this.helperService.formatReqMessagesString(
           "common.addAsyncActionQueueFailed",

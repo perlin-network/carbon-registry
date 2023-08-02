@@ -1,0 +1,8 @@
+Resources:
+  AsyncQueue:
+    Type: AWS::SQS::Queue
+    Properties: 
+      QueueName: AsyncQueue${self:provider.stage}.fifo
+      FifoQueue: true
+      ContentBasedDeduplication: true
+      VisibilityTimeout: 60

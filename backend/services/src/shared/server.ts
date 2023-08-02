@@ -40,7 +40,7 @@ function setupSwagger(
     .setTitle(`${name.replace("APIModule", " API")}`)
     .setDescription(
       `RESTful Web API Documentation.
-      <div id="links-header"><a target="_blank" href="https://github.com/undp/carbon-registry">Github</a><a target="_blank" href="http://status.carbreg.org">Status</a></div>`
+      <div id="links-header"><a target="_blank" href="https://github.com/perlin-network/carbon-registry">Github</a><a target="_blank" href="http://status.perlin.net">Status</a></div>`
     )
     .setVersion("0.5")
     .addBearerAuth()
@@ -53,7 +53,7 @@ function setupSwagger(
   SwaggerModule.setup(`${httpBase}`, nestApp, document, {
     customSiteTitle: "API Documentation",
     customCss: `
-    .topbar-wrapper img {content:url(\'https://carbon-common-dev.s3.amazonaws.com/logo-h.png\'); height:50px; width:auto;}
+    .topbar-wrapper img {content:url(\'https://cr-perlin-common.s3.amazonaws.com/logo-h.png\'); height:50px; width:auto;}
     .swagger-ui .topbar { background-color: #f4f5fa; }
     .swagger-ui { background-color: white; }
     #links-header { position: absolute; top: 25px; right: calc((100% - 1440px)/2); }

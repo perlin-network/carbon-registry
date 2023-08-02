@@ -9,11 +9,13 @@ export class AsyncOperationsHandlerService {
     private emailService: EmailService,
     private registryClient: RegistryClientService,
     private logger: Logger
-  ) {}
+  ) {
+    logger.log("Constructor initialized", 'AsyncOperationsHandlerService');
+  }
 
   async handler(actionType: any, dataObject: any) {
 
-    this.logger.log("AsyncOperationsHandlerService started", actionType.toString());
+    this.logger.log("started", 'handler', actionType.toString());
     if (actionType) {
       switch (actionType.toString()) {
         case AsyncActionType.Email.toString():

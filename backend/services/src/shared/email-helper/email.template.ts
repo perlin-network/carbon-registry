@@ -24,7 +24,7 @@ export const EmailTemplates = {
         Password (temporary): {{tempPassword}} <br><br>
 
         If you have any questions, feel free to email our customer success
-        team <a href="mailto:help@carbreg.org?subject=I Need Help With The {{countryName}} Carbon Credit Registry">customer success team</a>
+        team <a href="mailto:admin@bioeconomy.co?subject=I Need Help With The {{countryName}} Carbon Credit Registry">customer success team</a>
         (We’re lightning quick at replying.) We also offer live chat {{liveChat}}.
         <br><br>
 
@@ -78,7 +78,7 @@ export const EmailTemplates = {
         Hi {{name}},<br><br>
         The password of your Carbon Registry account was changed successfully. <br><br>
         If you do not use {{countryName}} Carbon Credit Registry or did not request a password reset, please ignore this email or
-        <a href="mailto:help@carbreg.org?subject=Password Problem with the {{countryName}} Carbon Credit Registry">contact support</a>
+        <a href="mailto:admin@bioeconomy.co?subject=Password Problem with the {{countryName}} Carbon Credit Registry">contact support</a>
         if you have questions.
 
         <br><br>
@@ -100,7 +100,7 @@ export const EmailTemplates = {
         <br><br>
 
         If you do not use {{countryName}} Carbon Credit Registry or did not request a password reset, please ignore this email or
-        <a href="mailto:help@carbreg.org?subject=Password Problem with the {{countryName}} Carbon Credit Registry">contact support</a>
+        <a href="mailto:admin@bioeconomy.co?subject=Password Problem with the {{countryName}} Carbon Credit Registry">contact support</a>
         if you have questions.
 
         <br><br>

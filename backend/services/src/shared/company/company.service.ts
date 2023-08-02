@@ -47,7 +47,9 @@ export class CompanyService {
     private programmeTransferRepo: Repository<ProgrammeTransfer>,
     private fileHandler: FileHandlerInterface,
     private counterService: CounterService
-  ) {}
+  ) {
+    logger.log("Constructor initialized", 'CompanyService');
+  }
 
   async suspend(
     companyId: number,
@@ -287,11 +289,14 @@ export class CompanyService {
   }
 
   async findByCompanyId(companyId: number): Promise<Company | undefined> {
+    this.logger.verbose(companyId, 'findByCompanyId');
     const companies = await this.companyRepo.find({
       where: {
         companyId: companyId,
       },
     });
+
+    this.logger.verbose('Found companies', 'findByCompanyId', companies);
     return companies && companies.length > 0 ? companies[0] : undefined;
   }
 
@@ -315,17 +320,20 @@ export class CompanyService {
   }
 
   async findGovByCountry(countryCode: string): Promise<Company | undefined> {
+    this.logger.verbose(countryCode, 'findGovByCountry');
     const companies = await this.companyRepo.find({
       where: {
         country: countryCode,
         companyRole: CompanyRole.GOVERNMENT,
       },
     });
+
+    this.logger.verbose('Found country', 'findGovByCountry', companies);
     return companies && companies.length > 0 ? companies[0] : undefined;
   }
 
   async create(companyDto: OrganisationDto): Promise<Company | undefined> {
-    this.logger.verbose("Company create received", companyDto.email);
+    this.logger.verbose("Company create received", 'create', companyDto.email);
 
     if (!companyDto.companyId) {
       companyDto.companyId = parseInt(

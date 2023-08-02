@@ -1,0 +1,81 @@
+v1Default:
+  name: ${self:provider.stage}-v1-${self:service}-default
+  handler: src/shared/handler.handler
+  memorySize: 1536
+  events:
+    - http:
+        method: any
+        path: /{any+}
+  environment:
+    NODE_PATH: "./:/opt/node_modules"
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
+
+v1NationalApi:
+  timeout: 300
+  name: ${self:provider.stage}-v1-${self:service}-national-api
+  handler: src/national-api/handler.handler
+  memorySize: 1536
+  events:
+    - http:
+        method: any
+        path: /national/{any+}
+    - http:
+        method: any
+        path: /national
+  ssmToEnvironment:
+    - DB_PASSWORD
+    - USER_JWT_SECRET
+    - ADMIN_JWT_SECRET
+    - SMTP_USERNAME
+    - SMTP_PASSWORD
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
+  iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-national-api-role
+  iamRoleStatementsInherit: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:*
+        - sns:*
+        - ses:*
+        - rds:*
+        - qldb:*
+        - s3:*
+      Resource: "*"
+
+v1AnalyticsApi:
+  timeout: 300
+  name: ${self:provider.stage}-v1-${self:service}-analytics-api
+  handler: src/analytics-api/handler.handler
+  memorySize: 1536
+  events:
+    - http:
+        method: any
+        path: /stats/{any+}
+    - http:
+        method: any
+        path: /stats
+  ssmToEnvironment:
+    - DB_PASSWORD
+    - USER_JWT_SECRET
+    - ADMIN_JWT_SECRET
+    - SMTP_USERNAME
+    - SMTP_PASSWORD
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
+  iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-analytics-api-role
+  iamRoleStatementsInherit: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:*
+        - sns:*
+        - ses:*
+        - rds:*
+        - qldb:*
+        - s3:*
+      Resource: "*"

@@ -1,0 +1,28 @@
+Resources:
+  DBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: carbondb${self:provider.stage}
+      DBName: carbondb${self:provider.stage}
+      AllocatedStorage: 20
+      DBInstanceClass: db.t3.micro
+      StorageType: gp2
+      Engine: postgres
+      EngineVersion: '14.4'
+      MasterUsername: root
+      MasterUserPassword: '{{resolve:ssm-secure:/${self:service}/${self:provider.stage}/DB_PASSWORD}}'
+      PubliclyAccessible: True
+
+  # DBLedgerInstance:
+  #   Type: AWS::RDS::DBInstance
+  #   Properties:
+  #     DBInstanceIdentifier: carbondb${self:provider.stage}Events
+  #     DBName: carbondb${self:provider.stage}Events
+  #     AllocatedStorage: 20
+  #     DBInstanceClass: db.t3.micro
+  #     StorageType: gp2
+  #     Engine: postgres
+  #     EngineVersion: '14.4'
+  #     MasterUsername: root
+  #     MasterUserPassword: ${env:DB_PASSWORD}
+  #     PubliclyAccessible: True

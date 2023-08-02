@@ -14,7 +14,7 @@ export class EmailService {
     this.sourceEmail = this.configService.get<string>("email.source");
     this.emailDisabled = this.configService.get<boolean>("email.disabled");
 
-    this.transporter = nodemailer.createTransport({
+    const config = {
       host: this.configService.get<string>("email.endpoint"),
       port: 465,
       secure: true,
@@ -24,7 +24,10 @@ export class EmailService {
       },
       pool: true,
       maxMessages : 14
-    });
+    };
+
+    this.transporter = nodemailer.createTransport(config);
+    logger.log("Constructor initialized", 'EmailService', config);
   }
 
   async sendEmail(emailDataObj: any): Promise<any> {

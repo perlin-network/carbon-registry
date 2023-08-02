@@ -33,6 +33,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
     private readonly logger: Logger,
     private readonly configService: ConfigService
   ) {
+    const ledgerHost = configService.get<string>("ledger.host");
     this.ledgerName = configService.get<string>("ledger.name");
     this.tableName = configService.get<string>("ledger.table");
     this.overallTableName = configService.get<string>("ledger.overallTable");
@@ -41,19 +42,20 @@ export class PgSqlLedgerService implements LedgerDBInterface {
     let dbc = this.configService.get<any>("database");
 
     const config = {
-      host: dbc["host"],
+      host: ledgerHost,
       port: dbc["port"],
       user: dbc["username"],
       password: dbc["password"],
-      database: dbc["database"] + "Events",
+      database: this.ledgerName,
     };
+
     this.dbCon = new Pool(config);
-    logger.log("PgSQL Ledger init ", this.ledgerName);
+    logger.log("[PgSqlLedgerService] constructor initialized. ", this.ledgerName);
   }
 
   // TODO: Handler session expire
   private async execute<TM>(queries: TxElement[]): Promise<QueryResult> {
-    console.log(`Statement: ${JSON.stringify(queries)}`);
+    console.info(`[execute] Statement %j`, queries);
     const client = await this.dbCon.connect();
     try {
       const responses = [];
@@ -61,12 +63,12 @@ export class PgSqlLedgerService implements LedgerDBInterface {
       for (const c of queries) {
         const resp = await client.query(c.sql, c.params);
         responses.push(resp);
-        console.log("Execute resp", resp);
+        console.info("[execute] Response", resp);
       }
       await client.query("COMMIT");
       return responses;
     } catch (e) {
-      console.log("Error", e);
+      console.error("[execute]", e);
       await client.query("ROLLBACK");
       throw e;
     } finally {
@@ -78,7 +80,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
     client: Client,
     queries: { [key: string]: TxElement }
   ): Promise<{ [key: string]: QueryResult }> {
-    console.log(`Statement: ${JSON.stringify(queries)}`);
+    console.info(`[executeTxn] Statement %j`, queries);
     try {
       const responses = {};
       await client.query("BEGIN");
@@ -86,19 +88,19 @@ export class PgSqlLedgerService implements LedgerDBInterface {
         const c = queries[k];
         const resp = await client.query(c.sql, c.params);
         responses[k] = resp;
-        console.log("Execute resp", resp);
+        console.info("[executeTxn] Response", resp);
       }
       await client.query("COMMIT");
       return responses;
     } catch (e) {
-      console.log("Error", e);
+      console.error("[executeTxn]", e);
       await client.query("ROLLBACK");
       throw e;
     }
   }
 
   public async createTable(tableName?: string): Promise<void> {
-    const sql = `CREATE SEQUENCE ${
+    const sql = `CREATE SEQUENCE IF NOT EXISTS ${
       tableName ? tableName : this.tableName
     }_hash_seq; 
         CREATE TABLE IF NOT EXISTS ${tableName ? tableName : this.tableName}
@@ -110,7 +112,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
             }_hash_seq'::regclass),
             PRIMARY KEY (hash)
         );`;
-    await await this.execute([{ sql }]);
+    await this.execute([{ sql }]);
   }
 
   public async createIndex(
@@ -118,7 +120,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
     tableName?: string
   ): Promise<void> {
     return null;
-    // await (await this.execute(`create index on ${tableName ? tableName : this.tableName} (${indexCol})`));
+    // await this.execute(`create index on ${tableName ? tableName : this.tableName} (${indexCol})`);
   }
 
   public async insertRecord(
@@ -190,7 +192,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
         },
       ])
     )[0]?.rows;
-    console.log("Results", x);
+    console.info("[fetchHistory] Results", x);
     return x;
   }
 
@@ -212,7 +214,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
       getQueries,
       (results: Record<string, dom.Value[]>) => {
         const resTable = results[table];
-        console.log("Res table", resTable, update);
+        console.info("[updateRecords] Res table", resTable, update);
         const insertMap = {};
         for (const obj of resTable) {
           for (const k in update) {
@@ -220,12 +222,12 @@ export class PgSqlLedgerService implements LedgerDBInterface {
           }
           insertMap[table] = obj;
         }
-        console.log("Updating records", insertMap);
+        console.info("[updateRecords] Updating records", insertMap);
         return [{}, {}, insertMap];
       }
     );
 
-    console.log(r);
+    console.log('[updateRecords] Result %j', r);
 
     return r[table];
   }
@@ -253,14 +255,14 @@ export class PgSqlLedgerService implements LedgerDBInterface {
       results: Record<string, dom.Value[]>
     ) => [Record<string, any>, Record<string, any>, Record<string, any>]
   ): Promise<Record<string, dom.Value[]>> {
-    this.logger.log(`getQueries: ${JSON.stringify(getQueries)}`);
+    this.logger.log(`[getAndUpdateTx] getQueries %j`, getQueries);
 
     let updateResults = {};
     const client = await this.dbCon.connect();
     try {
       const getTxElements = {};
       for (const t in getQueries) {
-        console.log("getQueries t", t);
+        console.log("[getAndUpdateTx] getQueries t", t);
         if (getQueries.hasOwnProperty(t)) {
           const isHistoryQuery = t.includes("history(");
           let table = t;
@@ -311,7 +313,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
           };
         }
       }
-      console.log("Get elements", getTxElements);
+      console.log("[getAndUpdateTx] Get elements %j", getTxElements);
       const list = await this.executeTxn(client, getTxElements);
 
       const mapped = {};
@@ -320,7 +322,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
       }
       let [update, updateWhere, insert] = processGetFn(mapped);
 
-      console.log("processGetFn", update, updateWhere, insert);
+      console.log("[getAndUpdateTx] processGetFn", update, updateWhere, insert);
       const updateGetElements = {};
 
       if (update && Object.keys(update).length > 0) {
@@ -356,23 +358,23 @@ export class PgSqlLedgerService implements LedgerDBInterface {
           }
         }
 
-        console.log("TEST", updateGetElements);
+        console.log("[getAndUpdateTx] TEST", updateGetElements);
         const obj = await this.executeTxn(client, updateGetElements);
         const updatingObj = {};
         for (const el in obj) {
           updatingObj[el] = obj[el]?.rows.map((e) => e.data);
-          console.log('updateGetElements TEST', el, JSON.stringify(obj[el]))
+          console.log('[getAndUpdateTx] updateGetElements TEST', el, JSON.stringify(obj[el]))
         }
 
         if (!insert) {
           insert = {};
         }
 
-        console.log("Update property", updatingObj, update);
+        console.log("[getAndUpdateTx] Update property", updatingObj, update);
         for (const t in updatingObj) {
           if (updatingObj.hasOwnProperty(t)) {
             if (updatingObj[t]) {
-              console.log("Length", updatingObj[t].length);
+              console.log("[getAndUpdateTx] Length", updatingObj[t].length);
               for (const o of updatingObj[t]) {
                 if (update[t]) {
                   for (const f in update[t]) {
@@ -384,11 +386,11 @@ export class PgSqlLedgerService implements LedgerDBInterface {
             }
           }
         }
-        console.log("Updated prop", insert);
+        console.log("[getAndUpdateTx] Updated prop", insert);
       }
 
       const updateTxElements = {};
-      this.logger.log(`Insert queries`, JSON.stringify(insert));
+      this.logger.log(`[getAndUpdateTx] Insert queries %j`, insert);
       for (const qk in insert) {
         const tableName = qk.split("#")[0];
         if (insert.hasOwnProperty(qk)) {
@@ -410,7 +412,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
     } finally {
       client.release();
     }
-    this.logger.debug("Response", JSON.stringify(updateResults));
+    this.logger.debug("[getAndUpdateTx] Response %j", updateResults);
 
     const processedResponse = {};
     for (const k in updateResults) {

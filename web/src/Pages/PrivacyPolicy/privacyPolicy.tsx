@@ -50,8 +50,8 @@ const PrivacyPolicy = () => {
               as when you:
               <ul>
                 <li>
-                  Visit our website at https://carbreg.org, or any website of ours that links to
-                  this privacy notice
+                  Visit our website at https://carbon-registry.perlin.net, or any website of ours
+                  that links to this privacy notice
                 </li>
                 <li>
                   Engage with us in other related ways ― including any sales, marketing, or events

@@ -2,7 +2,6 @@ import { NestFactory } from "@nestjs/core";
 import { Role } from "../shared/casl/role.enum";
 import { UserDto } from "../shared/dto/user.dto";
 import { LedgerDbModule } from "../shared/ledger-db/ledger-db.module";
-import { QLDBLedgerService } from "../shared/ledger-db/qldb-ledger.service";
 import { getLogger } from "../shared/server";
 import { UtilModule } from "../shared/util/util.module";
 import { Country } from "../shared/entities/country.entity";
@@ -25,16 +24,24 @@ import { ConfigService } from "@nestjs/config";
 const fs = require("fs");
 
 export const handler: Handler = async (event) => {
-  console.log(`Setup Handler Started with: ${event}`);
+  console.log(`[setup] Handler Started with %j`, event);
 
   if (!event) {
     event = process.env;
   }
 
-  const userApp = await NestFactory.createApplicationContext(UserModule, {
-    logger: getLogger(UserModule),
-  });
-  const userService = userApp.get(UserService);
+  let userService: UserService;
+
+  try {
+    const userApp = await NestFactory.createApplicationContext(UserModule, {
+      logger: getLogger(UserModule),
+    });
+    userService = userApp.get(UserService);
+    console.log(`[setup] User module initialized`);
+  } catch (e) {
+     console.error("[setup] User module failed to initialize, stopping.", e);
+     return;
+  }
 
   if (event.type === "IMPORT_USERS" && event.body) {
 
@@ -152,33 +159,42 @@ export const handler: Handler = async (event) => {
     return;
   }
 
-  const u = await userService.findOne(event["rootEmail"]);
-  if (u != undefined) {
-    console.log("Root user already created and setup is completed");
+  const rootUser = await userService.findOne(event["rootEmail"]);
+  if (rootUser != undefined) {
+    console.warn("[setup] Root user %s already created and setup is completed", event["rootEmail"]);
   }
 
-  const app = await NestFactory.createApplicationContext(LedgerDbModule, {
-    logger: getLogger(LedgerDbModule),
-  });
+  let ledgerDBInterface: LedgerDBInterface;
+
   try {
-    const ledgerModule = app.get(LedgerDBInterface);
+    const app = await NestFactory.createApplicationContext(LedgerDbModule, {
+      logger: getLogger(LedgerDbModule),
+    });
 
-    await ledgerModule.createTable("company");
-    await ledgerModule.createIndex("txId", "company");
+    ledgerDBInterface = app.get(LedgerDBInterface);
+    console.log(`[setup] Ledger module initialized`);
+  } catch (e) {
+    console.error("[setup] Ledger module failed to initialize, stopping.", e);
+    return;
+  }
+  
+  try {
+    await ledgerDBInterface.createTable("company");
+    await ledgerDBInterface.createIndex("txId", "company");
 
-    await ledgerModule.createTable("overall");
-    await ledgerModule.createIndex("txId", "overall");
+    await ledgerDBInterface.createTable("overall");
+    await ledgerDBInterface.createIndex("txId", "overall");
     const creditOverall = new CreditOverall();
     creditOverall.credit = 0;
     creditOverall.txId = event["systemCountryCode"];
     creditOverall.txRef = "genesis block";
     creditOverall.txType = TxType.ISSUE;
-    await ledgerModule.insertRecord(creditOverall, "overall");
-    await ledgerModule.createTable();
-    await ledgerModule.createIndex("programmeId");
-    console.log("QLDB Table created");
+    await ledgerDBInterface.insertRecord(creditOverall, "overall");
+    await ledgerDBInterface.createTable();
+    await ledgerDBInterface.createIndex("programmeId");
+    console.info("[setup] QLDB Table company created", );
   } catch (e) {
-    console.log("QLDB table does not create", e);
+    console.error("[setup] QLDB table does not create", e);
   }
 
   try {
@@ -195,35 +211,46 @@ export const handler: Handler = async (event) => {
     user.phoneNo = "-";
     user.company = company;
 
-    console.log("Adding company", company);
-    console.log("Adding user", user);
+    console.log("[setup] Adding company", company);
+    console.log("[setup] Adding user", user);
 
     await userService.create(user, -1, CompanyRole.GOVERNMENT);
   } catch (e) {
-    console.log(`User ${event["rootEmail"]} failed to create`, e);
+    console.error(`[setup] User ${event["rootEmail"]} failed to create`, e);
   }
 
-  const countryData = fs.readFileSync("countries.json", "utf8");
-  const jsonCountryData = JSON.parse(countryData);
-  const utils = await NestFactory.createApplicationContext(UtilModule);
-  const countryService = utils.get(CountryService);
+  try {
+    console.log("[setup] Adding countryData");
+    const countryData = fs.readFileSync("countries.json", "utf8");
+    const jsonCountryData = JSON.parse(countryData);
+    const utils = await NestFactory.createApplicationContext(UtilModule);
+    const countryService = utils.get(CountryService);
+  
+    jsonCountryData.forEach(async (countryItem) => {
+      if (countryItem["UN Member States"] === "x") {
+        const country = new Country();
+        country.alpha2 = countryItem["ISO-alpha2 Code"];
+        country.alpha3 = countryItem["ISO-alpha3 Code"];
+        country.name = countryItem["English short"];
+        await countryService.insertCountry(country);
+      }
+    });
+  } catch (e) {
+    console.error("[setup] Failed to create country data, stopping", e);
+    return;
+  }
 
-  jsonCountryData.forEach(async (countryItem) => {
-    if (countryItem["UN Member States"] === "x") {
-      const country = new Country();
-      country.alpha2 = countryItem["ISO-alpha2 Code"];
-      country.alpha3 = countryItem["ISO-alpha3 Code"];
-      country.name = countryItem["English short"];
-      await countryService.insertCountry(country);
-    }
-  });
-
-  const locationApp = await NestFactory.createApplicationContext(
-    LocationModule,
-    {
-      logger: getLogger(UserModule),
-    }
-  );
-  const locationInterface = locationApp.get(LocationInterface);
-  await locationInterface.init();
+  try {
+    const locationApp = await NestFactory.createApplicationContext(
+      LocationModule,
+      {
+        logger: getLogger(LocationModule),
+      }
+    );
+    const locationInterface = locationApp.get(LocationInterface);
+    await locationInterface.init();
+    console.log(`[setup] Location module initialized`);
+  } catch (e) {
+    console.error("[setup] Location module failed to initialize, stopping.", e);
+  }
 };

@@ -56,7 +56,8 @@
     "lint:fix": "yarn run lint --fix \"./src/**/*.{ts,tsx,js,jsx,scss,css}\"",
     "prettier": "npx prettier --check \"./src/**/*.{ts,tsx,js,jsx,scss,css}\"",
     "prettier:fix": "yarn prettier --write \"./src/**/*.{ts,tsx,js,jsx,scss,css}\"",
-    "format": "yarn run prettier:fix && yarn run lint:fix"
+    "format": "yarn run prettier:fix && yarn run lint:fix",
+    "deploy": "CI=false && sls deploy --stage"
   },
   "browserslist": {
     "production": [
@@ -93,7 +94,10 @@
     "react-scripts": "5.0.1",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.9",
-    "tslint-config-prettier": "^1.18.0"
+    "tslint-config-prettier": "^1.18.0",
+    "serverless": "^3.18.2",
+    "serverless-s3-deploy": "^0.10.1",
+    "serverless-s3-remover": "^0.6.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json}": [

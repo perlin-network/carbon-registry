@@ -63,7 +63,9 @@ export class UserService {
     private countryService: CountryService,
     private fileHandler: FileHandlerInterface,
     private asyncOperationsInterface: AsyncOperationsInterface
-  ) {}
+  ) {
+    logger.log("Constructor initialized", 'UserService');
+  }
 
   private async generateApiKey(email) {
     return Buffer.from(
@@ -78,6 +80,8 @@ export class UserService {
         companyId: parseInt(companyId),
       },
     });
+
+    console.info('[getAdminUserDetails] result %j', result);
 
     return result;
   }
@@ -102,11 +106,14 @@ export class UserService {
   }
 
   async findOne(username: string): Promise<User | undefined> {
+    this.logger.debug("[findOne] with ", username);
     const users = await this.userRepo.find({
       where: {
         email: username,
       },
     });
+
+    this.logger.debug("[findOne] result ", users);
     return users && users.length > 0 ? users[0] : undefined;
   }
 
@@ -140,7 +147,7 @@ export class UserService {
     userDto: UserUpdateDto,
     abilityCondition: string
   ): Promise<DataResponseDto | undefined> {
-    this.logger.verbose("User update received", abilityCondition);
+    this.logger.verbose("[update] User update received", abilityCondition);
 
     userDto.email = userDto.email?.toLowerCase()
 
@@ -394,7 +401,7 @@ export class UserService {
     companyId: number,
     companyRole: CompanyRole
   ): Promise<User | DataResponseMessageDto | undefined> {
-    this.logger.verbose(`User create received  ${userDto.email} ${companyId}`);
+    this.logger.verbose(`[create] User create received  ${userDto.email} ${companyId}`);
     userDto.email = userDto.email?.toLowerCase();
     const createdUserDto = {...userDto};
     if(userDto.company){
@@ -454,7 +461,7 @@ export class UserService {
       }
 
       console.log(
-        "Company Log",
+        "[create] Company Log",
         company,
         this.configService.get("systemCountry")
       );
@@ -517,6 +524,7 @@ export class UserService {
       u.apiKey = await this.generateApiKey(userDto.email);
     }
 
+    this.logger.verbose(`[create] User generation password  ${userDto.email} ${u.password}`);
     const hostAddress = this.configService.get("host");
 
     if (company) {
@@ -524,6 +532,7 @@ export class UserService {
         await this.counterService.incrementCount(CounterType.COMPANY, 3)
       );
       if (company.logo && this.helperService.isBase64(company.logo)) {
+        this.logger.verbose(`[create] Uploading logo  ${userDto.email} ${companyId}`);
         const response: any = await this.fileHandler.uploadFile(
           `profile_images/${company.companyId}_${new Date().getTime()}.png`,
           company.logo
@@ -580,6 +589,7 @@ export class UserService {
       }
     }
 
+    this.logger.verbose(`[create] User prepare email async action  ${userDto.email} ${companyId}`);
     const templateData = {
       name: u.name,
       countryName: this.configService.get("systemCountryName"),
@@ -608,6 +618,7 @@ export class UserService {
       },
     };
     await this.asyncOperationsInterface.AddAction(action);
+    this.logger.verbose(`[create] User async email action added. ${userDto.email} ${companyId}`);
 
     u.createdTime = new Date().getTime();
 
@@ -621,62 +632,65 @@ export class UserService {
       );
     }
 
-    const usr = await this.entityManger
-      .transaction(async (em) => {
-        if (company) {
-          const c: Company = await em.save<Company>(
-            plainToClass(Company, company)
-          );
-          u.companyId = c.companyId;
-          u.companyRole = company.companyRole;
-        }
-        const user = await em.save<User>(u);
-        return user;
-      })
-      .catch((err: any) => {
-        console.log(err);
-        if (err instanceof QueryFailedError) {
-          console.log(err);
-          switch (err.driverError.code) {
-            case PG_UNIQUE_VIOLATION:
-              if (err.driverError.detail.includes("email")) {
-                throw new HttpException(
-                  `${
-                    err.driverError.table == "company"
-                      ? this.helperService.formatReqMessagesString(
-                          "user.orgEmailExist",
-                          []
-                        )
-                      : "Email already exist"
-                  }`,
-                  HttpStatus.BAD_REQUEST
-                );
-              } else if (err.driverError.detail.includes("taxId")) {
-                throw new HttpException(
-                  this.helperService.formatReqMessagesString(
-                    "user.taxIdExistAlready",
-                    []
-                  ),
-                  HttpStatus.BAD_REQUEST
-                );
-              }
+    this.logger.verbose(`[create] Preparing for entity transaction. ${userDto.email}`);
+
+    try {
+      const usr = await this.entityManger
+        .transaction(async (em) => {
+          if (company) {
+            const c: Company = await em.save<Company>(
+              plainToClass(Company, company)
+            );
+            u.companyId = c.companyId;
+            u.companyRole = company.companyRole;
           }
-          this.logger.error(`User add error ${err}`);
-        } else {
-          this.logger.error(`User add error ${err}`);
+          const user = await em.save<User>(u);
+          this.logger.verbose(`[create] entityManger.transaction User saved. ${user.email}`);
+          return user;
+        });
+
+      const { apiKey, password, ...resp } = usr;
+
+      const response = new DataResponseMessageDto(
+        HttpStatus.CREATED,
+        this.helperService.formatReqMessagesString("user.createUserSuccess", []),
+        resp
+      );
+    
+      console.info('[create] Final Response %j', response);
+      return response;
+    } catch (err) {
+      console.error('[create] entityManger.transaction', err);
+
+      if (err instanceof QueryFailedError) {
+        switch (err.driverError.code) {
+          case PG_UNIQUE_VIOLATION:
+            if (err.driverError.detail.includes("email")) {
+              throw new HttpException(
+                `${
+                  err.driverError.table == "company"
+                    ? this.helperService.formatReqMessagesString(
+                        "user.orgEmailExist",
+                        []
+                      )
+                    : "Email already exist"
+                }`,
+                HttpStatus.BAD_REQUEST
+              );
+            } else if (err.driverError.detail.includes("taxId")) {
+              throw new HttpException(
+                this.helperService.formatReqMessagesString(
+                  "user.taxIdExistAlready",
+                  []
+                ),
+                HttpStatus.BAD_REQUEST
+              );
+            }
         }
-        return err;
-      });
+      }
+    }
 
-    const { apiKey, password, ...resp } = usr;
-
-    const response = new DataResponseMessageDto(
-      HttpStatus.CREATED,
-      this.helperService.formatReqMessagesString("user.createUserSuccess", []),
-      resp
-    );
-
-    return response;
+    return undefined;
   }
 
   async query(query: QueryDto, abilityCondition: string): Promise<any> {

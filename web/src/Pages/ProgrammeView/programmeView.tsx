@@ -858,7 +858,8 @@ const ProgrammeView = () => {
         delete calculations.energyGenerationUnit;
       }
     }
-    calculations.constantVersion = mitigation.properties.constantVersion;
+    calculations.constantVersion =
+      mitigation.properties?.constantVersion || mitigation.constantVersion || 'No constant version';
 
     for (const key in mitigation) {
       if (mitigation.hasOwnProperty(key)) {

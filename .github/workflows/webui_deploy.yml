@@ -1,21 +1,24 @@
-name: Deploy Front end in S3
+name: '[webui] deploy'
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - web/**
+  workflow_dispatch:
+    inputs:
+      stage_name:
+        type: choice
+        description: 'Stage name (default: dev)'
+        options:
+        - dev
+        - prod
+
+env:
+  REACT_APP_MAP_TYPE : "Mapbox"
+  REACT_APP_MAPBOXGL_ACCESS_TOKEN: ${{ secrets.MAPBOXGL_ACCESS_TOKEN }}
+  REACT_APP_BACKEND: https://cr-api.perlin.net/${{ github.event.inputs.stage_name }}
+  REACT_APP_COUNTRY_NAME: 'CountryX'
+  REACT_APP_COUNTRY_CODE: 'BS'
 
 jobs:
-  deploy_front_end:
+  default:
     runs-on: ubuntu-latest
-    env:
-      REACT_APP_BACKEND: https://api.carbreg.org
-      COUNTRY_NAME: 'CountryX'
-      COUNTRY_FLAG_URL: 'https://carbon-common-prod.s3.amazonaws.com/flag.png'
-      COUNTRY_CODE: 'NG'
-      REACT_APP_MAPBOXGL_ACCESS_TOKEN: ${{ secrets.MAPBOXGL_ACCESS_TOKEN }}
-      REACT_APP_MAP_TYPE : "Mapbox"
     steps:
       - uses: actions/checkout@v3
       - name: Cache modules
@@ -25,21 +28,29 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install dependencies
         working-directory: ./web
-        run: CI=false yarn
+        run: CI=false yarn install
+
       - name: Build
         working-directory: ./web
         run: CI=false yarn build
-      - name: Deploy
-        run: aws s3 sync ./web/build s3://carbon-www-prod
+
+      - name: serverless deploy
+        uses: serverless/github-action@v3.1
+        with:
+          args: -c "cd ./web && serverless deploy --stage ${{ github.event.inputs.stage_name }}"
+          entrypoint: /bin/sh

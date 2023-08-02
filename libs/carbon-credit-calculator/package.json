@@ -1,7 +1,7 @@
 {
   "name": "@undp/carbon-credit-calculator",
   "version": "1.0.0",
-  "description": "Carbon Credit Calculator",
+  "description": "Carbon Credit Calculator Libs",
   "main": "./dist/esm/index.js",
   "module": "./dist/cjs/index.js",
   "license": "MIT",

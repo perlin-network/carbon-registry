@@ -6,13 +6,13 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: us-east-1
   iam:
-    role: arn:aws:iam::302213478610:role/lambda-role
-  vpc:
-    subnetIds:
-      - subnet-0c29051002d165a2c
-      - subnet-0c29051002d165a2c
-    securityGroupIds:
-      - sg-029b80f0fd44eb16a
+    role: arn:aws:iam::909101490035:role/lambda-role
+  # vpc:
+  #   subnetIds:
+  #     - subnet-05abb4287f3081602 Private Subnet (AZ1)
+  #     - subnet-09148cfff6c5e97b1 Private Subnet (AZ2)
+  #   securityGroupIds:
+  #     - sg-0bf65b90711ab2043
 
 layers:
   service-dependencies-1:

@@ -17,7 +17,7 @@ const LayoutFooter = () => {
             </div>
             <div>
               <div style={{ display: 'flex' }}>
-                <div className="title">{'CARBON'}</div>
+                <div className="title">{'PERL.eco Carbon & Bio Assets'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
               </div>
               <div className="footer-country-name">
@@ -45,7 +45,7 @@ const LayoutFooter = () => {
             <a href="/help" target={'blank'} className="footertext-links">
               {t('homepage:Help')}
             </a>
-            <a href="https://status.carbreg.org/" target={'blank'} className="footertext-links">
+            <a href="https://status.perlin.net/" target={'blank'} className="footertext-links">
               {t('homepage:Status')}
             </a>
             <a href="/cookie" className="footertext-links">

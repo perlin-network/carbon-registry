@@ -61,7 +61,7 @@ const Homepage = () => {
                   </div>
                   <div>
                     <div style={{ display: 'flex' }}>
-                      <div className="title">{'CARBON'}</div>
+                      <div className="title">{'PERL.eco Carbon & Bio Assets'}</div>
                       <div className="title-sub">{'REGISTRY'}</div>
                     </div>
                     <div className="country-name">
@@ -83,7 +83,8 @@ const Homepage = () => {
             <Row>
               <div className="text-ctn">
                 <span>
-                  {t('homepage:national')} {t('homepage:carbon')} <br />
+                  {t('PERL.eco Carbon & Bio Assets')}
+                  <br />
                   {t('homepage:registry')}
                 </span>
                 <div className="subhome">{t('homepage:lorem')}</div>
@@ -170,43 +171,6 @@ const Homepage = () => {
               </div>
               <Row>{t('homepage:aboutusline2')}</Row>
               <Row className="homepagebody_aboutuslines">{t('homepage:aboutusline3')}</Row>
-              <div className="homepagebody_aboutusline1">
-                Developed in Partnership with{' '}
-                <a
-                  href="https://www.theclimatewarehouse.org/work/digital-4-climate"
-                  target="_blank"
-                >
-                  Digital For Climate (D4C)
-                </a>
-                . D4C is a collaboration between the{' '}
-                <a href="https://www.ebrd.com/" target="_blank">
-                  European Bank for Reconstruction and Development (EBRD)
-                </a>
-                ,{' '}
-                <a href="https://www.undp.org/" target="_blank">
-                  United Nations Development Program (UNDP)
-                </a>
-                ,{' '}
-                <a href="https://www.unfccc.int/" target="_blank">
-                  United Nations Framework Convention on Climate Change (UNFCCC)
-                </a>
-                ,{' '}
-                <a href="https://www.ieta.org/" target="_blank">
-                  International Emissions Trading Association (IETA)
-                </a>
-                ,{' '}
-                <a href="https://www.esa.int/" target="_blank">
-                  European Space Agency (ESA)
-                </a>
-                , and{' '}
-                <a href="https://www.worldbank.org/" target="_blank">
-                  World Bank Group
-                </a>{' '}
-                that aims to coordinate respective workflows and create a modular and interoperable
-                end-to-end digital ecosystem for the carbon market. The overarching goal is to
-                support a transparent, high integrity global carbon market that can channel capital
-                for impactful climate action and low-carbon development.
-              </div>
             </div>
           </div>
         </Col>
@@ -261,7 +225,6 @@ const Homepage = () => {
                   <ul>
                     <li>{t('homepage:reslist1')}</li>
                     <li>{t('homepage:reslist2')}</li>
-                    <li>{t('homepage:reslist3')}</li>
                   </ul>
                 </div>
               </Col>

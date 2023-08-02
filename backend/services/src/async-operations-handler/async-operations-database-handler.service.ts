@@ -17,10 +17,12 @@ export class AsyncOperationsDatabaseHandlerService
     @InjectRepository(AsyncActionEntity)
     private asyncActionRepo: Repository<AsyncActionEntity>,
     private asyncOperationsHandlerService: AsyncOperationsHandlerService
-  ) {}
+  ) {
+    logger.log("Constructor initialized", 'AsyncOperationsDatabaseHandlerService');
+  }
 
   async asyncHandler(event: any): Promise<any> {
-    this.logger.log("database asyncHandler started", JSON.stringify(event));
+    this.logger.log("[asyncHandler] database asyncHandler started", JSON.stringify(event));
 
     const seqObj = await this.counterRepo.findOneBy({
       id: CounterType.ASYNC_OPERATIONS,
@@ -46,7 +48,7 @@ export class AsyncOperationsDatabaseHandlerService
         
       const startedSeq = lastSeq;
       notExecutedActions.forEach((action: any) => {
-        console.log('Processing action', action.actionId)
+        console.log('[asyncHandler] Processing action', action.actionId)
         asyncPromises.push(
           this.asyncOperationsHandlerService.handler(
             action.actionType,
@@ -63,7 +65,7 @@ export class AsyncOperationsDatabaseHandlerService
           counter: lastSeq,
         });
       } catch (exception) {
-        this.logger.log("database asyncHandler failed", exception);
+        this.logger.log("[asyncHandler] database asyncHandler failed", exception);
         lastSeq = startedSeq;
       }
     }, 5000);

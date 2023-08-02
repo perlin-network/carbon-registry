@@ -1,8 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { QldbDriver, Result, TransactionExecutor } from "amazon-qldb-driver-nodejs";
+import { QldbDriver, Result, TransactionExecutor, RetryConfig } from "amazon-qldb-driver-nodejs";
 import { dom } from "ion-js";
 import { ArrayIn, ArrayLike, LedgerDBInterface } from './ledger.db.interface';
+import { Agent } from 'https';
+import { QLDBSessionClientConfig } from "@aws-sdk/client-qldb-session";
+import { NodeHttpHandlerOptions } from "@aws-sdk/node-http-handler";
 
 @Injectable()
 export class QLDBLedgerService implements LedgerDBInterface {
@@ -18,45 +21,82 @@ export class QLDBLedgerService implements LedgerDBInterface {
         this.tableName = configService.get<string>('ledger.table');
         this.overallTableName = configService.get<string>('ledger.overallTable');
         this.companyTableName = configService.get<string>('ledger.companyTable');
-        logger.log("QLDB Ledger init ", this.ledgerName);
+        this.driver = this.createQldbDriver(this.ledgerName);
+        logger.log("[QLDBLedgerService] constructor initialized. ", this.ledgerName);
+    }
+
+    private createQldbDriver(ledgerName: string): QldbDriver {
+        const maxConcurrentTransactions: number = 5;
+        const retryLimit: number = 2;
+
+        //Reuse connections with keepAlive
+        const lowLevelClientHttpOptions: NodeHttpHandlerOptions = {
+            httpAgent: new Agent({
+                maxSockets: maxConcurrentTransactions
+            })
+        };
+
+        const serviceConfigurationOptions: QLDBSessionClientConfig = {
+            region: "us-east-1"
+        };
+
+        //Use driver's default backoff function for this example (no second parameter provided to RetryConfig)
+        const retryConfig: RetryConfig = new RetryConfig(retryLimit);
+
+        const driver = new QldbDriver(ledgerName, 
+            serviceConfigurationOptions,
+            lowLevelClientHttpOptions,
+            maxConcurrentTransactions,
+            retryConfig);
+        
+        this.logger.debug('[createQldbDriver] Created.');
+
+        return driver;
     }
 
     // TODO: Handler session expire
     private async execute<TM>(sql, ...parameters: any[]): Promise<Result> {
-        this.logger.debug(`Statement: ${sql}, parameter: ${JSON.stringify(parameters)}`);
-        this.driver = new QldbDriver(this.ledgerName);
-        const resp = await this.driver.executeLambda(async (txn: TransactionExecutor) => {
+        let result: Result;
+
+        try {
+            //this.driver = this.createQldbDriver(this.ledgerName);
+            result = await this.driver.executeLambda(async (txn: TransactionExecutor) =>
+                this.executeTxn(txn, sql, ...parameters));
+            this.logger.debug('[execute] Response', JSON.stringify(result));
+        } catch (error) {
+            this.logger.error('[execute]', error);
+        }
+        // finally {
+        //     this.driver.close();
+        // }
+
+        return result;
+    }
+
+    private async executeTxn<TM>(txn: TransactionExecutor, sql, ...parameters: any[]): Promise<Result> {
+        this.logger.debug(`[executeTxn] Statement: ${sql}, parameter: ${JSON.stringify(parameters)}`);
+
+        try {
             if (parameters.length > 0) {
                 return await txn.execute(sql, ...parameters);
             } else {
                 return await txn.execute(sql);
             }
-
-        });
-        this.logger.debug('Response', JSON.stringify(resp));
-        this.driver.close();
-        return resp;
-    }
-
-    private async executeTxn<TM>(txn: TransactionExecutor, sql, ...parameters: any[]): Promise<Result> {
-        this.logger.debug(`Statement: ${sql}, parameter: ${JSON.stringify(parameters)}`);
-        if (parameters.length > 0) {
-            return await txn.execute(sql, ...parameters);
-        } else {
-            return await txn.execute(sql);
-        }
+        } catch (error) {
+            this.logger.error('[executeTxn]', error);
+        } 
     }
 
     public async createTable(tableName?: string): Promise<void> {
-        await (await this.execute(`create table ${tableName ? tableName : this.tableName}`));
+        await this.execute(`CREATE TABLE ${tableName ? tableName : this.tableName}`);
     }
 
     public async createIndex(indexCol: string, tableName?: string): Promise<void> {
-        await (await this.execute(`create index on ${tableName ? tableName : this.tableName} (${indexCol})`));
+       await this.execute(`CREATE INDEX ON ${tableName ? tableName : this.tableName} (${indexCol})`);
     }
 
     public async insertRecord(document: Record<string, any>, tableName?: string): Promise<void> {
-        await (await this.execute(`INSERT INTO ${tableName ? tableName : this.tableName} ?`, document));
+        await this.execute(`INSERT INTO ${tableName ? tableName : this.tableName} ?`, document);
     }
 
     public async fetchRecords(where: Record<string, any>): Promise<dom.Value[]> {
@@ -94,7 +134,7 @@ export class QLDBLedgerService implements LedgerDBInterface {
 
     public async getAndUpdateTx<TM>(getQueries: Record<string, Record<string, any>>, processGetFn: (results: Record<string, dom.Value[]>) => [Record<string, any>, Record<string, any>, Record<string, any>]): Promise<Record<string, dom.Value[]>> {
         this.logger.debug(``);
-        this.driver = new QldbDriver(this.ledgerName);
+        //this.driver = this.createQldbDriver(this.ledgerName);
         const resp = await this.driver.executeLambda(async (txn: TransactionExecutor) => {
             const getResults = {};
             for (const t in getQueries) {
@@ -135,7 +175,7 @@ export class QLDBLedgerService implements LedgerDBInterface {
             return updateResults;
         });
         this.logger.debug('Response', JSON.stringify(resp));
-        this.driver.close();
+        //this.driver.close();
         return resp;
     }
 

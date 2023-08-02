@@ -31,7 +31,9 @@ export class ProgrammeLedgerService {
     @InjectEntityManager() private entityManger: EntityManager,
     private ledger: LedgerDBInterface,
     private helperService: HelperService
-  ) {}
+  ) {
+    logger.log("Constructor initialized", 'ProgrammeLedgerService');
+  }
 
   public async createProgramme(programme: Programme): Promise<Programme> {
     this.logger.debug("Creating programme", JSON.stringify(programme));

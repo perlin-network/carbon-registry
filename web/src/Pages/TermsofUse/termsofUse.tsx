@@ -134,8 +134,8 @@ const TermsOfUse = () => {
                 personally or on behalf of an entity (“you”) and United Nations Development
                 Programme ("Company," “we," “us," or “our”), concerning your access to and use of
                 the{' '}
-                <a target="_blank" href="https://carbreg.org">
-                  https://carbreg.org
+                <a target="_blank" href="https://carbon-registry.perlin.net">
+                  https://carbon-registry.perlin.net
                 </a>{' '}
                 website as well as any other media form, media channel, mobile website or mobile
                 application related, linked, or otherwise connected thereto (collectively, the

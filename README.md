@@ -7,19 +7,19 @@
 
 <a name="about"></a>
 
-# National Carbon Credit Registry
-The National Carbon Registry enables carbon credit trading in order to reduce greenhouse gas emissions.
+# PERL.eco Carbon & Bio Asset Registry
+PERL.eco Carbon & Bio Asset Registry enables carbon credit trading in order to reduce greenhouse gas emissions and supports natural capital accounting to better value bio diverse ecosystems.
 
-As an online database, the National Carbon Registry uses national and international standards for quantifying and verifying greenhouse gas emissions reductions by programmes, tracking issued carbon credits and enabling credit transfers in an efficient and transparent manner. The Registry functions by receiving, processing, recording and storing data on mitigations projects, the issuance, holding, transfer, acquisition, cancellation, and retirement of emission reduction credits. This information is publicly accessible to increase public confidence in the emissions reduction agenda.
+As an online database, PERL.eco  Carbon & Bio Asset Registry uses national and international standards for quantifying and verifying greenhouse gas emissions reductions by programmes, tracking issued carbon credits and enabling credit transfers in an efficient and transparent manner. The Registry functions by receiving, processing, recording and storing data on mitigations projects, the issuance, holding, transfer, acquisition, cancellation, and retirement of emission reduction credits. The Registry also stores information relevant to national bio asset inventories and enables governments to ensure equitable sharing of value from natural assets through bio genomics and other benefits within the economy. This information is publicly accessible to increase public confidence in the emissions reduction agenda.
 
-The National Carbon Registry enables carbon credit tracking transactions from mitigation activities, as the digital implementation of the Paris Agreement. Any country can customize and deploy a local version of the registry then connect it to other national & international registries, MRV systems, and more. 
+PERL.eco Carbon & Bio Asset Registry enables carbon credit tracking transactions from mitigation activities, as the digital implementation of the Paris Agreement. Any country deploy a local version of the PERL.eco Registry then connect it to other national & international registries, MRV systems, and more. 
 
 The system has 3 key features:
 * **Analytics Dashboard:** Enabling governments, companies, and certification bodies to operate transparently and function on an immutable blockchain.
 * **Carbon Credit Calculator:** Standardized system According to the UNFCCC - CDM (Clean Development Mechanism) methodologies, across defined sectors. 
 * **Serial Number Generator:** Standardizing the technical format to allow for easy cross-border collaboration between carbon trading systems.
 
-## Index
+## Index	
 * [About](#about)
 * [Standards](#standards)
 * [Architecture](#architecture)
@@ -34,7 +34,7 @@ The system has 3 key features:
 * [Status Page](#status)
 * [Governance & Support](#support)
 
-<a name="standards"></a>
+<a name="standards"></a>	
 ## Standards
 This codebase aims to fullfill the digital public goods standard:
 https://digitalpublicgoods.net/standard/
@@ -43,12 +43,12 @@ https://digitalprinciples.org/
 
 <a name="architecture"></a>
 ## System Architecture
-UNDP Carbon Registry is based on service oriented architecture (SOA). Following diagram visualize the basic components in the system.
+PERL.eco Carbon & Bio Asset Registry is built on the UNDP Carbon Registry which is based on service oriented architecture (SOA). Following diagram visualize the basic components in the system.
 
-![alt text](./documention/imgs/System%20Architecture.svg)
+![alt text](./documention/imgs/PERL%20System%20Architecture.svg)	
 
-<a name="services"></a>
-### **System Services**
+<a name="services"></a>	
+### **System Services**	
 #### *National Service*
 
 Authenticate, Validate and Accept user (Government, Programme Developer/Certifier) API requests related to the following functionalities,
@@ -60,7 +60,7 @@ Authenticate, Validate and Accept user (Government, Programme Developer/Certifie
 Service is horizontally scalable and state maintained in the following locations,
 - File storage.
 - Operational Database.
-- Ledger Database.
+- PERL.eco Ledger Database.
 
 Uses the Carbon Credit Calculator and Serial Number Generator node modules to estimate the programme carbon credit amount and issue a serial number.
 Uses Ledger interface to persist programme and credit life cycles.
@@ -71,12 +71,13 @@ Horizontally scalable.
 
 #### *Replicator Service*
 Asynchronously replicate ledger database events in to the operational database. During the replication process it injects additional information to the data for query purposes (Eg: Location information). 
-Currently implemented for QLDB and PostgresSQL ledgers. By implementing [replicator interface](./backend/services/src/ledger-replicator/replicator-interface.service.ts) can support more ledger replicators. 
-Replicator select based on the `LEDGER_TYPE` environment variable. Support types `QLDB`, `PGSQL(Default)`.
+Currently implemented for PERL.eco Ledger and Operational Query Database. By implementing [replicator interface](./backend/services/src/ledger-replicator/replicator-interface.service.ts) can support more ledger replicators. 
+Replicator select based on the `LEDGER_TYPE` environment variable. Support types `PERL`, `OQDB(Default)`.
 
+	
 ### **Deployment**
 System services can deploy in 2 ways.
-- **As a Container** - Each service boundary containerized in to a docker container and can deploy on any container orchestration service. [Please refer Docker Compose file](./docker-compose.yml)
+-  **As a Container** - Each service boundary containerized in to a docker container and can deploy on any container orchestration service. [Please refer Docker Compose file](./docker-compose.yml)
 - **As a Function** - Each service boundary packaged as a function (Serverless) and host on any Function As A Service (FaaS) stack. [Please refer Serverless configuration file](./backend/services/serverless.yml)
 
 
@@ -105,9 +106,9 @@ Change by environment variable `FILE_SERVICE`. Supported types `S3`, `LOCAL(Defa
 
 ### **Database Architecture**
 Primary/secondary database architecture used to store carbon programme and account balances. 
-Ledger database is the primary database. Add/update programmes and update account balances in a single transaction. Currently implemented only for AWS QLDB
+Ledger database is the primary database. Add/update programmes and update account balances in a single transaction. Currently implemented only for PERL.eco Ledger
 
-Operational Database is the secondary database. Eventually replicated to this from primary database via data stream. Implemented based on PostgresSQL
+Operational Database is the secondary database. 
 
 **Why Two Database Approach?**
 1. Cost and Query capabilities - Ledger database (blockchain) read capabilities can be limited and costly. To support rich statistics and minimize the cost, data is replicated in to a cheap query database.
@@ -121,13 +122,8 @@ Operational Database is the secondary database. Eventually replicated to this fr
 
 **Ledger Database Interface**
 
-This enables the capability to add any blockchain or ledger database support to the carbon registry without functionality module changes. Currently implemented for PostgresSQL and AWS QLDB.
-
-**PostgresSQL Ledger Implementation** storage all the carbon programme and credit events in a separate event database with the sequence number. Support all the ledger functionalities except immutability.  
-
-
+This enables the capability to interface with the PERL.eco Ledger database.
 Single database approach used for user and company management. 
-
 
 ### **Ledger Layout**
 Carbon Registry contains 3 ledger tables.
@@ -175,7 +171,7 @@ The below diagram demonstrates the the ledger behavior of programme create, auth
         - `SMTP_ENDPOINT`
         - `SMTP_USERNAME`
         - `SMTP_PASSWORD`
-    - Use `DB_PASSWORD` env variable to change PostgresSQL database password
+    - Use `DB_PASSWORD` env variable to change Operational Database database password
     - Configure system root account email by updating environment variable `ROOT EMAIL`. If the email service is enabled, on the first docker start, this email address will receive a new email with the root user password.
     - By default frontend does not show map images on dashboard and programme view. To enable them please update `REACT_APP_MAP_TYPE` env variable to `Mapbox` and add new env variable `REACT_APP_MAPBOXGL_ACCESS_TOKEN` with [MapBox public access token](https://docs.mapbox.com/help/tutorials/get-started-tokens-api/) in web container. 
 - Add user data
@@ -196,7 +192,7 @@ The below diagram demonstrates the the ledger behavior of programme create, auth
 
 <a name="local"></a>
 ## Run Services Locally
-- Setup postgreSQL locally and create a new database.
+- Setup Operational Database locally and create a new database.
 - Update following DB configurations in the .env.local file (If the file does not exist please create a new .env.local)
     - DB_HOST (Default localhost)
     - DB_PORT (Default 5432)
@@ -220,7 +216,7 @@ The below diagram demonstrates the the ledger behavior of programme create, auth
     - AWS_SECRET_ACCESS_KEY
 - Run it manually to deploy all the lambda services immediately. It will create 2 lambda layers and following lambda functions,
     - national-api: Handle all carbon registry user and program creation. Trigger by external http request.
-    - replicator: Replicate Ledger database entries in to Postgres database for analytics. Trigger by new record on the Kinesis stream.
+    - replicator: Replicate Ledger database entries in to Operational Database for analytics. Trigger by new record on the Kinesis stream.
     - setup: Function to add initial system user data.
 - Create initial user data in the system by invoking setup lambda function by executing
     ```
@@ -423,3 +419,4 @@ Open source code available at https://github.com/undp/carbon-registry-status
 [Digital For Climate (D4C)](https://www.theclimatewarehouse.org/work/digital-4-climate) is responsible for managing the application. D4C is a collaboration between the [European Bank for Reconstruction and Development (EBRD)](https://www.ebrd.com), [United Nations Development Program (UNDP)](https://www.undp.org), [United Nations Framework Convention on Climate Change (UNFCCC)](https://www.unfccc.int), [International Emissions Trading Association (IETA)](https://www.ieta.org), [European Space Agency (ESA)](https://www.esa.int), and [World Bank Group](https://www.worldbank.org) that aims to coordinate respective workflows and create a modular and interoperable end-to-end digital ecosystem for the carbon market. The overarching goal is to support a transparent, high integrity global carbon market that can channel capital for impactful climate action and low-carbon development. 
 
 This code is managed by [United Nations Development Programme](https://www.undp.org) as custodian. For any questions, contact us at digital@undp.org .
+
