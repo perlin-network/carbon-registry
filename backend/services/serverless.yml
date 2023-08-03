@@ -29,7 +29,7 @@ plugins:
   - "serverless-plugin-typescript"
   - serverless-plugin-optimize
   - serverless-offline
-  - serverless-ssm-fetch
+  # - serverless-ssm-fetch
 #  - '@haftahave/serverless-ses-template'
 
 params:
