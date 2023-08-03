@@ -1,12 +1,5 @@
 name: Deploy Services
 on:
-  push:
-    branches:
-      - develop
-      - main
-    paths:
-      - backend/**
-      - libs/**
   workflow_dispatch:
     inputs:
       stage_name:
@@ -14,7 +7,8 @@ on:
         description: 'Stage name (default: dev)'
         options:
         - dev
-    
+        - prod
+
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -26,7 +20,7 @@ jobs:
     # Declare outputs for next jobs
     outputs:
       deps_changed: ${{ steps.check_file_changed.outputs.deps_changed }}
-      stage: ${{ steps.branch_check.outputs.stage }}
+      # stage: ${{ steps.branch_check.outputs.stage }}
     steps:
     - uses: actions/checkout@v3
       with:
@@ -38,13 +32,13 @@ jobs:
         else
           echo "deps_changed=False" >> $GITHUB_OUTPUT
         fi
-    - id: branch_check
-      run: |
-        if [[ ${GITHUB_REF} == 'refs/heads/main' ]]; then
-          echo "stage=prod" >> $GITHUB_OUTPUT
-        else
-          echo "stage=dev" >> $GITHUB_OUTPUT
-        fi
+    # - id: branch_check
+    #   run: |
+    #     if [[ ${GITHUB_REF} == 'refs/heads/main' ]]; then
+    #       echo "stage=prod" >> $GITHUB_OUTPUT
+    #     else
+    #       echo "stage=dev" >> $GITHUB_OUTPUT
+    #     fi
   layer:
     name: layer
     runs-on: ubuntu-latest
@@ -76,19 +70,13 @@ jobs:
         if: ${{ needs.check_dependency_change.outputs.deps_changed == 'True' }}
         working-directory: ./backend/layer/dependency_layer
         run: yarn install --production --frozen-lockfile
-      # - name: Copy Dependency
-      #   if: ${{ needs.check_dependency_change.outputs.deps_changed == 'True' }}
-      #   working-directory: ./backend/layer
-      #   run: |
-      #     cp -r node_modules ./dependency_layer
-      #     ls
-      - name: serverless deploy develop
-        if: ${{ needs.check_dependency_change.outputs.deps_changed == 'True'}}
+      - name: serverless deploy layers develop
+        if: ${{ needs.check_dependency_change.outputs.deps_changed == 'True' && github.ref == 'refs/heads/develop'}}
         uses: serverless/github-action@v3.1
         with:
-          args: -c "cd ./backend/layer && serverless deploy --stage ${{ needs.check_dependency_change.outputs.stage }}"
+          args: -c "cd ./backend/layer && serverless deploy --stage ${{ github.event.inputs.stage_name }}"
           entrypoint: /bin/sh
-      - name: serverless deploy main
+      - name: serverless deploy layers main
         if: ${{ needs.check_dependency_change.outputs.deps_changed == 'True' && github.ref == 'refs/heads/main'}}
         uses: serverless/github-action@v3.1
         with:
@@ -109,8 +97,8 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: version
         run: |
-          echo "ARN1=$(aws lambda list-layer-versions --layer-name service-dependencies-${{ needs.check_dependency_change.outputs.stage }}-1 --region us-east-1 --query 'LayerVersions[0].LayerVersionArn')" >> $GITHUB_OUTPUT
-          echo "ARN2=$(aws lambda list-layer-versions --layer-name service-dependencies-${{ needs.check_dependency_change.outputs.stage }}-2 --region us-east-1 --query 'LayerVersions[0].LayerVersionArn')" >> $GITHUB_OUTPUT
+          echo "ARN1=$(aws lambda list-layer-versions --layer-name service-dependencies-${{ github.event.inputs.stage_name }}-1 --region us-east-1 --query 'LayerVersions[0].LayerVersionArn')" >> $GITHUB_OUTPUT
+          echo "ARN2=$(aws lambda list-layer-versions --layer-name service-dependencies-${{ github.event.inputs.stage_name }}-2 --region us-east-1 --query 'LayerVersions[0].LayerVersionArn')" >> $GITHUB_OUTPUT
         id: layerArn
       - name: Build Serial Generator Package
         working-directory: ./libs/serial-number-gen
@@ -125,23 +113,23 @@ jobs:
           aws-region: us-east-1
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: serverless deploy develop
-        if: github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'
+        if: ${{ github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'}}
         uses: serverless/github-action@v3.1
         with:
-          args: -c "cd ./backend/services && serverless deploy --stage ${{ needs.check_dependency_change.outputs.stage }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'"
+          args: -c "cd ./backend/services && serverless deploy --stage ${{ github.event.inputs.stage_name }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'"
           entrypoint: /bin/sh
       - name: serverless deploy main
-        if: github.ref == 'refs/heads/main' || github.event.inputs.stage_name == 'prod'
+        if: ${{ github.ref == 'refs/heads/main' || github.event.inputs.stage_name == 'prod'}}
         uses: serverless/github-action@v3.1
         with:
-          args: -c "cd ./backend/services && serverless deploy --stage ${{ needs.check_dependency_change.outputs.stage }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'"
+          args: -c "cd ./backend/services && serverless deploy --stage ${{ github.event.inputs.stage_name }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'"
           entrypoint: /bin/sh
       - name: Login to Amazon ECR
-        if: github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'
+        if: ${{ github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'}}
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build, tag, and push the image to Amazon ECR
-        if: github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'
+        if: ${{ github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'}}
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
