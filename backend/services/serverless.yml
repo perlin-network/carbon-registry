@@ -48,13 +48,17 @@ functions:
       - http:
           method: any
           path: /national
-    ssmToEnvironment:
-      - DB_PASSWORD
-      - USER_JWT_SECRET
-      - ADMIN_JWT_SECRET
-      - SMTP_PASSWORD
+    # ssmToEnvironment:
+    #   - DB_PASSWORD
+    #   - USER_JWT_SECRET
+    #   - ADMIN_JWT_SECRET
+    #   - SMTP_PASSWORD
     environment:
       NODE_PATH: "./:/opt/node_modules"
+      DB_PASSWORD: perlin123!
+      USER_JWT_SECRET: '1234'
+      ADMIN_JWT_SECRET: '8654'
+      SMTP_PASSWORD: BJPIbqCcoeRf87SFruI/Bl0Daz5hfB4o8DkKk4nB5y0D
     layers:
       - ${param:depLayerArn1}
       - ${param:depLayerArn2}
@@ -69,13 +73,17 @@ functions:
       - http:
           method: any
           path: /stats
-    ssmToEnvironment:
-      - DB_PASSWORD
-      - USER_JWT_SECRET
-      - ADMIN_JWT_SECRET
-      - SMTP_PASSWORD
+    # ssmToEnvironment:
+    #   - DB_PASSWORD
+    #   - USER_JWT_SECRET
+    #   - ADMIN_JWT_SECRET
+    #   - SMTP_PASSWORD
     environment:
       NODE_PATH: "./:/opt/node_modules"
+      DB_PASSWORD: perlin123!
+      USER_JWT_SECRET: '1234'
+      ADMIN_JWT_SECRET: '8654'
+      SMTP_PASSWORD: BJPIbqCcoeRf87SFruI/Bl0Daz5hfB4o8DkKk4nB5y0D
     layers:
       - ${param:depLayerArn1}
       - ${param:depLayerArn2}
@@ -90,11 +98,13 @@ functions:
           startingPosition: LATEST
           maximumRetryAttempts: 10
           enabled: true
-    ssmToEnvironment:
-      - DB_PASSWORD
-      - MAPBOX_PK
+    # ssmToEnvironment:
+    #   - DB_PASSWORD
+    #   - MAPBOX_PK
     environment:
       NODE_PATH: "./:/opt/node_modules"
+      DB_PASSWORD: perlin123!
+      MAPBOX_PK: 'pk.eyJ1IjoiaWdvci1wZXJsaW5uZXQiLCJhIjoiY2xrcnZlMXZpMWt0eDNka3llMGEyZGs0YSJ9.MoaYxDMv5zPJRUEN2lp0MQ'
     layers:
       - ${param:depLayerArn1}
       - ${param:depLayerArn2}
@@ -108,13 +118,17 @@ functions:
           enabled: true
           input: 
             importTypes: ITMO_SYSTEM
-    ssmToEnvironment:
-      - DB_PASSWORD
-      - ITMO_API_KEY
-      - ITMO_EMAIL
-      - ITMO_PASSWORD
+    # ssmToEnvironment:
+    #   - DB_PASSWORD
+    #   - ITMO_API_KEY
+    #   - ITMO_EMAIL
+    #   - ITMO_PASSWORD
     environment:
       NODE_PATH: "./:/opt/node_modules"
+      DB_PASSWORD: perlin123!
+      ITMO_API_KEY: testkey123
+      ITMO_EMAIL: aws@bioeconomy.co
+      ITMO_PASSWORD: 1q2w3e4r5t6
     layers:
       - ${param:depLayerArn1}
       - ${param:depLayerArn2}
@@ -126,12 +140,15 @@ functions:
       - sqs:
           arn: arn:aws:sqs:us-east-1:302213478610:AsyncQueue${self:provider.stage}.fifo
           batchSize: 10
-    ssmToEnvironment:
-      - SMTP_PASSWORD
-      - DB_PASSWORD
-      - MRV_API_TOKEN
+    # ssmToEnvironment:
+    #   - SMTP_PASSWORD
+    #   - DB_PASSWORD
+    #   - MRV_API_TOKEN
     environment:
       NODE_PATH: "./:/opt/node_modules"
+      DB_PASSWORD: perlin123!
+      SMTP_PASSWORD: BJPIbqCcoeRf87SFruI/Bl0Daz5hfB4o8DkKk4nB5y0D
+      MRV_API_TOKEN: test123mrv!
     layers:
       - ${param:depLayerArn1}
       - ${param:depLayerArn2}
@@ -139,11 +156,13 @@ functions:
   setup:
     timeout: 60
     handler: src/setup/handler.handler
-    ssmToEnvironment:
-      - DB_PASSWORD
-      - SMTP_PASSWORD
+    # ssmToEnvironment:
+    #   - DB_PASSWORD
+    #   - SMTP_PASSWORD
     environment:
       NODE_PATH: "./:/opt/node_modules"
+      DB_PASSWORD: perlin123!
+      SMTP_PASSWORD: BJPIbqCcoeRf87SFruI/Bl0Daz5hfB4o8DkKk4nB5y0D
     layers:
       - ${param:depLayerArn1}
       - ${param:depLayerArn2}
@@ -162,16 +181,16 @@ functions:
 custom:
   optimize:
     external: ["swagger-ui-dist"]
-  serverlessSsmFetch:
-    DB_PASSWORD: /carbon-registry-services/dev/DB_PASSWORD~true
-    USER_JWT_SECRET: /carbon-registry-services/dev/USER_JWT_SECRET~true
-    ADMIN_JWT_SECRET: /carbon-registry-services/dev/ADMIN_JWT_SECRET~true
-    SMTP_PASSWORD: /carbon-registry-services/dev/SES_PASSWORD~true
-    MAPBOX_PK: /carbon-registry-services/dev/MAPBOX_PK~true
-    ITMO_API_KEY: /carbon-registry-services/dev/ITMO_API_KEY~true
-    ITMO_EMAIL: /carbon-registry-services/dev/ITMO_EMAIL~true
-    ITMO_PASSWORD: /carbon-registry-services/dev/ITMO_PASSWORD~true
-    MRV_API_TOKEN: /carbon-registry-services/dev/MRV_API_TOKEN~true
+  # serverlessSsmFetch:
+  #   DB_PASSWORD: /carbon-registry-services/dev/DB_PASSWORD~true
+  #   USER_JWT_SECRET: /carbon-registry-services/dev/USER_JWT_SECRET~true
+  #   ADMIN_JWT_SECRET: /carbon-registry-services/dev/ADMIN_JWT_SECRET~true
+  #   SMTP_PASSWORD: /carbon-registry-services/dev/SES_PASSWORD~true
+  #   MAPBOX_PK: /carbon-registry-services/dev/MAPBOX_PK~true
+  #   ITMO_API_KEY: /carbon-registry-services/dev/ITMO_API_KEY~true
+  #   ITMO_EMAIL: /carbon-registry-services/dev/ITMO_EMAIL~true
+  #   ITMO_PASSWORD: /carbon-registry-services/dev/ITMO_PASSWORD~true
+  #   MRV_API_TOKEN: /carbon-registry-services/dev/MRV_API_TOKEN~true
   # sesTemplates:
   #   addStage: true                             # Specifies whether to add stage to template name (default false)
   #   configFile: './src/shared/email/email.template.ts' # Config file path (default './ses-email-templates/index.js')
