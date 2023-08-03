@@ -111,6 +111,12 @@ jobs:
       - name: Build Carbon Credit Package
         working-directory: ./libs/carbon-credit-calculator
         run: yarn run build
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-region: us-east-1
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: serverless deploy develop
         if: github.ref == 'refs/heads/develop'
         uses: serverless/github-action@v3.1
@@ -123,13 +129,6 @@ jobs:
         with:
           args: -c "cd ./backend/services && serverless deploy --stage ${{ needs.check_dependency_change.outputs.stage }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'"
           entrypoint: /bin/sh
-      - name: Configure AWS credentials
-        if: github.ref == 'refs/heads/develop'
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
       - name: Login to Amazon ECR
         if: github.ref == 'refs/heads/develop'
         id: login-ecr
