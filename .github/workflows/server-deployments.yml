@@ -95,6 +95,12 @@ jobs:
       - name: Install Dependency
         working-directory: ./backend/services
         run: yarn install --frozen-lockfile
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-region: us-east-1
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: version
         run: |
           echo "ARN1=$(aws lambda list-layer-versions --layer-name service-dependencies-${{ github.event.inputs.stage_name }}-1 --region us-east-1 --query 'LayerVersions[0].LayerVersionArn')" >> $GITHUB_OUTPUT
@@ -106,12 +112,6 @@ jobs:
       - name: Build Carbon Credit Package
         working-directory: ./libs/carbon-credit-calculator
         run: yarn run build
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-region: us-east-1
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: serverless deploy develop
         if: ${{ github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'}}
         uses: serverless/github-action@v3.1
