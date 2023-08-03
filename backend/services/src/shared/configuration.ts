@@ -7,7 +7,7 @@ export default () => ({
   dateFormat: "DD LLLL yyyy",
   database: {
     type: "postgres",
-    host: process.env.DB_HOST || "localhost",
+    host: process.env.DB_HOST || "carbondb.c0rjpojmhdkp.us-east-1.rds.amazonaws.com",
     port: parseInt(process.env.DB_PORT) || 5432,
     username: process.env.DB_USER || "hquser",
     password: process.env.DB_PASSWORD || "",
@@ -28,20 +28,20 @@ export default () => ({
     companyTable: "company",
   },
   email: {
-    source: process.env.SOURCE_EMAIL || "info@xeptagon.com",
+    source: process.env.SOURCE_EMAIL || "admin@bioeconomy.co",
     endpoint:
       process.env.SMTP_ENDPOINT ||
-      "vpce-02cef9e74f152b675-b00ybiai.email-smtp.us-east-1.vpce.amazonaws.com",
-    username: process.env.SMTP_USERNAME || "AKIAUMXKTXDJIOFY2QXL",
+      "vpce-0a2e5d4b000bd950f-d9pcih7s.email-smtp.us-east-1.vpce.amazonaws.com",
+    username: process.env.SMTP_USERNAME || "AKIA5HKVL35ZY5NTTA54",
     password: process.env.SMTP_PASSWORD,
     disabled: process.env.IS_EMAIL_DISABLED === "true" ? true : false,
     disableLowPriorityEmails:
       process.env.DISABLE_LOW_PRIORITY_EMAIL === "true" ? true : false,
   },
   s3CommonBucket: {
-    name: "carbon-common-" + (process.env.NODE_ENV || "dev"),
+    name: "carbon=perlin-common-" + (process.env.NODE_ENV || "dev"),
   },
-  host: process.env.HOST || "https://test.carbreg.org",
+  host: process.env.HOST || "https://cr-dev.perlin.net",
   liveChat: "https://undp2020cdo.typeform.com/to/emSWOmDo",
   mapbox: {
     key: process.env.MAPBOX_PK,
