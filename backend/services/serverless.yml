@@ -154,7 +154,7 @@ functions:
       - ${param:depLayerArn2}
 
   setup:
-    timeout: 60
+    timeout: 180
     handler: src/setup/handler.handler
     # ssmToEnvironment:
     #   - DB_PASSWORD
