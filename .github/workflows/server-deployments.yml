@@ -20,7 +20,6 @@ jobs:
     # Declare outputs for next jobs
     outputs:
       deps_changed: ${{ steps.check_file_changed.outputs.deps_changed }}
-      # stage: ${{ steps.branch_check.outputs.stage }}
     steps:
     - uses: actions/checkout@v3
       with:
@@ -32,13 +31,7 @@ jobs:
         else
           echo "deps_changed=False" >> $GITHUB_OUTPUT
         fi
-    # - id: branch_check
-    #   run: |
-    #     if [[ ${GITHUB_REF} == 'refs/heads/main' ]]; then
-    #       echo "stage=prod" >> $GITHUB_OUTPUT
-    #     else
-    #       echo "stage=dev" >> $GITHUB_OUTPUT
-    #     fi
+
   layer:
     name: layer
     runs-on: ubuntu-latest
@@ -70,18 +63,13 @@ jobs:
         if: ${{ needs.check_dependency_change.outputs.deps_changed == 'True' }}
         working-directory: ./backend/layer/dependency_layer
         run: yarn install --production --frozen-lockfile
-      - name: serverless deploy layers develop
-        if: ${{ needs.check_dependency_change.outputs.deps_changed == 'True' && github.ref == 'refs/heads/develop'}}
+      - name: serverless deploy layers
+        if: ${{ needs.check_dependency_change.outputs.deps_changed == 'True'}}
         uses: serverless/github-action@v3.1
         with:
           args: -c "cd ./backend/layer && serverless deploy --stage ${{ github.event.inputs.stage_name }}"
           entrypoint: /bin/sh
-      - name: serverless deploy layers main
-        if: ${{ needs.check_dependency_change.outputs.deps_changed == 'True' && github.ref == 'refs/heads/main'}}
-        uses: serverless/github-action@v3.1
-        with:
-          args: -c "cd ./backend/layer && serverless deploy --stage prod"
-          entrypoint: /bin/sh
+
   deploy:
     name: deploy
     runs-on: ubuntu-latest
@@ -112,24 +100,17 @@ jobs:
       - name: Build Carbon Credit Package
         working-directory: ./libs/carbon-credit-calculator
         run: yarn run build
-      - name: serverless deploy develop
-        if: ${{ github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'}}
-        uses: serverless/github-action@v3.1
-        with:
-          args: -c "cd ./backend/services && serverless deploy --stage ${{ github.event.inputs.stage_name }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'"
-          entrypoint: /bin/sh
-      - name: serverless deploy main
-        if: ${{ github.ref == 'refs/heads/main' || github.event.inputs.stage_name == 'prod'}}
+      - name: serverless deploy
         uses: serverless/github-action@v3.1
         with:
           args: -c "cd ./backend/services && serverless deploy --stage ${{ github.event.inputs.stage_name }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'"
           entrypoint: /bin/sh
       - name: Login to Amazon ECR
-        if: ${{ github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'}}
+        if: ${{ github.event.inputs.stage_name == 'dev'}}
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build, tag, and push the image to Amazon ECR
-        if: ${{ github.ref == 'refs/heads/develop' || github.event.inputs.stage_name == 'dev'}}
+        if: ${{ github.event.inputs.stage_name == 'dev'}}
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
