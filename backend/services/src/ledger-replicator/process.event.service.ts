@@ -18,7 +18,7 @@ export class ProcessEventService {
   ) {}
 
   async process(programme: Programme, overall: CreditOverall, version: number, txTime: number): Promise<any> {
-    this.logger.log(`Processing message ${programme} ${overall} ${version} ${txTime}`)
+    this.logger.log(`Processing message ${programme} ${overall} ${version} ${txTime}`, 'process')
     if (programme) {
       const previousProgramme = await this.programmeRepo.findOneBy({
         programmeId: programme.programmeId,

@@ -18,13 +18,16 @@ export class QLDBKinesisReplicatorService implements LedgerReplicatorInterface{
     private logger: Logger,
     private eventProcessor: ProcessEventService,
     private configService: ConfigService
-  ) {}
+  ) {
+    logger.log('Constructor initialized', 'QLDBKinesisReplicatorService');
+  }
 
   async processRecords(records) {
     return await Promise.all(
       records.map(async (record) => {
         // Kinesis data is base64 encoded so decode here
         const payload = Buffer.from(record.data, "base64");
+        this.logger.log('Payload', 'processRecords', payload);
 
         // payload is the actual ion binary record published by QLDB to the stream
         const ionRecord = dom.load(payload);
@@ -72,6 +75,7 @@ export class QLDBKinesisReplicatorService implements LedgerReplicatorInterface{
               JSON.parse(JSON.stringify(payload))
             );
 
+            this.logger.log('CreditOverall', 'processRecords', overall);
             await this.eventProcessor.process(undefined, overall, parseInt(meta["version"]), new Date(meta.txTime).getTime())
           }
         }
@@ -92,7 +96,7 @@ export class QLDBKinesisReplicatorService implements LedgerReplicatorInterface{
   }
 
   async replicate(event): Promise<any> {
-    this.logger.log("Event received", JSON.stringify(event));
+    this.logger.log("Event received", 'replicate', JSON.stringify(event));
     return await Promise.all(
       event.Records.map(async (kinesisRecord) => {
         const records = await this.promiseDeaggregate(kinesisRecord.kinesis);

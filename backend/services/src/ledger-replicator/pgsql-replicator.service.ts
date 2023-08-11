@@ -19,10 +19,12 @@ export class PgSqlReplicatorService implements LedgerReplicatorInterface {
     @InjectRepository(Counter) private counterRepo: Repository<Counter>,
     private configService: ConfigService,
     private eventProcessor: ProcessEventService,
-  ) {}
+  ) {
+    logger.log('Constructor initialized', 'PgSqlReplicatorService');
+  }
 
   async replicate(event): Promise<any> {
-    this.logger.log("Start received", JSON.stringify(event));
+    this.logger.log("Start received", 'replicate', JSON.stringify(event));
 
     setInterval(async () => {
       const seqObj = await this.counterRepo.findOneBy({
