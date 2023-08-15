@@ -14,6 +14,8 @@ import LayoutFooter from '../../Components/Footer/layout.footer';
 import ImgWithFallback from '../../Components/ImgwithFallback/ImgWithFallback';
 import './homepage.scss';
 import { BarChart, Gem, Calculator } from 'react-bootstrap-icons';
+import { ReactComponent as LogoSvg } from '../../Assets/Images/logo.svg';
+
 const Homepage = () => {
   const { i18n, t } = useTranslation(['common', 'homepage']);
   const navigate = useNavigate();
@@ -52,14 +54,12 @@ const Homepage = () => {
     <div className="homepage-container">
       <Row>
         <Col md={24} lg={24} flex="auto">
-          <div className="homepage-img-container image-container">
-            <Row>
-              <Col md={21} lg={21} flex="auto">
-                <div className="homepage-header-container">
-                  <div className="logo">
+          <div className="container">
+            <div className="homepage-header-container">
+              {/* <div className="logo">
                     <img src={sliderLogo} alt="slider-logo" />
-                  </div>
-                  <div>
+                  </div> */}
+              {/* <div>
                     <div style={{ display: 'flex' }}>
                       <div className="title">{'PERL.eco Carbon & Bio Assets'}</div>
                       <div className="title-sub">{'REGISTRY'}</div>
@@ -67,40 +67,41 @@ const Homepage = () => {
                     <div className="country-name">
                       {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
                     </div>
-                  </div>
-                </div>
-              </Col>
-              <Col md={3} lg={3} flex="auto">
-                <div className="homepage-button-container">
-                  <div className="button">
-                    <Button type="primary" onClick={() => navigate('/login')}>
-                      SIGN IN
-                    </Button>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-            <Row>
+                  </div> */}
+              <LogoSvg className="logo" />
+              <div className="sign-in">
+                <Button onClick={() => navigate('/login')}>SIGN IN</Button>
+              </div>
+            </div>
+          </div>
+          <div className="homepage-img-container image-container">
+            <div className="container">
               <div className="text-ctn">
                 <span>
-                  {t('PERL.eco Carbon & Bio Assets')}
+                  {t('PERL.eco Carbon &')}
                   <br />
-                  {t('homepage:registry')}
+                  {t('Bio Assets registry')}
                 </span>
-                <div className="subhome">{t('homepage:lorem')}</div>
               </div>
-            </Row>
-            <Row>
-              {Visible && (
-                <nav className={'arrows'}>
-                  <svg onClick={handleClickScroll}>
-                    <path className="a1" d="M0 0 L30 32 L60 0"></path>
-                    <path className="a2" d="M0 20 L30 52 L60 20"></path>
-                    <path className="a3" d="M0 40 L30 72 L60 40"></path>
-                  </svg>
-                </nav>
-              )}
-            </Row>
+              <div className="subtitle">
+                <span>
+                  {t('Fostering Eco-Balance: ')}
+                  <br />
+                  {t('Tracking Carbon, Sharing Nature')}
+                </span>
+              </div>
+              <Row>
+                {Visible && (
+                  <nav className={'arrows'}>
+                    <svg onClick={handleClickScroll}>
+                      <path className="a1" d="M0 0 L30 32 L60 0"></path>
+                      <path className="a2" d="M0 20 L30 52 L60 20"></path>
+                      <path className="a3" d="M0 40 L30 72 L60 40"></path>
+                    </svg>
+                  </nav>
+                )}
+              </Row>
+            </div>
           </div>
         </Col>
       </Row>

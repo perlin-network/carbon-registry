@@ -715,3 +715,26 @@ body {
   left: auto;
   min-width: 400px;
 }
+
+.container {
+  padding-right: 16px;
+  padding-left: 16px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+@media (min-width: $md-size) {
+  .container {
+    max-width: $md-size;
+  }
+}
+@media (min-width: $lg-size) {
+  .container {
+    max-width: $lg-size;
+  }
+}
+@media (min-width: $xl-size) {
+  .container {
+    max-width: $xl-size;
+  }
+}
