@@ -13,8 +13,10 @@ import resourcesfall from '../../Assets/Images/resources.png';
 import LayoutFooter from '../../Components/Footer/layout.footer';
 import ImgWithFallback from '../../Components/ImgwithFallback/ImgWithFallback';
 import './homepage.scss';
-import { BarChart, Gem, Calculator } from 'react-bootstrap-icons';
 import { ReactComponent as LogoSvg } from '../../Assets/Images/logo.svg';
+import { ReactComponent as AnalyticsDashboardSvg } from '../../Assets/Images/analytics-dashboard.svg';
+import { ReactComponent as CarbonCreditCalculatorSvg } from '../../Assets/Images/carbon-credit-calculator.svg';
+import { ReactComponent as SerialNumberGeneratorSvg } from '../../Assets/Images/serial-number-generator.svg';
 
 const Homepage = () => {
   const { i18n, t } = useTranslation(['common', 'homepage']);
@@ -76,20 +78,20 @@ const Homepage = () => {
           </div>
           <div className="homepage-img-container image-container">
             <div className="container">
-              <div className="text-ctn">
+              <h1 className="text-ctn">
                 <span>
                   {t('PERL.eco Carbon &')}
                   <br />
                   {t('Bio Assets registry')}
                 </span>
-              </div>
-              <div className="subtitle">
+              </h1>
+              <p className="subtitle">
                 <span>
                   {t('Fostering Eco-Balance: ')}
                   <br />
                   {t('Tracking Carbon, Sharing Nature')}
                 </span>
-              </div>
+              </p>
               <Row>
                 {Visible && (
                   <nav className={'arrows'}>
@@ -107,71 +109,67 @@ const Homepage = () => {
       </Row>
       <Row gutter={[8, 8]}>
         <Col md={24} lg={24} flex="auto">
-          <div className="homepage-content-containerwhite">
-            <div id="scrollhome" className="title">
-              {t('homepage:aboutustitle')}
-            </div>
-            <div className="homepagebody">
-              <div className="homepagebody_aboutusline1">{t('homepage:aboutusline1')}</div>
-              <div className="homepagebody_subtitle">{t('homepage:Keyfeatures')}</div>
+          <div className="homepage-about-container">
+            <div className="container">
+              <h2 id="scrollhome" className="title">
+                {t('homepage:aboutustitle')}
+              </h2>
+              <div className="homepagebody">
+                <p className="homepage-about-us">{t('homepage:aboutusline1')}</p>
+                <h3 className="homepage-feature-title">{t('homepage:Keyfeatures')}</h3>
 
-              <div className="aboutus_cards-container">
-                <Row gutter={[5, 5]} className="aboutus_card-row">
-                  <Col xxl={8} xl={8} md={8} className="aboutus_card-col">
-                    <div className="aboutus-card-main-container">
-                      <Col>
-                        <Row className="aboutus_card-row">
-                          <div>
-                            <BarChart color="#FFFF" size="80px" />
-                          </div>
-                        </Row>
-                        <Row className="aboutus_card-row">
-                          <div className="aboutus-card-title">{t('homepage:analytic')}</div>
-                        </Row>
-                        <Row>
-                          <div className="aboutus-card-text">{t('homepage:analyticbody')}</div>
-                        </Row>
-                      </Col>
-                    </div>
-                  </Col>
-                  <Col xxl={8} xl={8} md={8} className="aboutus_card-col">
-                    <div className="aboutus-card-main-container">
-                      <Col>
-                        <Row className="aboutus_card-row">
-                          <div>
-                            <Gem color="#FFFF" size="80px" />
-                          </div>
-                        </Row>
-                        <Row className="aboutus_card-row">
-                          <div className="aboutus-card-title">{t('homepage:carboncal')}</div>
-                        </Row>
-                        <Row>
-                          <div className="aboutus-card-text">{t('homepage:carboncalbody')}</div>
-                        </Row>
-                      </Col>
-                    </div>
-                  </Col>
-                  <Col xxl={8} xl={8} md={8} className="aboutus_card-col">
-                    <div className="aboutus-card-main-container">
-                      <Col>
-                        <Row className="aboutus_card-row">
-                          <div>
-                            <Calculator className="aboutusicon" color="#FFFF" size="80px" />
-                          </div>
-                        </Row>
-                        <Row className="aboutus_card-row">
-                          <div className="aboutus-card-title">{t('homepage:serialgen')}</div>
-                        </Row>
-                        <Row>
-                          <div className="aboutus-card-text">{t('homepage:serialgenbody')}</div>
-                        </Row>
-                      </Col>
-                    </div>
-                  </Col>
-                </Row>
+                <div className="homepage-features-container">
+                  <Row gutter={40} align="stretch" className="aboutus_card-row">
+                    <Col xxl={8} xl={8} md={8} className="aboutus_card-col">
+                      <div className="aboutus-card-main-container">
+                        <Col>
+                          <Row className="aboutus_card-row">
+                            <AnalyticsDashboardSvg height={92} />
+                          </Row>
+                          <Row className="aboutus_card-row">
+                            <div className="aboutus-card-title">{t('homepage:analytic')}</div>
+                          </Row>
+                          <Row>
+                            <div className="aboutus-card-text">{t('homepage:analyticbody')}</div>
+                          </Row>
+                        </Col>
+                      </div>
+                    </Col>
+                    <Col xxl={8} xl={8} md={8} className="aboutus_card-col">
+                      <div className="aboutus-card-main-container">
+                        <Col>
+                          <Row className="aboutus_card-row">
+                            <CarbonCreditCalculatorSvg height={92} />
+                          </Row>
+                          <Row className="aboutus_card-row">
+                            <div className="aboutus-card-title">{t('homepage:carboncal')}</div>
+                          </Row>
+                          <Row>
+                            <div className="aboutus-card-text">{t('homepage:carboncalbody')}</div>
+                          </Row>
+                        </Col>
+                      </div>
+                    </Col>
+                    <Col xxl={8} xl={8} md={8} className="aboutus_card-col">
+                      <div className="aboutus-card-main-container">
+                        <Col>
+                          <Row className="aboutus_card-row">
+                            <SerialNumberGeneratorSvg height={92} />
+                          </Row>
+                          <Row className="aboutus_card-row">
+                            <div className="aboutus-card-title">{t('homepage:serialgen')}</div>
+                          </Row>
+                          <Row>
+                            <div className="aboutus-card-text">{t('homepage:serialgenbody')}</div>
+                          </Row>
+                        </Col>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+                <Row>{t('homepage:aboutusline2')}</Row>
+                <Row className="homepagebody_aboutuslines">{t('homepage:aboutusline3')}</Row>
               </div>
-              <Row>{t('homepage:aboutusline2')}</Row>
-              <Row className="homepagebody_aboutuslines">{t('homepage:aboutusline3')}</Row>
             </div>
           </div>
         </Col>

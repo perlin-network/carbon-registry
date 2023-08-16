@@ -1,12 +1,17 @@
 @import '../../Assets/Fonts/fonts.scss';
 @import '../../Styles/variables.scss';
 
+$font-family-title: 'Poppins';
+$font-family-regular: 'Bai Jamjuree';
+
 .homepage-container {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: $background-color;
   scroll-behavior: smooth;
+  color: #333336;
+  font-family: $font-family-regular;
 
   .homepage-header-container {
     display: flex;
@@ -177,7 +182,7 @@
       position: relative;
       padding-top: 20vh;
       color: $outside-background-color;
-      font-family: $secondary-font-family;
+      font-family: $font-family-title;
       font-size: 4rem;
       line-height: 1.1;
       text-transform: uppercase;
@@ -214,59 +219,58 @@
       text-transform: uppercase;
     }
   }
-  .homepage-content-containerwhite {
+
+  .homepage-about-container {
     background-color: $outside-background-color;
     height: fit-content;
-    padding: 10px 60px 10px 60px;
+    padding: 60px 0;
     text-align: center;
-    margin-top: 5px;
 
     @media (max-width: $lg-size) {
       height: fit-content;
     }
 
     .title {
+      margin-bottom: 30px;
       font-size: 2rem;
       font-weight: 700;
-      font-family: $primary-font-family;
-      color: $title-text-color;
+      font-family: $font-family-title;
       text-align: center;
       justify-content: center;
       text-transform: uppercase;
-      padding: 50px 50px 10px 50px;
+      // padding: 50px 50px 10px 50px;
 
       @media (max-width: $lg-size) {
         font-size: 2rem;
-        margin-top: 1rem;
+        // margin-top: 1rem;
         color: $title-text-color;
         line-height: 1.5em;
       }
     }
     .homepagebody {
       text-align: center;
-      font-size: 0.875rem;
-      font-weight: 400;
-      font-family: $primary-font-family;
-      color: $title-text-color;
-      justify-content: center;
-      margin: 20px 60px 20px 60px;
+
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.5rem;
 
       @media (max-width: $lg-size) {
-        font-size: 0.8rem;
-        margin-top: 1rem;
-        color: $title-text-color;
-        line-height: 1.5em;
+        // font-size: 0.8rem;
+        // margin-top: 1rem;
+        // color: $title-text-color;
+        // line-height: 1.5em;
       }
-      .homepagebody_aboutusline1 {
-        font-size: 1.125rem;
-        margin-top: 1rem;
-        color: $title-text-color;
+      .homepage-about-us {
+        margin-bottom: 70px;
+        // font-size: 1.125rem;
+        // margin-top: 1rem;
+        // color: $title-text-color;
 
         @media (max-width: $lg-size) {
-          font-size: 1rem;
-          margin-top: 1rem;
-          color: $title-text-color;
-          line-height: 1.5em;
+          // font-size: 1rem;
+          // margin-top: 1rem;
+          // color: $title-text-color;
+          // line-height: 1.5em;
         }
       }
       .homepagebody_aboutuslines {
@@ -274,49 +278,44 @@
         margin-bottom: 3.5rem;
       }
 
-      .homepagebody_subtitle {
+      .homepage-feature-title {
+        margin: 0;
         font-size: 1.25rem;
         font-weight: 700;
-        font-family: $primary-font-family;
-        color: $title-text-color;
+        font-family: $font-family-title;
         text-align: center;
-        justify-content: center;
-        margin-top: 2rem;
       }
     }
+
     .aboutus-card-main-container {
       display: flex;
+      padding: 40px 25px 25px 25px;
       max-height: 22rem;
       min-height: 20rem;
       max-width: 25rem;
-      justify-content: center;
-      background: linear-gradient(to right, $gradient-background-start, $gradient-background-end);
-      border-radius: 0.625rem;
-      padding: 40px 25px 25px 25px;
-      margin: 60px 40px 60px 40px;
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(200deg, #128d89 0%, #333336 100%);
+      // margin: 60px 40px 60px 40px;
       text-align: center;
     }
     .aboutus-card-main-container:hover {
-      background: $gradient-background-end;
-      cursor: pointer;
+      // background: $gradient-background-end;
+      // cursor: pointer;
     }
-    .aboutus_cards-container {
+
+    .homepage-features-container {
       display: flex;
-      flex-direction: row;
-      width: 100%;
-      align-items: center;
-      justify-content: center;
+      padding: 60px 0;
 
       .aboutus_card-row {
         display: flex;
         align-items: center;
         justify-content: center;
-        .aboutus_card-col {
-          display: flex;
-          flex-direction: row;
-          justify-content: flex;
-          align-items: center;
-        }
+        flex: 1;
+      }
+      .aboutus_card-col {
+        height: 100%;
       }
       .aboutusIcon {
         display: flex;
@@ -325,16 +324,16 @@
       }
       .aboutus-card-text {
         color: $dark-text-color;
-        line-height: 2;
+        font-size: 0.875rem;
+        line-height: 1.125rem;
       }
       .aboutus-card-title {
-        font-weight: 700;
-        display: flex;
+        margin: 18px 0 24px;
         color: $dark-text-color;
-        line-height: 2;
-        text-align: center;
-        margin-bottom: 10px;
-        margin-top: 20px;
+        font-family: $font-family-title;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.75rem;
       }
     }
     .undplogocontainer {
