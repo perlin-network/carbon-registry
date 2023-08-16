@@ -13,8 +13,8 @@ import { HelperService } from "./helpers.service";
 import { IsValidCountryConstraint } from "./validcountry.decorator";
 import { PasswordReset } from "../entities/userPasswordResetToken.entity";
 import { PasswordResetService } from "./passwordReset.service";
+import { ParameterStoreService } from "./parameterStore.service";
 import { User } from "../entities/user.entity";
-import { UserModule } from "../user/user.module";
 import { AsyncOperationsModule } from "../async-operations/async-operations.module";
 import { ConfigurationSettingsService } from "./configurationSettings.service";
 import { ConfigurationSettings } from "../entities/configuration.settings";
@@ -56,6 +56,7 @@ import { ConfigurationSettings } from "../entities/configuration.settings";
     IsValidCountryConstraint,
     HelperService,
     PasswordResetService,
+    ParameterStoreService,
     Logger,
     ConfigurationSettingsService,
   ],
@@ -64,6 +65,7 @@ import { ConfigurationSettings } from "../entities/configuration.settings";
     CountryService,
     HelperService,
     PasswordResetService,
+    ParameterStoreService,
     ConfigurationSettingsService,
   ],
 })
