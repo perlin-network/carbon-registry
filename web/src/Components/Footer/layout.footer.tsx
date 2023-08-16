@@ -3,19 +3,19 @@ import { useTranslation } from 'react-i18next';
 import sliderLogo from '../../Assets/Images/logo-slider.png';
 import './layout.footer.scss';
 import { CcCircle } from 'react-bootstrap-icons';
+import { ReactComponent as LogoSvg } from '../../Assets/Images/logo-inverted.svg';
 
 const LayoutFooter = () => {
   const { i18n, t } = useTranslation(['common', 'homepage']);
 
   return (
     <div className="homepage-footer-container">
-      <Row>
-        <Col md={24} lg={24}>
-          <div className="logocontainer">
-            <div className="logo">
-              <img src={sliderLogo} alt="slider-logo" />
-            </div>
-            <div>
+      <div className="container">
+        <Row>
+          <Col md={24} lg={24}>
+            <div className="logocontainer">
+              <LogoSvg height={48} />
+              {/* <div>
               <div style={{ display: 'flex' }}>
                 <div className="title">{'PERL.eco Carbon & Bio Assets'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
@@ -23,24 +23,17 @@ const LayoutFooter = () => {
               <div className="footer-country-name">
                 {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
               </div>
+            </div> */}
             </div>
-          </div>
-        </Col>
-      </Row>
-      <Divider className="divider" style={{ backgroundColor: '#FFFF' }} />
-      <Row>
-        <Col md={24} lg={24}>
-          <div className="footertext">{t('homepage:footertext1')}</div>
-        </Col>
-      </Row>
-      <Row>
-        <Col md={10} lg={10}>
+          </Col>
+        </Row>
+        <Divider className="divider" />
+        <div className="footertext">{t('homepage:footertext1')}</div>
+        <div className="footer-bottom">
           <div className="footertext-bottom">
             {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
             <CcCircle className="cc" color="#FFFF" size="10px" />
           </div>
-        </Col>
-        <Col md={14} lg={14}>
           <div className="footertext-link-container">
             <a href="/help" target={'blank'} className="footertext-links">
               {t('homepage:Help')}
@@ -61,8 +54,8 @@ const LayoutFooter = () => {
               {t('homepage:privacy')}
             </a>
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };

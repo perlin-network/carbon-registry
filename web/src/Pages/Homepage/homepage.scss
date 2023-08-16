@@ -238,28 +238,17 @@ $font-family-regular: 'Bai Jamjuree';
       text-align: center;
       justify-content: center;
       text-transform: uppercase;
-      // padding: 50px 50px 10px 50px;
-
-      @media (max-width: $lg-size) {
-        font-size: 2rem;
-        // margin-top: 1rem;
-        color: $title-text-color;
-        line-height: 1.5em;
-      }
     }
     .homepagebody {
-      text-align: center;
-
       font-size: 1.5rem;
       font-weight: 500;
       line-height: 1.5rem;
+      text-align: center;
 
       @media (max-width: $lg-size) {
-        // font-size: 0.8rem;
-        // margin-top: 1rem;
-        // color: $title-text-color;
-        // line-height: 1.5em;
+        font-size: 1.125rem;
       }
+
       .homepage-about-us {
         margin-bottom: 70px;
         // font-size: 1.125rem;
@@ -289,15 +278,19 @@ $font-family-regular: 'Bai Jamjuree';
 
     .aboutus-card-main-container {
       display: flex;
+      justify-content: center;
       padding: 40px 25px 25px 25px;
-      max-height: 22rem;
-      min-height: 20rem;
-      max-width: 25rem;
+      // max-height: 22rem;
+      // min-height: 20rem;
+      // max-width: 25rem;
       height: 100%;
       border-radius: 10px;
       background: linear-gradient(200deg, #128d89 0%, #333336 100%);
       // margin: 60px 40px 60px 40px;
       text-align: center;
+      @media (max-width: $md-size) {
+        margin-bottom: 16px;
+      }
     }
     .aboutus-card-main-container:hover {
       // background: $gradient-background-end;
@@ -316,6 +309,10 @@ $font-family-regular: 'Bai Jamjuree';
       }
       .aboutus_card-col {
         height: 100%;
+        @media (max-width: $md-size) {
+          min-width: 100%;
+          height: auto;
+        }
       }
       .aboutusIcon {
         display: flex;
@@ -359,38 +356,6 @@ $font-family-regular: 'Bai Jamjuree';
     text-align: right;
     margin-top: 5px;
 
-    @media (max-width: $lg-size) {
-    }
-    .forest-image {
-      height: 33.75rem;
-      width: 52.5rem;
-    }
-
-    ul {
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-    li {
-      line-height: 40px;
-    }
-
-    .title {
-      font-size: 2rem;
-      font-weight: 700;
-      font-family: $primary-font-family;
-      color: $title-text-color;
-      text-align: center;
-      justify-content: center;
-      text-transform: uppercase;
-      padding: 50px 50px 10px 50px;
-
-      @media (max-width: $lg-size) {
-        font-size: 2rem;
-        margin-top: 1rem;
-        color: $title-text-color;
-        line-height: 1.5em;
-      }
-    }
     .homepagebody {
       text-align: left;
       font-size: 0.875rem;

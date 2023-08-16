@@ -70,7 +70,7 @@ const Homepage = () => {
                       {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
                     </div>
                   </div> */}
-              <LogoSvg className="logo" />
+              <LogoSvg className="logo" height={48} />
               <div className="sign-in">
                 <Button onClick={() => navigate('/login')}>SIGN IN</Button>
               </div>
@@ -119,7 +119,11 @@ const Homepage = () => {
                 <h3 className="homepage-feature-title">{t('homepage:Keyfeatures')}</h3>
 
                 <div className="homepage-features-container">
-                  <Row gutter={40} align="stretch" className="aboutus_card-row">
+                  <Row
+                    gutter={{ xs: 0, md: 16, lg: 40 }}
+                    align="stretch"
+                    className="aboutus_card-row"
+                  >
                     <Col xxl={8} xl={8} md={8} className="aboutus_card-col">
                       <div className="aboutus-card-main-container">
                         <Col>
@@ -167,8 +171,6 @@ const Homepage = () => {
                     </Col>
                   </Row>
                 </div>
-                <Row>{t('homepage:aboutusline2')}</Row>
-                <Row className="homepagebody_aboutuslines">{t('homepage:aboutusline3')}</Row>
               </div>
             </div>
           </div>
