@@ -17,6 +17,8 @@ import { ReactComponent as LogoSvg } from '../../Assets/Images/logo.svg';
 import { ReactComponent as AnalyticsDashboardSvg } from '../../Assets/Images/analytics-dashboard.svg';
 import { ReactComponent as CarbonCreditCalculatorSvg } from '../../Assets/Images/carbon-credit-calculator.svg';
 import { ReactComponent as SerialNumberGeneratorSvg } from '../../Assets/Images/serial-number-generator.svg';
+import GenomPng from '../../Assets/Images/genom.png';
+import JunglePng from '../../Assets/Images/jungle.png';
 
 const Homepage = () => {
   const { i18n, t } = useTranslation(['common', 'homepage']);
@@ -178,58 +180,64 @@ const Homepage = () => {
       </Row>
       <Row gutter={[8, 8]}>
         <Col md={24} lg={24} flex="auto">
-          <div className="homepage-image-content-container">
-            <Row>
-              <Col className="eligicontent" flex={2} md={12} lg={12}>
-                <div className="title">{t('homepage:eligibility')}</div>
-                <div className="homepagebody">
-                  {t('homepage:eligibilitybody')}
+          <div className="homepage-list-section-container">
+            <div className="container">
+              <Row gutter={24}>
+                <Col md={24} lg={12}>
+                  <h3 className="title">{t('homepage:eligibility')}</h3>
+                  {/* <div className="homepagebody"> */}
+                  {/* {t('homepage:eligibilitybody')} */}
                   <ul>
                     <li>{t('homepage:eliglist1')}</li>
                     <li>{t('homepage:eliglist2')}</li>
                     <li>{t('homepage:eliglist3')}</li>
                     <li>{t('homepage:eliglist4')}</li>
                   </ul>
-                </div>
-              </Col>
-              <Col flex={3} md={12} lg={12}>
-                <ImgWithFallback
-                  className="forest-image"
-                  src={forest}
-                  fallbackSrc={forestfall}
-                  mediaType="image/webp"
-                  alt="forestry"
-                />
-                {/* <img className="image" src={forest} alt="forest" /> */}
-              </Col>
-            </Row>
+                  {/* </div> */}
+                </Col>
+                <Col md={24} lg={12}>
+                  <img className="genom-image" src={GenomPng} alt="genom" />
+                  {/* <ImgWithFallback
+                   className="forest-image"
+                   src={forest}
+                   fallbackSrc={forestfall}
+                   mediaType="image/webp"
+                   alt="forestry"
+                /> */}
+                  {/* <img className="image" src={forest} alt="forest" /> */}
+                </Col>
+              </Row>
+            </div>
           </div>
         </Col>
       </Row>
       <Row gutter={[8, 8]}>
         <Col md={24} lg={24} flex="auto">
-          <div className="homepage-resources-content-container">
-            <Row>
-              <Col className="resource-image-container" md={12} lg={12}>
-                <ImgWithFallback
+          <div className="homepage-list-section-container">
+            <div className="container">
+              <Row gutter={24}>
+                <Col md={{ span: 24, order: 2 }} lg={{ span: 12, order: 1 }}>
+                  <img className="jungle-image" src={JunglePng} alt="jungle" />
+                  {/* <ImgWithFallback
                   className="image"
                   src={resources}
                   fallbackSrc={resourcesfall}
                   mediaType="image/webp"
                   alt="resources"
-                />
-                {/* <img className="image" src={resources} alt="resources" /> */}
-              </Col>
-              <Col md={12} lg={12}>
-                <div className="title">{t('homepage:resource')}</div>
-                <div className="homepagebody">
+                /> */}
+                  {/* <img className="image" src={resources} alt="resources" /> */}
+                </Col>
+                <Col md={{ span: 24, order: 1 }} lg={{ span: 12, order: 2 }}>
+                  <h3 className="title">{t('homepage:resource')}</h3>
+                  {/* <div className="homepagebody"> */}
                   <ul>
                     <li>{t('homepage:reslist1')}</li>
                     <li>{t('homepage:reslist2')}</li>
                   </ul>
-                </div>
-              </Col>
-            </Row>
+                  {/* </div> */}
+                </Col>
+              </Row>
+            </div>
           </div>
         </Col>
       </Row>

@@ -54,6 +54,8 @@ $font-family-regular: 'Bai Jamjuree';
     }
 
     .sign-in {
+      margin-left: 24px;
+
       button {
         min-width: 218px;
         color: #fff;
@@ -63,6 +65,9 @@ $font-family-regular: 'Bai Jamjuree';
         text-transform: uppercase;
         text-align: left;
         font-size: 0.875rem;
+        @media (max-width: $lg-size) {
+          min-width: 0;
+        }
       }
     }
   }
@@ -222,12 +227,11 @@ $font-family-regular: 'Bai Jamjuree';
 
   .homepage-about-container {
     background-color: $outside-background-color;
-    height: fit-content;
     padding: 60px 0;
     text-align: center;
 
     @media (max-width: $lg-size) {
-      height: fit-content;
+      padding-bottom: 0;
     }
 
     .title {
@@ -350,91 +354,81 @@ $font-family-regular: 'Bai Jamjuree';
   .eligicontent {
     padding: 20px;
   }
-  .homepage-image-content-container {
+
+  .homepage-list-section-container {
     background-color: $outside-background-color;
-    padding-left: 60px;
-    text-align: right;
-    margin-top: 5px;
-
-    .homepagebody {
-      text-align: left;
-      font-size: 0.875rem;
-      font-weight: 400;
-      font-family: $primary-font-family;
-      color: $title-text-color;
-      justify-content: left;
-      margin: 20px 10px 20px 60px;
-
-      @media (max-width: $lg-size) {
-        font-size: 0.8rem;
-        margin-top: 1rem;
-        color: $title-text-color;
-        line-height: 1.5em;
-      }
-    }
-  }
-  .homepage-resources-content-container {
-    background-color: $outside-background-color;
-    height: fit-content;
-    padding-left: 60px;
-
-    margin-top: 5px;
-    height: fit-content;
-    @media (max-width: $lg-size) {
-      height: fit-content;
-    }
-
-    ul {
-      margin-top: 25px;
-      margin-left: 9vw;
-    }
-    li {
-      line-height: 40px;
-    }
-
-    img {
-      display: flex;
-      padding: 50px;
-      justify-content: center;
-      text-align: center;
-      width: 28.125rem;
-      height: 23.438rem;
-    }
-    .resource-image-container {
-      display: flex;
-      justify-content: center;
-      text-align: center;
+    color: #333336;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.33;
+    font-family: $font-family-regular;
+    @media (max-width: $md-size) {
+      font-size: 1.25rem;
     }
 
     .title {
+      margin: 32px 0;
+      color: #333336;
+      text-align: center;
+      font-family: $font-family-title;
       font-size: 2rem;
       font-weight: 700;
-      font-family: $primary-font-family;
-      color: $title-text-color;
-      margin-left: 10vw;
+      line-height: 1.57;
       text-transform: uppercase;
-      padding: 50px 50px 10px 50px;
-
-      @media (max-width: $lg-size) {
-        font-size: 2rem;
-        margin-top: 1rem;
-        color: $title-text-color;
-        line-height: 1.5em;
+    }
+    ul {
+      list-style-position: inside;
+      padding: 0;
+      @media (max-width: $md-size) {
+        padding: 0 24px;
       }
     }
-    .homepagebody {
-      font-size: 0.875rem;
-      font-weight: 400;
-      font-family: $primary-font-family;
-      color: $title-text-color;
-      margin: 20px 60px 20px 60px;
-
+    li {
+      margin: 24px 0;
+    }
+    .genom-image {
+      display: block;
+      margin: 60px auto;
+      max-width: 450px;
+      max-height: 650px;
       @media (max-width: $lg-size) {
-        font-size: 0.8rem;
-        margin-top: 1rem;
-        color: $title-text-color;
-        line-height: 1.5em;
+        margin: 0px auto;
+        max-width: 320px;
       }
+    }
+    .jungle-image {
+      display: block;
+      margin: 30px auto 60px;
+      max-width: 450px;
+      max-height: 650px;
+    }
+  }
+
+  .homepage-resources-container {
+    background-color: $outside-background-color;
+
+    .title {
+      margin: 32px 0;
+      color: #333336;
+      text-align: center;
+      font-family: $font-family-title;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.57;
+      text-transform: uppercase;
+    }
+    ul {
+      list-style-position: inside;
+      padding: 0;
+    }
+    li {
+      margin: 24px 0;
+    }
+    img {
+      display: block;
+      margin: 60px auto;
+      max-width: 450px;
+      max-height: 650px;
     }
   }
 }
