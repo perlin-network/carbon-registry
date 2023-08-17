@@ -15,13 +15,6 @@ provider:
   #     - sg-0bf65b90711ab2043
 
 layers:
-  lambda-dependencies:
-    path: dependency_layer
-    name: lambda-dependencies-${self:provider.stage}
-    description: "Lambda Dependencies"
-    package:
-      exclude:
-        - node_modules/ethers/**
   # blockchain-dependencies:
   #   path: dependency_layer
   #   name: blockchain-dependencies-${self:provider.stage}
