@@ -90,10 +90,10 @@ jobs:
           aws-region: us-east-1
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: version
-        # echo "ARN_BLOCKCHAIN_LAYER=$(aws lambda list-layer-versions --layer-name blockchain-dependencies-${{ github.event.inputs.stage_name }} --region us-east-1 --query 'LayerVersions[0].LayerVersionArn')" >> $GITHUB_OUTPUT
         run: |
           echo "ARN1=$(aws lambda list-layer-versions --layer-name service-dependencies-${{ github.event.inputs.stage_name }}-1 --region us-east-1 --query 'LayerVersions[0].LayerVersionArn')" >> $GITHUB_OUTPUT
           echo "ARN2=$(aws lambda list-layer-versions --layer-name service-dependencies-${{ github.event.inputs.stage_name }}-2 --region us-east-1 --query 'LayerVersions[0].LayerVersionArn')" >> $GITHUB_OUTPUT
+          echo "ARN_BLOCKCHAIN_LAYER=$(aws lambda list-layer-versions --layer-name blockchain-dependencies-${{ github.event.inputs.stage_name }} --region us-east-1 --query 'LayerVersions[0].LayerVersionArn')" >> $GITHUB_OUTPUT
         id: layerArn
       - name: Build Serial Generator Package
         working-directory: ./libs/serial-number-gen
@@ -104,8 +104,8 @@ jobs:
       - name: serverless deploy
         uses: serverless/github-action@v3.1
         with:
-          args: -c "cd ./backend/services && serverless deploy --stage ${{ github.event.inputs.stage_name }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'"
-          # args: -c "cd ./backend/services && serverless deploy --stage ${{ github.event.inputs.stage_name }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'" --param='depLayerBlockchainArn=${{ steps.layerArn.outputs.ARN_BLOCKCHAIN_LAYER }}'
+          args: -c "cd ./backend/services && serverless deploy --stage ${{ github.event.inputs.stage_name }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}' --param='depLayerBlockchainArn=${{ steps.layerArn.outputs.ARN_BLOCKCHAIN_LAYER }}'"
+          # args: -c "cd ./backend/services && serverless deploy --stage ${{ github.event.inputs.stage_name }} --param='depLayerArn1=${{ steps.layerArn.outputs.ARN1 }}' --param='depLayerArn2=${{ steps.layerArn.outputs.ARN2 }}'"
           entrypoint: /bin/sh
       # - name: Login to Amazon ECR
       #   if: ${{ github.event.inputs.stage_name == 'dev'}}
