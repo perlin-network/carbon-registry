@@ -6,11 +6,13 @@ import configuration from '../shared/configuration';
 import { TypeOrmConfigService } from '../shared/typeorm.config.service';
 import { QLDBKinesisReplicatorService } from './qldb-kinesis-replicator.service';
 import { Company } from '../shared/entities/company.entity';
+import { PerlLedgerService } from './perl-ledger.service';
 import { LedgerReplicatorInterface } from './replicator-interface.service';
 import { PgSqlReplicatorService } from './pgsql-replicator.service';
 import { ProcessEventService } from './process.event.service';
 import { Counter } from '../shared/entities/counter.entity';
 import { LocationModule } from '../shared/location/location.module';
+import { UtilModule } from "../shared/util/util.module";
 import { LedgerType } from '../shared/enum/ledger.type';
 
 @Module({
@@ -24,7 +26,8 @@ import { LedgerType } from '../shared/enum/ledger.type';
       useClass: TypeOrmConfigService,
     }),
     TypeOrmModule.forFeature([Programme, Company, Counter]),
-    LocationModule
+    LocationModule,
+    UtilModule,
   ],
   providers: [{
     provide: LedgerReplicatorInterface,
@@ -32,6 +35,6 @@ import { LedgerType } from '../shared/enum/ledger.type';
       process.env.LEDGER_TYPE === LedgerType.QLDB
         ? QLDBKinesisReplicatorService
         : PgSqlReplicatorService,
-  }, Logger, ProcessEventService]
+  }, Logger, PerlLedgerService, ProcessEventService]
 })
 export class LedgerReplicatorModule {}

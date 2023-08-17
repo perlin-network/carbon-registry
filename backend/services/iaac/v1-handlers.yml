@@ -12,6 +12,9 @@ v1Replicator:
   ssmToEnvironment:
     - DB_PASSWORD
     - MAPBOX_PK
+    - PERL_LEDGER_PROVIDER_URL
+    - PERL_LEDGER_CONTRACT_ADDRESS
+    - PERL_LEDGER_WALLET_PRIVATE_KEY
   layers:
     - ${param:depLayerArn1}
     - ${param:depLayerArn2}
@@ -27,6 +30,7 @@ v1Replicator:
         - qldb:*
         - rds:*
         - s3:*
+        - ssm:GetParameter
       Resource: "*"
 
 v1DataImporter:
