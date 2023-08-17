@@ -9,8 +9,9 @@ v1Default:
   environment:
     NODE_PATH: "./:/opt/node_modules"
   layers:
-    - ${param:depLayerArn1}
-    - ${param:depLayerArn2}
+    - ${param:depLayerLambdaArn}
+    # - ${param:depLayerArn1}
+    # - ${param:depLayerArn2}
 
 v1NationalApi:
   timeout: 300
@@ -31,8 +32,9 @@ v1NationalApi:
     - SMTP_USERNAME
     - SMTP_PASSWORD
   layers:
-    - ${param:depLayerArn1}
-    - ${param:depLayerArn2}
+    - ${param:depLayerLambdaArn}
+    # - ${param:depLayerArn1}
+    # - ${param:depLayerArn2}
   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-national-api-role
   iamRoleStatementsInherit: true
   iamRoleStatements:
@@ -65,8 +67,9 @@ v1AnalyticsApi:
     - SMTP_USERNAME
     - SMTP_PASSWORD
   layers:
-    - ${param:depLayerArn1}
-    - ${param:depLayerArn2}
+    - ${param:depLayerLambdaArn}
+    # - ${param:depLayerArn1}
+    # - ${param:depLayerArn2}
   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-analytics-api-role
   iamRoleStatementsInherit: true
   iamRoleStatements:

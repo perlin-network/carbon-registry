@@ -42,10 +42,10 @@ plugins:
   - serverless-ssm-fetch
 #  - '@haftahave/serverless-ses-template'
 
-params:
-  local:
-    depLayerArn1: arn:aws:lambda:us-west-2:111111111111:layer:layer:1
-    depLayerArn2: arn:aws:lambda:us-west-2:111111111111:layer:layer:1
+# params:
+#   local:
+#     depLayerArn1: arn:aws:lambda:us-west-2:111111111111:layer:layer:1
+#     depLayerArn2: arn:aws:lambda:us-west-2:111111111111:layer:layer:1
 
 functions:
   - ${file(./iaac/v1-api.yml)}

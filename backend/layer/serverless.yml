@@ -5,8 +5,8 @@ provider:
   runtime: nodejs16.x
   stage: ${opt:stage, 'dev'}
   region: us-east-1
-  iam:
-    role: arn:aws:iam::909101490035:role/lambda-role
+  # iam:
+  #   role: arn:aws:iam::909101490035:role/lambda-role
   # vpc:
   #   subnetIds:
   #     - subnet-05abb4287f3081602 Private Subnet (AZ1)
@@ -15,6 +15,10 @@ provider:
   #     - sg-0bf65b90711ab2043
 
 layers:
+  lambda-dependencies:
+    path: dependency_layer
+    name: lambda-dependencies-${self:provider.stage}
+    description: "Lambda Dependencies"
   service-dependencies-1:
     path: dependency_layer
     name: service-dependencies-${self:provider.stage}-1
