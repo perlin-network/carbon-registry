@@ -15,10 +15,10 @@ v1Replicator:
     - PERL_LEDGER_PROVIDER_URL
     - PERL_LEDGER_CONTRACT_ADDRESS
     - PERL_LEDGER_WALLET_PRIVATE_KEY
-  # layers:
+  layers:
     # - ${param:depLayerBlockchainArn}
-    # - ${param:depLayerArn1}
-    # - ${param:depLayerArn2}
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-replicator-role
   iamRoleStatementsInherit: true
   iamRoleStatements:
@@ -49,9 +49,9 @@ v1DataImporter:
     - ITMO_API_KEY
     - ITMO_EMAIL
     - ITMO_PASSWORD
-  # layers:
-  #   - ${param:depLayerArn1}
-  #   - ${param:depLayerArn2}
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-data-importer-role
   iamRoleStatementsInherit: true
   iamRoleStatements:
@@ -79,9 +79,9 @@ v1AsyncOperationsHandler:
     - SMTP_PASSWORD
     - DB_PASSWORD
     - MRV_API_TOKEN
-  # layers:
-  #   - ${param:depLayerArn1}
-  #   - ${param:depLayerArn2}
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-async-operations-role
   iamRoleStatementsInherit: true
   iamRoleStatements:
@@ -106,9 +106,9 @@ v1SetupHandler:
     - SMTP_PASSWORD
   environment:
     ASYNC_QUEUE_NAME: https://sqs.us-east-1.amazonaws.com/909101490035/AsyncQueuedev.fifo
-  # layers:
-  #   - ${param:depLayerArn1}
-  #   - ${param:depLayerArn2}
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-setup-role
   iamRoleStatementsInherit: true
   iamRoleStatements:
