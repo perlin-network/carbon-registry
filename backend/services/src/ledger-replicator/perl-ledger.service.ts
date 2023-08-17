@@ -1,5 +1,5 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { ethers } from 'ethers';
+import { Wallet, Contract, JsonRpcProvider } from 'ethers';
 import { ConfigService } from "@nestjs/config";
 import { CreditOverall } from "../shared/entities/credit.overall.entity";
 import { PerlLedgerConfig } from "../shared/dto/perlLedger.config";
@@ -8,7 +8,7 @@ import contractABI from './PerlLedger.json';
 
 @Injectable()
 export class PerlLedgerService {
-  private contract: ethers.Contract;
+  private contract: Contract;
 
   constructor(
     private logger: Logger,
@@ -16,9 +16,9 @@ export class PerlLedgerService {
     configService: ConfigService
   ) {
     const config = configService.get<PerlLedgerConfig>('distributedLedger');
-    const provider = new ethers.JsonRpcProvider(config.providerURL);
-    const wallet = new ethers.Wallet(config.walletPrivateKey, provider);
-    this.contract = new ethers.Contract(config.contractAddress, contractABI as any, wallet)
+    const provider = new JsonRpcProvider(config.providerURL);
+    const wallet = new Wallet(config.walletPrivateKey, provider);
+    this.contract = new Contract(config.contractAddress, contractABI as any, wallet)
 
     logger.log('Constructor initialized', 'PerlLedgerService', config);
   }
