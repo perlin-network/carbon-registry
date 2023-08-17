@@ -1,5 +1,6 @@
 export default () => ({
   stage: process.env.STAGE || "local",
+  projectName: process.env.PROJECT_NAME,
   systemCountry: process.env.COUNTRY_CODE || "BS",
   systemCountryName: process.env.COUNTRY_NAME || "CountryX",
   defaultCreditUnit: process.env.defaultCreditUnit || "ITMO",
@@ -29,6 +30,11 @@ export default () => ({
     table: "programmes",
     overallTable: "overall",
     companyTable: "company",
+  },
+  distributedLedger: {
+    providerURL: process.env.PERL_LEDGER_PROVIDER_URL,
+    contractAddress: process.env.PERL_LEDGER_CONTRACT_ADDRESS,
+    walletPrivateKey: process.env.PERL_LEDGER_WALLET_PRIVATE_KEY,
   },
   email: {
     source: process.env.SOURCE_EMAIL || "admin@bioeconomy.co",

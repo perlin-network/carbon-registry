@@ -6,6 +6,7 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: us-east-1
   environment:
+    PROJECT_NAME: ${self:service}
     NODE_ENV: ${self:provider.stage}
     NODE_PATH: './:/opt/node_modules'
     STAGE: ${self:provider.stage}
@@ -65,6 +66,9 @@ custom:
     ITMO_EMAIL: /${self:service}/${self:provider.stage}/ITMO_EMAIL~true
     ITMO_PASSWORD: /${self:service}/${self:provider.stage}/ITMO_PASSWORD~true
     MRV_API_TOKEN: /${self:service}/${self:provider.stage}/MRV_API_TOKEN~true
+    PERL_LEDGER_PROVIDER_URL: /${self:service}/${self:provider.stage}/PERL_LEDGER_PROVIDER_URL~true
+    PERL_LEDGER_CONTRACT_ADDRESS: /${self:service}/${self:provider.stage}/PERL_LEDGER_CONTRACT_ADDRESS~true
+    PERL_LEDGER_WALLET_PRIVATE_KEY: /${self:service}/${self:provider.stage}/PERL_LEDGER_WALLET_PRIVATE_KEY~true
   # sesTemplates:
   #   addStage: true                             # Specifies whether to add stage to template name (default false)
   #   configFile: './src/shared/email/email.template.ts' # Config file path (default './ses-email-templates/index.js')
