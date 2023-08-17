@@ -17,6 +17,7 @@ v1Replicator:
     - PERL_LEDGER_WALLET_PRIVATE_KEY
   layers:
     - ${param:depLayerLambdaArn}
+    - ${param:depLayerBlockchainArn}
     # - ${param:depLayerArn1}
     # - ${param:depLayerArn2}
   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-replicator-role

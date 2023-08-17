@@ -49,7 +49,6 @@
     "ethers": "^6.7.0",
     "fs": "^0.0.1-security",
     "ion-js": "^4.3.0",
-    "jsbi": "^4.3.0",
     "nanoid": "3.3.4",
     "nest-winston": "^1.8.0",
     "nestjs-i18n": "^10.2.6",
@@ -60,7 +59,6 @@
     "passport-local": "^1.0.0",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "typeorm": "^0.3.10",
     "winston": "^3.8.2"
