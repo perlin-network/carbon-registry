@@ -22,14 +22,14 @@ layers:
     package:
       exclude:
         - node_modules/ethers/**
-  blockchain-dependencies:
-    path: dependency_layer
-    name: blockchain-dependencies-${self:provider.stage}
-    description: "Blockchain Dependencies"
-    package:
-      exclude:
-        - node_modules/**
-        - '!node_modules/ethers/**'
+  # blockchain-dependencies:
+  #   path: dependency_layer
+  #   name: blockchain-dependencies-${self:provider.stage}
+  #   description: "Blockchain Dependencies"
+  #   package:
+  #     exclude:
+  #       - node_modules/**
+  #       - '!node_modules/ethers/**'
   service-dependencies-1:
     path: dependency_layer
     name: service-dependencies-${self:provider.stage}-1
