@@ -1,5 +1,4 @@
 import { Injectable, Logger } from "@nestjs/common";
-import axios from "axios";
 import { Programme } from "../shared/entities/programme.entity";
 import { dom } from "ion-js";
 import { plainToClass } from "class-transformer";
