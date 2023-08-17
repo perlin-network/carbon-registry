@@ -30,9 +30,9 @@ v1NationalApi:
     - ADMIN_JWT_SECRET
     - SMTP_USERNAME
     - SMTP_PASSWORD
-  layers:
-    - ${param:depLayerArn1}
-    - ${param:depLayerArn2}
+  # layers:
+  #   - ${param:depLayerArn1}
+  #   - ${param:depLayerArn2}
   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-national-api-role
   iamRoleStatementsInherit: true
   iamRoleStatements:
@@ -64,9 +64,9 @@ v1AnalyticsApi:
     - ADMIN_JWT_SECRET
     - SMTP_USERNAME
     - SMTP_PASSWORD
-  layers:
-    - ${param:depLayerArn1}
-    - ${param:depLayerArn2}
+  # layers:
+  #   - ${param:depLayerArn1}
+  #   - ${param:depLayerArn2}
   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-analytics-api-role
   iamRoleStatementsInherit: true
   iamRoleStatements:

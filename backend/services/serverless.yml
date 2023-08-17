@@ -47,9 +47,9 @@ plugins:
 #     depLayerArn1: arn:aws:lambda:us-west-2:111111111111:layer:layer:1
 #     depLayerArn2: arn:aws:lambda:us-west-2:111111111111:layer:layer:1
 
-# functions:
-#   - ${file(./iaac/v1-api.yml)}
-#   - ${file(./iaac/v1-handlers.yml)}
+functions:
+  - ${file(./iaac/v1-api.yml)}
+  - ${file(./iaac/v1-handlers.yml)}
 
 custom:
   customDomain: ${file(./iaac/gateway/dns.yml):customDomain}
