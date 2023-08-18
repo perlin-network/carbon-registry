@@ -4,7 +4,7 @@ import { ConfigService } from "@nestjs/config";
 import { CreditOverall } from "../shared/entities/credit.overall.entity";
 import { PerlLedgerConfig } from "../shared/dto/perlLedger.config";
 import { ParameterStoreService } from "../shared/util/parameterStore.service";
-import contractABI from './PerlLedger.json';
+import perlLedgerContract from './PerlLedger.json';
 
 @Injectable()
 export class PerlLedgerService {
@@ -20,7 +20,8 @@ export class PerlLedgerService {
 
     const provider = new ethers.JsonRpcProvider(config.providerURL);
     const wallet = new ethers.Wallet(config.walletPrivateKey, provider);
-    this.contract = new ethers.Contract(config.contractAddress, contractABI as any, wallet)
+    const { abi } = perlLedgerContract;
+    this.contract = new ethers.Contract(config.contractAddress, abi as any, wallet)
 
     logger.log('Constructor initialized', 'PerlLedgerService');
   }
