@@ -6,6 +6,8 @@ import { ConfigService } from "@nestjs/config";
 import { CreditOverall } from "../shared/entities/credit.overall.entity";
 import { LedgerReplicatorInterface } from "./replicator-interface.service";
 import { ProcessEventService } from "./process.event.service";
+import { AsyncOperationsInterface } from "../shared/async-operations/async-operations.interface";
+import { AsyncActionType } from "src/shared/enum/async.action.type.enum";
 
 const computeChecksums = true;
 const REVISION_DETAILS = "REVISION_DETAILS";
@@ -16,7 +18,8 @@ export class QLDBKinesisReplicatorService implements LedgerReplicatorInterface{
   constructor(
     private logger: Logger,
     private eventProcessor: ProcessEventService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private asyncOperationsInterface: AsyncOperationsInterface,
   ) {
     logger.log('Constructor initialized', 'QLDBKinesisReplicatorService');
   }
@@ -29,7 +32,7 @@ export class QLDBKinesisReplicatorService implements LedgerReplicatorInterface{
 
         // payload is the actual ion binary record published by QLDB to the stream
         const ionRecord = dom.load(payload);
-        this.logger.log("ION Record", 'processRecords', JSON.stringify(ionRecord));
+        this.logger.log("ION Record %j", 'processRecords', ionRecord.get('payload'));
         // Only process records where the record type is REVISION_DETAILS
         if (ionRecord.get("recordType").stringValue() !== REVISION_DETAILS) {
           this.logger.log(
@@ -76,6 +79,21 @@ export class QLDBKinesisReplicatorService implements LedgerReplicatorInterface{
 
             this.logger.log('CreditOverall', 'processRecords', overall);
             await this.eventProcessor.process(undefined, overall, parseInt(meta["version"]), new Date(meta.txTime).getTime())
+          }
+          else if (
+            tableName == this.configService.get("ledger.overallTable")
+          ) {
+            const payload = ionRecord
+              .get("payload")
+              .get("revision")
+              .get("data");
+
+            const perlLedgerAction = {
+              actionType: AsyncActionType.PublishToPerlLedger,
+              actionProps: JSON.parse(JSON.stringify(payload)),
+            };
+
+            await this.asyncOperationsInterface.AddAction(perlLedgerAction);
           }
         }
       })

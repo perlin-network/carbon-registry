@@ -7,7 +7,6 @@ import { Programme } from "../shared/entities/programme.entity";
 import { CreditOverall } from "../shared/entities/credit.overall.entity";
 import { LocationInterface } from "../shared/location/location.interface";
 import { CompanyRole } from "src/shared/enum/company.role.enum";
-import { PerlLedgerService } from "./perl-ledger.service";
 
 @Injectable()
 export class ProcessEventService {
@@ -16,7 +15,6 @@ export class ProcessEventService {
     @InjectRepository(Programme) private programmeRepo: Repository<Programme>,
     @InjectRepository(Company) private companyRepo: Repository<Company>,
     private locationService: LocationInterface,
-    private perlLedgerService: PerlLedgerService,
   ) {}
 
   async process(programme: Programme, overall: CreditOverall, version: number, txTime: number): Promise<any> {
@@ -196,8 +194,6 @@ export class ProcessEventService {
                   this.logger.error(err);
                   return err;
                 });
-
-                await this.perlLedgerService.createLedgerRecord(overall);
             } else {
               this.logger.error(
                 "Unexpected programme. Company does not found",

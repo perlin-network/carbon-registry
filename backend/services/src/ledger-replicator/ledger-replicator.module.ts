@@ -6,7 +6,6 @@ import configuration from '../shared/configuration';
 import { TypeOrmConfigService } from '../shared/typeorm.config.service';
 import { QLDBKinesisReplicatorService } from './qldb-kinesis-replicator.service';
 import { Company } from '../shared/entities/company.entity';
-import { PerlLedgerService } from './perl-ledger.service';
 import { LedgerReplicatorInterface } from './replicator-interface.service';
 import { PgSqlReplicatorService } from './pgsql-replicator.service';
 import { ProcessEventService } from './process.event.service';
@@ -35,6 +34,6 @@ import { LedgerType } from '../shared/enum/ledger.type';
       process.env.LEDGER_TYPE === LedgerType.QLDB
         ? QLDBKinesisReplicatorService
         : PgSqlReplicatorService,
-  }, Logger, PerlLedgerService, ProcessEventService]
+  }, Logger, ProcessEventService]
 })
 export class LedgerReplicatorModule {}
