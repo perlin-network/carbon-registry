@@ -26,19 +26,19 @@ export class QLDBKinesisReplicatorService implements LedgerReplicatorInterface{
       records.map(async (record) => {
         // Kinesis data is base64 encoded so decode here
         const payload = Buffer.from(record.data, "base64");
-        this.logger.log('Payload', 'processRecords', payload);
 
         // payload is the actual ion binary record published by QLDB to the stream
         const ionRecord = dom.load(payload);
+        this.logger.log("ION Record", 'processRecords', JSON.stringify(ionRecord));
         // Only process records where the record type is REVISION_DETAILS
         if (ionRecord.get("recordType").stringValue() !== REVISION_DETAILS) {
           this.logger.log(
             `Skipping record of type ${ionRecord
               .get("recordType")
-              .stringValue()}`
+              .stringValue()}`,
+              'processRecords',
           );
         } else {
-          this.logger.log("ION Record", JSON.stringify(ionRecord));
           const tableName = ionRecord
             .get("payload")
             .get("tableInfo")
