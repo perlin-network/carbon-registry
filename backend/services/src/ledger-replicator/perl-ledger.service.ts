@@ -20,8 +20,7 @@ export class PerlLedgerService {
 
     const provider = new ethers.JsonRpcProvider(config.providerURL);
     const wallet = new ethers.Wallet(config.walletPrivateKey, provider);
-    const { abi } = perlLedgerContract;
-    this.contract = new ethers.Contract(config.contractAddress, abi as any, wallet)
+    this.contract = new ethers.Contract(config.contractAddress, perlLedgerContract.abi as any, wallet)
 
     logger.log('Constructor initialized', 'PerlLedgerService');
   }
