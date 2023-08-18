@@ -16,7 +16,7 @@ export class PerlLedgerService {
     configService: ConfigService
   ) {
     const config = configService.get<PerlLedgerConfig>('distributedLedger');
-    logger.log('Config received', 'PerlLedgerService', config);
+    console.log('[PerlLedgerService] Config received %j', config);
 
     const provider = new ethers.JsonRpcProvider(config.providerURL);
     const wallet = new ethers.Wallet(config.walletPrivateKey, provider);
