@@ -51,7 +51,8 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      padding: 0rem 2rem 0 1rem;
+      // padding: 0rem 2rem 0 1rem;
+      padding-left: 1rem;
       cursor: pointer;
 
       .title {
@@ -70,8 +71,16 @@
       }
 
       .logo {
+        display: flex;
+        align-items: center;
+        // height: 52px;
+        // width: 80px;
         height: 52px;
-        width: 80px;
+        width: 100%;
+
+        svg {
+          max-width: 100%;
+        }
 
         img {
           object-fit: cover;
@@ -84,7 +93,7 @@
     }
 
     .ant-menu-item-selected {
-      background: linear-gradient(to right, $gradient-background-start, $gradient-background-end);
+      background: linear-gradient(to left, $gradient-primary-start, $gradient-primary-end);
       color: $dark-text-color;
       border-top-right-radius: 22px;
       border-bottom-right-radius: 22px;

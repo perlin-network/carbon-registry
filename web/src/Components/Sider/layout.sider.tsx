@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Menu, Layout, MenuProps } from 'antd';
-import sliderLogo from '../../Assets/Images/logo-slider.png';
+// import sliderLogo from '../../Assets/Images/logo-slider.png';
+import { ReactComponent as LogoSvg } from '../../Assets/Images/logo.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import './layout.sider.scss';
 import * as Icon from 'react-bootstrap-icons';
@@ -71,15 +72,16 @@ const LayoutSider = (props: LayoutSiderProps) => {
           onClick={() => navigate('/dashboard', { replace: true })}
         >
           <div className="logo">
-            <img src={sliderLogo} alt="slider-logo" />
+            <LogoSvg />
+            {/* <img src={sliderLogo} alt="slider-logo" /> */}
           </div>
           {!collapsed && (
             <div>
-              <div style={{ display: 'flex' }}>
+              {/* <div style={{ display: 'flex' }}>
                 <div className="title">{collapsed ? '' : 'CARBON'}</div>
                 <div className="title-sub">{collapsed ? '' : 'REGISTRY'}</div>
               </div>
-              <div className="country-name">{process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}</div>
+              <div className="country-name">{process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}</div> */}
             </div>
           )}
           {collapsed && (

@@ -3,6 +3,7 @@ import React, { FC, Suspense, useContext, useEffect, useState } from 'react';
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
 import './login.scss';
 import countryLogo from '../../Assets/Images/logo-slider.png';
+import LogoSvg from '../../Assets/Images/logo.svg';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import { useUserContext } from '../../Context/UserInformationContext/userInformationContext';
@@ -109,18 +110,18 @@ const Login: FC<LoginPageProps> = (props: LoginPageProps) => {
           <Col md={24} lg={9} flex="auto">
             <Row>
               <Col lg={{ span: 18, offset: 4 }} md={{ span: 24 }} flex="auto">
-                <Row>
-                  <Col lg={{ span: 9, offset: 15 }} md={{ span: 24 }} flex="auto">
-                    <div className="login-country-logo">
-                      <img
-                        src={countryLogo}
-                        alt="country-logo"
-                        onClick={() => {
-                          navigate('/');
-                        }}
-                      />
-                    </div>
-                    <div className="login-country-name">
+                {/* <Row>
+                  <Col lg={{ span: 9, offset: 15 }} md={{ span: 24 }} flex="auto"> */}
+                <div className="login-country-logo">
+                  <img
+                    src={LogoSvg}
+                    alt="country-logo"
+                    onClick={() => {
+                      navigate('/');
+                    }}
+                  />
+                </div>
+                {/* <div className="login-country-name">
                       <div className="title">
                         {'CARBON'}
                         <span className="title-sub">{'REGISTRY'}</span>
@@ -129,9 +130,9 @@ const Login: FC<LoginPageProps> = (props: LoginPageProps) => {
                       <span className="country-name">
                         {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
                       </span>
-                    </div>
-                  </Col>
-                </Row>
+                    </div> */}
+                {/* </Col>
+                </Row> */}
               </Col>
             </Row>
             {forgotPassword ? (

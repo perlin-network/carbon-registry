@@ -226,7 +226,7 @@
                 line-height: 22px;
                 padding-left: 0.125rem;
                 padding: 0;
-                color: $primary-blue;
+                color: $color-primary;
               }
             }
 
@@ -235,6 +235,10 @@
               align-items: center;
               justify-content: flex-end;
               width: 30%;
+
+              svg {
+                fill: $color-primary;
+              }
 
               img {
                 height: 80px;
@@ -349,7 +353,7 @@
               font-size: 0.75rem;
               border-radius: 3.125rem;
               padding: 0.05rem 0.8rem 0.05rem 0.8rem;
-              color: $primary-blue;
+              color: $color-primary;
               background-color: rgba($color: #b9e2f4, $alpha: 0.4);
             }
           }

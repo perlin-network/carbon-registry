@@ -67,39 +67,47 @@
     }
   }
   .container-image {
-    background-image: linear-gradient(
-        to bottom,
-        rgba(196, 196, 196, 0) 0%,
-        rgba(4, 104, 177, 0.6) 0.01%
+    // background-image: linear-gradient(
+    //     to bottom,
+    //     rgba(196, 196, 196, 0) 0%,
+    //     rgba(4, 104, 177, 0.6) 0.01%
+    //   ),
+    //   url('../../Assets/Images/factory.webp');
+    // background-image: linear-gradient(
+    //     to bottom,
+    //     rgba(196, 196, 196, 0) 0% rgba(4, 104, 177, 0.6) 0.01%
+    //   ),
+    //   image-set(
+    //     '../../Assets/Images/factory.png' type('image/png'),
+    //     '../../Assets/Images/factory.webp' type('image/webp')
+    //   );
+    // background-image: -webkit-gradient(
+    //   linear,left top,left bottom,from(hsla(0,0%,77%,0),rgba(4,104,177,.6))),
+    //   image-set(
+    //     '../../Assets/Images/factory.png' type('image/png'),
+    //     '../../Assets/Images/factory.webp' type('image/webp')
+    //   );
+    background-image: linear-gradient(18deg, #333336 0%, rgba(51, 51, 54, 0) 100%),
+      linear-gradient(
+        199deg,
+        rgba(69, 220, 163, 0.3) 0%,
+        rgba(18, 141, 137, 0.3) 47.49%,
+        rgba(51, 51, 54, 0.3) 100%
       ),
-      url('../../Assets/Images/factory.webp');
-    background-image: linear-gradient(
-        to bottom,
-        rgba(196, 196, 196, 0) 0% rgba(4, 104, 177, 0.6) 0.01%
-      ),
-      image-set(
-        '../../Assets/Images/factory.png' type('image/png'),
-        '../../Assets/Images/factory.webp' type('image/webp')
-      );
-    background-image: -webkit-gradient(
-      linear,left top,left bottom,from(hsla(0,0%,77%,0),rgba(4,104,177,.6))),
-      image-set(
-        '../../Assets/Images/factory.png' type('image/png'),
-        '../../Assets/Images/factory.webp' type('image/webp')
-      );
+      url('../../Assets/Images/forest-perl-background.jpg');
     background-size: cover;
   }
 
   .login-img-container {
     height: 100vh;
-    background-position-x: 90%;
-    background-position-y: 100%;
+    // background-position-x: 90%;
+    // background-position-y: 100%;
     flex-direction: column;
     justify-content: flex-end;
     display: flex;
     flex: 1;
     text-align: left;
-    background-size: 300vh;
+    // background-size: 300vh;
 
     @media (max-width: $lg-size) {
       text-align: center;
@@ -109,7 +117,7 @@
     .text-ctn {
       margin-left: 2vw;
       margin-bottom: 8vh;
-      font-family: $secondary-font-family;
+      font-family: $font-family-title;
       font-size: 4rem;
       color: $outside-background-color;
       line-height: 1.2em;
@@ -132,9 +140,10 @@
 
     img {
       margin-top: 20px;
-      object-fit: cover;
-      height: auto;
-      width: 3.7rem;
+      height: 24px;
+      // object-fit: cover;
+      // height: auto;
+      // width: 3.7rem;
     }
   }
 
@@ -317,6 +326,9 @@
 
     .login-submit-btn-container {
       margin-top: 2rem;
+      .ant-btn-primary {
+        background: linear-gradient(to left, $gradient-primary-start, $gradient-primary-end);
+      }
     }
 
     .login-register-new-container {
