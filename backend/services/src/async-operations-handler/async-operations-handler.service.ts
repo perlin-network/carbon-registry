@@ -16,7 +16,7 @@ export class AsyncOperationsHandlerService {
   }
 
   async handler(actionType: any, dataObject: any) {
-
+    console.log('[handler] received %j', { actionType, dataObject });
     this.logger.log("started", 'handler', actionType.toString());
     if (actionType) {
       switch (actionType.toString()) {

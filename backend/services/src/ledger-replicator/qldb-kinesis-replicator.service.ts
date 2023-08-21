@@ -32,7 +32,7 @@ export class QLDBKinesisReplicatorService implements LedgerReplicatorInterface{
 
         // payload is the actual ion binary record published by QLDB to the stream
         const ionRecord = dom.load(payload);
-        this.logger.log("ION Record %j", 'processRecords', ionRecord.get('payload'));
+        this.logger.log("ION Record %s", 'processRecords', ionRecord.get('payload').stringValue());
         // Only process records where the record type is REVISION_DETAILS
         if (ionRecord.get("recordType").stringValue() !== REVISION_DETAILS) {
           this.logger.log(

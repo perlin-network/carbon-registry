@@ -27,7 +27,6 @@ v1Replicator:
         - qldb:*
         - rds:*
         - s3:*
-        - ssm:GetParameter
       Resource: "*"
 
 v1DataImporter:
@@ -94,6 +93,7 @@ v1AsyncOperationsHandler:
         - qldb:*
         - rds:*
         - s3:*
+        - ssm:GetParameter
       Resource: "*"
 
 v1SetupHandler:
