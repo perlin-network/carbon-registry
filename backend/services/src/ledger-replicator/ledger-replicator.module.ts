@@ -12,6 +12,7 @@ import { ProcessEventService } from './process.event.service';
 import { Counter } from '../shared/entities/counter.entity';
 import { LocationModule } from '../shared/location/location.module';
 import { UtilModule } from "../shared/util/util.module";
+import { AsyncOperationsModule } from "../shared/async-operations/async-operations.module";
 import { LedgerType } from '../shared/enum/ledger.type';
 
 @Module({
@@ -26,6 +27,7 @@ import { LedgerType } from '../shared/enum/ledger.type';
     }),
     TypeOrmModule.forFeature([Programme, Company, Counter]),
     LocationModule,
+    AsyncOperationsModule,
     UtilModule,
   ],
   providers: [{
