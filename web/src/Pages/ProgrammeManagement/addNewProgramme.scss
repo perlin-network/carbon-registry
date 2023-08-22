@@ -1,1 +1,13 @@
 @import '../../Styles/variables.scss';
+
+.add-programme-container {
+  .content-card {
+    padding: 2.5rem 1.5rem;
+  }
+  .ant-input-number {
+    width: 100%;
+  }
+  .ant-input-number-handler-wrap {
+    display: none;
+  }
+}
