@@ -9,7 +9,9 @@ import {
   Table,
   Tag,
   Tooltip,
+  Button,
 } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import './programmeManagement.scss';
 import '../Common/common.table.scss';
@@ -333,6 +335,10 @@ const ProgrammeManagement = () => {
     // setCurrentPage(1);
   };
 
+  const handleAddProgramme = () => {
+    navigate('/programmeManagement/addProgramme');
+  };
+
   return (
     <div className="content-container programme-management">
       <div className="title-bar">
@@ -343,6 +349,15 @@ const ProgrammeManagement = () => {
         <Row className="table-actions-section">
           <Col lg={{ span: 16 }} md={{ span: 16 }}>
             <div className="action-bar">
+              <Button
+                type="primary"
+                size="large"
+                block
+                icon={<PlusOutlined />}
+                onClick={handleAddProgramme}
+              >
+                {t('programme:addProgramme')}
+              </Button>
               <Checkbox
                 className="all-check"
                 disabled={loading}

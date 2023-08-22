@@ -14,6 +14,7 @@ import Dashboard from './Pages/Dashboard/dashboard';
 import AddNewCompany from './Pages/Company/addNewCompany';
 import CompanyManagement from './Pages/CompanyManagement/companyManagement';
 import ProgrammeManagement from './Pages/ProgrammeManagement/programmeManagement';
+import AddNewProgramme from './Pages/ProgrammeManagement/addNewProgramme';
 import ProgrammeView from './Pages/ProgrammeView/programmeView';
 import i18next from 'i18next';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -88,6 +89,7 @@ const App = () => {
                   >
                     <Route path="viewAll" element={<ProgrammeManagement />} />
                     <Route path="view" element={<ProgrammeView />} />
+                    <Route path="addProgramme" element={<AddNewProgramme />} />
                   </Route>
                   <Route
                     path="/companyManagement"
