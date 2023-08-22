@@ -582,6 +582,7 @@ export class ProgrammeService {
     reason: string,
     isRetirement: boolean
   ) {
+    console.log("[doTransfer] Request received %j", transfer);
     const hostAddress = this.configService.get("host");
     const programme = await this.programmeLedger.transferProgramme(
       transfer,
@@ -610,6 +611,8 @@ export class ProgrammeService {
         this.logger.error(err);
         return err;
       });
+
+    console.log("[doTransfer] programmeTransferRepo.update result %j", result);
 
     if (result.affected > 0) {
       this.checkPendingTransferValidity(programme);
