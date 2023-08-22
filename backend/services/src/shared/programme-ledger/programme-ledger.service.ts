@@ -133,7 +133,9 @@ export class ProgrammeLedgerService {
     const resp = await this.ledger.getAndUpdateTx(
       getQueries,
       (results: Record<string, dom.Value[]>) => {
+        console.info('[getAndUpdateTx] results %j', results);
         const alreadyProcessed = results[`history(${this.ledger.tableName})`];
+        console.info('[getAndUpdateTx] alreadyProcessed %j', alreadyProcessed);
         if (alreadyProcessed.length > 0) {
           throw new HttpException(
             this.helperService.formatReqMessagesString(
