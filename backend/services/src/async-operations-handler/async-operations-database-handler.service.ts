@@ -22,7 +22,7 @@ export class AsyncOperationsDatabaseHandlerService
   }
 
   async asyncHandler(event: any): Promise<any> {
-    this.logger.log("[asyncHandler] database asyncHandler started", JSON.stringify(event));
+    this.logger.log("[asyncHandler] database asyncHandler started %j", event);
 
     const seqObj = await this.counterRepo.findOneBy({
       id: CounterType.ASYNC_OPERATIONS,
@@ -48,7 +48,7 @@ export class AsyncOperationsDatabaseHandlerService
         
       const startedSeq = lastSeq;
       notExecutedActions.forEach((action: any) => {
-        console.log('[asyncHandler] Processing action', action.actionId)
+        this.logger.log('[asyncHandler] Processing action', action.actionId)
         asyncPromises.push(
           this.asyncOperationsHandlerService.handler(
             action.actionType,
@@ -65,7 +65,7 @@ export class AsyncOperationsDatabaseHandlerService
           counter: lastSeq,
         });
       } catch (exception) {
-        this.logger.log("[asyncHandler] database asyncHandler failed", exception);
+        this.logger.error("[asyncHandler] database asyncHandler failed", exception);
         lastSeq = startedSeq;
       }
     }, 5000);

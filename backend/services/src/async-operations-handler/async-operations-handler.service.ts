@@ -16,8 +16,8 @@ export class AsyncOperationsHandlerService {
   }
 
   async handler(actionType: any, dataObject: any) {
-    console.log('[handler] received %j', { actionType, dataObject });
-    this.logger.log("started", 'handler', actionType.toString());
+    // console.log('[handler] received %j', { actionType, dataObject });
+    this.logger.log("received", 'handler', { actionType, dataObject });
     if (actionType) {
       switch (actionType.toString()) {
         case AsyncActionType.Email.toString():

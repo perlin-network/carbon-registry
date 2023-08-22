@@ -30,7 +30,7 @@ export class AsyncOperationsQueueHandlerService
           JSON.parse(record.body)
         );
       } catch (exception) {
-        this.logger.log("[asyncHandler] queue asyncHandler failed", exception);
+        this.logger.error("[asyncHandler] queue asyncHandler failed", exception);
         if (actionType?.toString() === AsyncActionType.Email.toString()) {
           response.batchItemFailures.push({ itemIdentifier: record.messageId });
         } else {
