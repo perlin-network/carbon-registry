@@ -591,18 +591,20 @@ export class ProgrammeService {
     );
 
     this.logger.log("Programme updated");
+    const now = new Date().getTime();
+    const updateFields =  {
+      status: transfer.isRetirement
+        ? TransferStatus.RECOGNISED
+        : TransferStatus.APPROVED,
+      txTime: now,
+      authTime: now,
+    };
     const result = await this.programmeTransferRepo
       .update(
         {
           requestId: transfer.requestId,
         },
-        {
-          status: transfer.isRetirement
-            ? TransferStatus.RECOGNISED
-            : TransferStatus.APPROVED,
-          txTime: new Date().getTime(),
-          authTime: new Date().getTime(),
-        }
+        updateFields,
       )
       .catch((err) => {
         this.logger.error(err);
@@ -611,6 +613,17 @@ export class ProgrammeService {
 
     if (result.affected > 0) {
       this.checkPendingTransferValidity(programme);
+      const perlLedgerAction = {
+        actionType: AsyncActionType.PublishToPerlLedger,
+        actionProps: {
+          serialNo: programme.serialNo,
+          requestRef: `${transfer.requestId}`,
+          status: updateFields.status,
+          creditAmount: transfer.creditAmount,
+        },
+      };
+
+      await this.asyncOperationsInterface.AddAction(perlLedgerAction);
       return new DataResponseDto(HttpStatus.OK, programme);
     }
 

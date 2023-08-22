@@ -80,21 +80,21 @@ export class QLDBKinesisReplicatorService implements LedgerReplicatorInterface{
             this.logger.log('CreditOverall', 'processRecords', overall);
             await this.eventProcessor.process(undefined, overall, parseInt(meta["version"]), new Date(meta.txTime).getTime())
           }
-          else if (
-            tableName == this.configService.get("ledger.overallTable")
-          ) {
-            const payload = ionRecord
-              .get("payload")
-              .get("revision")
-              .get("data");
+          // else if (
+          //   tableName == this.configService.get("ledger.overallTable")
+          // ) {
+          //   const payload = ionRecord
+          //     .get("payload")
+          //     .get("revision")
+          //     .get("data");
 
-            const perlLedgerAction = {
-              actionType: AsyncActionType.PublishToPerlLedger,
-              actionProps: JSON.parse(JSON.stringify(payload)),
-            };
+          //   const perlLedgerAction = {
+          //     actionType: AsyncActionType.PublishToPerlLedger,
+          //     actionProps: JSON.parse(JSON.stringify(payload)),
+          //   };
 
-            await this.asyncOperationsInterface.AddAction(perlLedgerAction);
-          }
+          //   await this.asyncOperationsInterface.AddAction(perlLedgerAction);
+          // }
         }
       })
     );

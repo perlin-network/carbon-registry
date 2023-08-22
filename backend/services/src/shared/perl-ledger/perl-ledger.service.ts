@@ -1,10 +1,10 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ethers } from 'ethers';
 import { ConfigService } from "@nestjs/config";
-import { CreditOverall } from "../entities/credit.overall.entity";
 import { PerlLedgerConfig } from "../dto/perlLedger.config";
 import { ParameterStoreService } from "../util/parameterStore.service";
-import perlLedgerContract from './PerlLedger.json';
+import perlLedgerContract from './PerlLedgerV1.json';
+import { PerlLedgerTransferDto } from "../dto/perlLedgerTransfer.dto";
 
 @Injectable()
 export class PerlLedgerService {
@@ -25,10 +25,10 @@ export class PerlLedgerService {
     logger.log('Constructor initialized', 'PerlLedgerService');
   }
 
-  async createLedgerRecord(overall: CreditOverall): Promise<string> {
+  async createLedgerRecord(transfer: PerlLedgerTransferDto): Promise<string> {
     let hash;
     try {
-      this.logger.debug('Request received', 'createLedgerRecord', overall);
+      this.logger.debug('Request received', 'createLedgerRecord', transfer);
       const isLedgerEnabled = await this.parameterStoreService.getParameter('PERL_LEDGER_ENABLED') === 'true';
 
       if (!isLedgerEnabled){
@@ -36,8 +36,8 @@ export class PerlLedgerService {
         return hash;
       }
 
-      const { txId, txRef, txType, credit } = overall;
-      const txResponse = await this.contract.createCreditOverall(txId, txRef, txType, credit);
+      const { serialNo, requestRef, status, creditAmount } = transfer;
+      const txResponse = await this.contract.addCarbonTransfer(serialNo, requestRef, status, creditAmount);
       await txResponse.wait();
 
       hash = txResponse.hash;
