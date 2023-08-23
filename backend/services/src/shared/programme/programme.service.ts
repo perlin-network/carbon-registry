@@ -1254,7 +1254,8 @@ export class ProgrammeService {
     // programme.constantVersion = constants
     //   ? String(constants.version)
     //   : "default";
-    programme.currentStage = ProgrammeStage.NEW;
+    // Changed from ProgrammeStage.NEW
+    programme.currentStage = ProgrammeStage.AWAITING_AUTHORIZATION;
     programme.companyId = companyIds;
     programme.txTime = new Date().getTime();
     if (programme.proponentPercentage) {
