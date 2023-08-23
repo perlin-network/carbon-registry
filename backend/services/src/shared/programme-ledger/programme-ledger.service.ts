@@ -115,7 +115,7 @@ export class ProgrammeLedgerService {
       "data.programmeId": transfer.programmeId,
       "data.txRef": new ArrayLike(
         "data.txRef",
-        "%#" + transfer.requestId + "#%"
+        "%#request-" + transfer.requestId + "#%"
       ),
     };
     getQueries[this.ledger.tableName] = {
@@ -264,7 +264,7 @@ export class ProgrammeLedgerService {
 
         const prvTxTime = programme.txTime;
         programme.txTime = new Date().getTime();
-        programme.txRef = `${name}#${transfer.requestId}#${transfer.retirementType}#${reason}`;
+        programme.txRef = `${name}#request-${transfer.requestId}#${transfer.retirementType}#${reason}`;
 
         const compIndex = programme.companyId.indexOf(transfer.fromCompanyId);
         if (compIndex < 0) {
