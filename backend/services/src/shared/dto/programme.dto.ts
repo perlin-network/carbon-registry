@@ -110,4 +110,10 @@ export class ProgrammeDto {
     @IsOptional()
     @IsNumber()
     creditEst: number;
+
+    @ApiPropertyOptional()
+    @IsNotEmpty()
+    @IsOptional()
+    @IsNumber()
+    creditIssued: number;
 }

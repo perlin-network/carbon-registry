@@ -1246,8 +1246,8 @@ export class ProgrammeService {
     //     HttpStatus.BAD_REQUEST
     //   );
     // }
-    // programme.creditBalance = programme.creditIssued;
-    // programme.creditChange = programme.creditIssued;
+    programme.creditBalance = programme.creditIssued;
+    programme.creditChange = programme.creditIssued;
     programme.programmeProperties.creditYear = new Date(
       programme.startTime * 1000
     ).getFullYear();
