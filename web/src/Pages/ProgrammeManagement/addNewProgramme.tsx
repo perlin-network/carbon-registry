@@ -84,7 +84,7 @@ const AddNewProgramme = () => {
 
     setLoading(true);
     try {
-      // const response = await post('national/user/add', requestData);
+      // const response = await post('national/programme/create', requestData);
       // if (response.status === 200 || response.status === 201) {
       //   setLoading(false);
       // }
@@ -270,6 +270,9 @@ const AddNewProgramme = () => {
                 <Input size="large" />
               </Form.Item>
               <Form.Item name="creditEst" label="Credit Est" rules={[{ required: true }]}>
+                <InputNumber size="large" />
+              </Form.Item>
+              <Form.Item name="creditIssued" label="Credit Issued" rules={[{ required: false }]}>
                 <InputNumber size="large" />
               </Form.Item>
             </Col>
