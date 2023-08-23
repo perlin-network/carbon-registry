@@ -1,93 +1,153 @@
 import './addNewProgramme.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Form, Row, Col, Input, InputNumber, DatePicker, Select, Button, message } from 'antd';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
 
-const proponentTaxVatIdOptions = [
-  {
-    label: 'Option #1',
-    value: '1',
-  },
-  {
-    label: 'Option #2',
-    value: '2',
-  },
-  {
-    label: 'Option #3',
-    value: '3',
-  },
+const sectorOptions = [
+  { label: 'Energy', value: 'Energy' },
+  { label: 'Health', value: 'Health' },
+  { label: 'Education', value: 'Education' },
+  { label: 'Transport', value: 'Transport' },
+  { label: 'Manufacturing', value: 'Manufacturing' },
+  { label: 'Hospitality', value: 'Hospitality' },
+  { label: 'Forestry', value: 'Forestry' },
+  { label: 'Waste', value: 'Waste' },
+  { label: 'Agriculture', value: 'Agriculture' },
+  { label: 'Other', value: 'Other' },
 ];
-
-const proponentPercentageOptions = [
-  {
-    label: '10%',
-    value: 10,
-  },
-  {
-    label: '50%',
-    value: 50,
-  },
-  {
-    label: '100%',
-    value: 100,
-  },
-];
-
+const proponentTaxVatIdOptions = [{ label: 'TAXID003', value: 'TAXID003' }];
+const proponentPercentageOptions = [{ label: '100%', value: 100 }];
 const geographicalLocationOptions = [
   {
-    label: 'Option #1',
-    value: '1',
-  },
-  {
-    label: 'Option #2',
-    value: '2',
-  },
-  {
-    label: 'Option #3',
-    value: '3',
+    label: 'Abuja,FCT',
+    value: 'Abuja,FCT',
   },
 ];
-
+const sourceOfFundingOptions = [
+  {
+    label: 'Board Source Funding',
+    value: 'BoardSourceFunding',
+  },
+  {
+    label: 'Government Grant or Loan',
+    value: 'GovernmentGrantOrLoan',
+  },
+  {
+    label: 'Other',
+    value: 'Other',
+  },
+];
 const greenHouseGassesOptions = [
-  {
-    label: '10%',
-    value: 10,
-  },
-  {
-    label: '50%',
-    value: 50,
-  },
-  {
-    label: '100%',
-    value: 100,
-  },
+  { label: 'CO2', value: 'CO2' },
+  { label: 'CH4', value: 'CH4' },
+  { label: 'N2O', value: 'N2O' },
+  { label: 'HFCs', value: 'HFCs' },
+  { label: 'PFCs', value: 'PFCs' },
+  { label: 'SF6', value: 'SF6' },
+];
+const typeOfMitigationOptions = [
+  { label: 'Agriculture', value: 'Agriculture' },
+  { label: 'Biomass Energy', value: 'BiomassEnergy' },
+  { label: 'CCS', value: 'CCS' },
+  { label: 'Cement', value: 'Cement' },
+  { label: 'Coal/Mine', value: 'Coal/Mine' },
+  { label: 'EEHouseholds', value: 'EEHouseholds' },
+  { label: 'EEIndustry', value: 'EEIndustry' },
+  { label: 'EEOwnGeneration', value: 'EEOwnGeneration' },
+  { label: 'EEService', value: 'EEService' },
+  { label: 'EESupplySide', value: 'EESupplySide' },
+  { label: 'Energy Distribution', value: 'EnergyDistribution' },
+  { label: 'Forestry', value: 'Forestry' },
+  { label: 'FossilFuel', value: 'FossilFuel' },
+  { label: 'Fugitive', value: 'Fugitive' },
+  { label: 'Geothermal', value: 'Geothermal' },
+  { label: 'HFC_PFCs_SF6', value: 'HFC_PFCs_SF6' },
+  { label: 'Hydro', value: 'Hydro' },
+  { label: 'Landfills', value: 'Landfills' },
+  { label: 'Marine', value: 'Marine' },
+  { label: 'Methane Avoidance', value: 'MethaneAvoidance' },
+  { label: 'N20', value: 'N20' },
+  { label: 'Solar', value: 'Solar' },
+  { label: 'Transport', value: 'Transport' },
+  { label: 'Wind', value: 'Wind' },
 ];
 
 const AddNewProgramme = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { t } = useTranslation(['addProgramme']);
   const { post } = useConnection();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values: any) => {
-    console.log(values);
+    const {
+      title,
+      externalId,
+      sectoralScope,
+      sector,
+      startTime,
+      endTime,
+      proponentTaxVatId,
+      proponentPercentage,
+      maxInternationalTransferAmount,
+      creditingPeriodInYears,
+      estimatedProgrammeCostUSD,
+      sourceOfFunding,
+      grantEquivalentAmount,
+      carbonPriceUSDPerTon,
+      buyerCountryEligibility,
+      geographicalLocation,
+      greenHouseGasses,
+      typeOfMitigation,
+      userEstimatedCredits,
+      systemEstimatedCredits,
+      actionId,
+      constantVersion,
+      creditEst,
+      creditIssued,
+    } = values;
 
     const requestData = {
-      ...values,
-      startDate: values.startDate.format('YYYY-MM-DDT00:00:00'),
-      endDate: values.endDate.format('YYYY-MM-DDT00:00:00'),
+      title,
+      externalId,
+      sectoralScope,
+      sector,
+      startTime: startTime.valueOf(),
+      endTime: endTime.valueOf(),
+      proponentTaxVatId,
+      proponentPercentage,
+      programmeProperties: {
+        maxInternationalTransferAmount,
+        creditingPeriodInYears,
+        estimatedProgrammeCostUSD,
+        sourceOfFunding,
+        grantEquivalentAmount,
+        carbonPriceUSDPerTon,
+        buyerCountryEligibility,
+        geographicalLocation,
+        greenHouseGasses,
+      },
+      mitigationActions: {
+        typeOfMitigation,
+        userEstimatedCredits,
+        systemEstimatedCredits,
+        actionId,
+        constantVersion,
+      },
+      creditEst,
+      creditIssued,
     };
-    console.log(requestData);
+    // console.log(requestData);
 
     setLoading(true);
     try {
-      // const response = await post('national/programme/create', requestData);
-      // if (response.status === 200 || response.status === 201) {
-      //   setLoading(false);
-      // }
+      const response = await post('national/programme/create', requestData);
+      if (response.status === 200 || response.status === 201) {
+        setLoading(false);
+        navigate('/programmeManagement/viewAll');
+      }
     } catch (error: any) {
       message.open({
         type: 'error',
@@ -127,16 +187,16 @@ const AddNewProgramme = () => {
                 <Input size="large" />
               </Form.Item>
               <Form.Item name="sector" label="Sector" rules={[{ required: true }]}>
-                <Input size="large" />
+                <Select size="large" options={sectorOptions} style={{ width: '100%' }} />
               </Form.Item>
               <Row className="row" gutter={[16, 16]}>
                 <Col xl={12} md={24}>
-                  <Form.Item name="startDate" label="Start Date" rules={[{ required: true }]}>
+                  <Form.Item name="startTime" label="Start Time" rules={[{ required: true }]}>
                     <DatePicker format="DD MMM YYYY" style={{ width: '100%' }} />
                   </Form.Item>
                 </Col>
                 <Col xl={12} md={24}>
-                  <Form.Item name="endDate" label="End Date" rules={[{ required: true }]}>
+                  <Form.Item name="endTime" label="End Time" rules={[{ required: true }]}>
                     <DatePicker format="DD MMM YYYY" style={{ width: '100%' }} />
                   </Form.Item>
                 </Col>
@@ -170,7 +230,7 @@ const AddNewProgramme = () => {
                 label="Max International Transfer Amount"
                 rules={[{ required: true }]}
               >
-                <InputNumber size="large" />
+                <Input size="large" />
               </Form.Item>
               <Form.Item
                 name="creditingPeriodInYears"
@@ -191,7 +251,7 @@ const AddNewProgramme = () => {
                 label="Source of Funding"
                 rules={[{ required: true }]}
               >
-                <Input size="large" />
+                <Select size="large" options={sourceOfFundingOptions} style={{ width: '100%' }} />
               </Form.Item>
               <Form.Item
                 name="grantEquivalentAmount"
@@ -243,7 +303,7 @@ const AddNewProgramme = () => {
                 label="Type of Mitigation"
                 rules={[{ required: true }]}
               >
-                <Input size="large" />
+                <Select size="large" options={typeOfMitigationOptions} style={{ width: '100%' }} />
               </Form.Item>
               <Form.Item
                 name="userEstimatedCredits"
