@@ -114,8 +114,8 @@ const AddNewProgramme = () => {
       externalId,
       sectoralScope,
       sector,
-      startTime: startTime.valueOf(),
-      endTime: endTime.valueOf(),
+      startTime: Date.parse(startTime) / 1000,
+      endTime: Date.parse(endTime) / 1000,
       proponentTaxVatId,
       proponentPercentage,
       programmeProperties: {
