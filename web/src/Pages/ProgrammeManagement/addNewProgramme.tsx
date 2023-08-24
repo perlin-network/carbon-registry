@@ -129,17 +129,20 @@ const AddNewProgramme = () => {
         geographicalLocation,
         greenHouseGasses,
       },
-      mitigationActions: {
-        typeOfMitigation,
-        userEstimatedCredits,
-        systemEstimatedCredits,
-        actionId,
-        constantVersion,
-      },
+      mitigationActions: [
+        {
+          typeOfMitigation,
+          userEstimatedCredits,
+          systemEstimatedCredits,
+          actionId,
+          constantVersion,
+        },
+      ],
       creditEst,
       creditIssued,
     };
-    // console.log(requestData);
+    //console.log(requestData);
+    //console.log(new Date(requestData.startTime * 1000).getFullYear());
 
     setLoading(true);
     try {
