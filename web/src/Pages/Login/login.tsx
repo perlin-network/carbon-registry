@@ -14,6 +14,7 @@ import { AbilityContext } from '../../Casl/Can';
 import { updateUserAbility } from '../../Casl/ability';
 import ForgotPassword from './forgotPassword';
 import ResetPassword from './resetPassword';
+import config from '../../config';
 
 export interface LoginPageProps {
   forgotPassword?: boolean;
@@ -128,7 +129,7 @@ const Login: FC<LoginPageProps> = (props: LoginPageProps) => {
                       </div>
 
                       <span className="country-name">
-                        {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
+                        {config.countryName}
                       </span>
                     </div> */}
                 {/* </Col>

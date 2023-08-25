@@ -15,6 +15,7 @@ import {
 } from '@ant-design/icons';
 import { LayoutSiderProps } from '../../Definitions/InterfacesAndType/layout.sider.definitions';
 import { useTranslation } from 'react-i18next';
+import config from '../../config';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -81,18 +82,12 @@ const LayoutSider = (props: LayoutSiderProps) => {
                 <div className="title">{collapsed ? '' : 'CARBON'}</div>
                 <div className="title-sub">{collapsed ? '' : 'REGISTRY'}</div>
               </div>
-              <div className="country-name">{process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}</div> */}
+              <div className="country-name">{config.countryName}</div> */}
             </div>
           )}
           {collapsed && (
             <div className="country-flag">
-              <img
-                alt="country flag"
-                src={
-                  process.env.REACT_APP_COUNTRY_FLAG_URL ||
-                  'https://cr-perlin-common-dev.s3.amazonaws.com/flag.png'
-                }
-              />
+              <img alt="country flag" src={config.countryFlag} />
             </div>
           )}
         </div>

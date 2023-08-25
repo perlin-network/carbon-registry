@@ -89,6 +89,7 @@ import TimelineBody from '../../Components/TimelineBody/TimelineBody';
 import MapComponent from '../../Components/Maps/MapComponent';
 import { MapTypes, MarkerData } from '../../Definitions/InterfacesAndType/mapComponent.definitions';
 import { useSettingsContext } from '../../Context/SettingsContext/settingsContext';
+import config from '../../config';
 
 const ProgrammeView = () => {
   const { get, put, post } = useConnection();
@@ -110,7 +111,7 @@ const ProgrammeView = () => {
   const [retireReason, setRetireReason] = useState<any>();
   const [markers, setMarkers] = useState<MarkerData[]>([]);
   const [centerPoint, setCenterPoint] = useState<number[]>([]);
-  const mapType = process.env.REACT_APP_MAP_TYPE ? process.env.REACT_APP_MAP_TYPE : 'None';
+  const mapType = config.mapType;
   const [isAllOwnersDeactivated, setIsAllOwnersDeactivated] = useState(true);
   const { isTransferFrozen, setTransferFrozen } = useSettingsContext();
 
@@ -225,8 +226,8 @@ const ProgrammeView = () => {
         setMarkers(markerList);
       } else {
         let accessToken;
-        if (mapType === MapTypes.Mapbox && process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN) {
-          accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN;
+        if (mapType === MapTypes.Mapbox && config.mapBoxToken) {
+          accessToken = config.mapBoxToken;
         }
 
         if (!accessToken || !data!.programmeProperties.geographicalLocation) return;
@@ -238,7 +239,7 @@ const ProgrammeView = () => {
               autocomplete: false,
               limit: 1,
               types: ['region', 'district'],
-              countries: [process.env.REACT_APP_COUNTRY_CODE || 'NG'],
+              countries: [config.countryCode],
             })
             .send();
 

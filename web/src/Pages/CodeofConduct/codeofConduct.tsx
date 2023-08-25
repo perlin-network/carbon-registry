@@ -7,6 +7,8 @@ import sliderLogo from '../../Assets/Images/logo-slider.png';
 import LayoutFooter from '../../Components/Footer/layout.footer';
 import './codeofConduct.scss';
 import { CcCircle } from 'react-bootstrap-icons';
+import config from '../../config';
+
 const CodeOfConduct = () => {
   const { i18n, t } = useTranslation(['common', 'homepage']);
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ const CodeOfConduct = () => {
                 <div className="title">{'CARBON'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
               </div>
-              <div className="country-name">{process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}</div>
+              <div className="country-name">{config.countryName}</div>
             </div>
           </div>
         </Col>
@@ -276,7 +278,7 @@ const CodeOfConduct = () => {
                   <div className="title-sub">{'REGISTRY'}</div>
                 </div>
                 <div className="footer-country-name">
-                  {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
+                  {config.countryName}
                 </div>
               </div>
             </div>
@@ -291,7 +293,7 @@ const CodeOfConduct = () => {
         <Row className="footer-raw">
           <Col md={4.8} lg={12}>
             <div className="footertext-bottom">
-              {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
+              {config.countryName}
               <CcCircle className="cc" color="#FFFF" size="10px" />
             </div>
           </Col>

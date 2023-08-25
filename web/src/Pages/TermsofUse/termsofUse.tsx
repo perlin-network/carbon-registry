@@ -7,6 +7,8 @@ import sliderLogo from '../../Assets/Images/logo-slider.png';
 import './termsofUse.scss';
 import LayoutFooter from '../../Components/Footer/layout.footer';
 import { CcCircle } from 'react-bootstrap-icons';
+import config from '../../config';
+
 const TermsOfUse = () => {
   const { i18n, t } = useTranslation(['common', 'homepage']);
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ const TermsOfUse = () => {
                 <div className="title">{'CARBON'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
               </div>
-              <div className="country-name">{process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}</div>
+              <div className="country-name">{config.countryName}</div>
             </div>
           </div>
         </Col>

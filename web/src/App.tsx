@@ -31,6 +31,7 @@ import { AbilityContext } from './Casl/Can';
 import { defineAbility, updateUserAbility } from './Casl/ability';
 import { message } from 'antd';
 import { SettingsContextProvider } from './Context/SettingsContext/settingsContext';
+import config from './config';
 
 // message.config({
 //   duration: 60,
@@ -39,8 +40,7 @@ import { SettingsContextProvider } from './Context/SettingsContext/settingsConte
 const App = () => {
   const ability = defineAbility();
   useEffect(() => {
-    console.log(process.env.REACT_APP_BACKEND);
-    console.log(process.env.REACT_APP_STAT_URL);
+    console.log(config.apiUrl);
     if (
       localStorage.getItem('companyId') &&
       localStorage.getItem('userRole') &&
@@ -58,13 +58,7 @@ const App = () => {
   }, []);
   return (
     <AbilityContext.Provider value={ability}>
-      <ConnectionContextProvider
-        serverURL={
-          process.env.REACT_APP_BACKEND
-            ? process.env.REACT_APP_BACKEND
-            : 'http://localhost:3000/local'
-        }
-      >
+      <ConnectionContextProvider serverURL={config.apiUrl}>
         <UserInformationContextProvider>
           <SettingsContextProvider>
             <BrowserRouter>

@@ -48,6 +48,7 @@ import {
   MapTypes,
   MarkerData,
 } from '../../Definitions/InterfacesAndType/mapComponent.definitions';
+import config from '../../config';
 
 const { RangePicker } = DatePicker;
 
@@ -180,7 +181,7 @@ const Dashboard = () => {
   const [programmeLocationsMapSource, setProgrammeLocationsMapSource] = useState<MapSourceData>();
   const [programmeLocationsMapLayer, setProgrammeLocationsMapLayer] = useState<any>();
 
-  const mapType = process.env.REACT_APP_MAP_TYPE ? process.env.REACT_APP_MAP_TYPE : 'None';
+  const mapType = config.mapType;
 
   const getAllProgrammeAnalyticsStatsParamsWithoutTimeRange = () => {
     return {
@@ -521,7 +522,7 @@ const Dashboard = () => {
         'stats/programme/agg',
         getAllChartsParams(),
         undefined,
-        process.env.REACT_APP_STAT_URL
+        config.startUrl
       );
       let programmesAggByStatus: any;
       let programmesAggBySector: any;
@@ -878,7 +879,7 @@ const Dashboard = () => {
         'stats/programme/agg',
         getAllProgrammeAnalyticsStatsParamsWithoutTimeRange(),
         undefined,
-        process.env.REACT_APP_STAT_URL
+        config.startUrl
       );
       const programmeByStatusAggregationResponse =
         response?.data?.stats?.AGG_PROGRAMME_BY_STATUS?.data;
@@ -1002,7 +1003,7 @@ const Dashboard = () => {
         'stats/programme/agg',
         getAllProgrammeAnalyticsStatsParams(),
         undefined,
-        process.env.REACT_APP_STAT_URL
+        config.startUrl
       );
       let programmeByStatusAggregationResponse: any;
       let programmeByStatusAuthAggregationResponse: any;

@@ -7,6 +7,8 @@ import sliderLogo from '../../Assets/Images/logo-slider.png';
 import './cookiePolicy.scss';
 import { CcCircle } from 'react-bootstrap-icons';
 import LayoutFooter from '../../Components/Footer/layout.footer';
+import config from '../../config';
+
 const CookiePolicy = () => {
   const { i18n, t } = useTranslation(['common', 'homepage']);
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ const CookiePolicy = () => {
                 <div className="title">{'CARBON'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
               </div>
-              <div className="country-name">{process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}</div>
+              <div className="country-name">{config.countryName}</div>
             </div>
           </div>
         </Col>

@@ -19,6 +19,7 @@ import { ReactComponent as CarbonCreditCalculatorSvg } from '../../Assets/Images
 import { ReactComponent as SerialNumberGeneratorSvg } from '../../Assets/Images/serial-number-generator.svg';
 import GenomPng from '../../Assets/Images/genom.png';
 import JunglePng from '../../Assets/Images/jungle.png';
+import config from '../../config';
 
 const Homepage = () => {
   const { i18n, t } = useTranslation(['common', 'homepage']);
@@ -69,7 +70,7 @@ const Homepage = () => {
                       <div className="title-sub">{'REGISTRY'}</div>
                     </div>
                     <div className="country-name">
-                      {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
+                      {config.countryName}
                     </div>
                   </div> */}
               <LogoSvg className="logo" height={48} />

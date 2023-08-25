@@ -6,10 +6,9 @@ import {
   MarkerData,
 } from '../../Definitions/InterfacesAndType/mapComponent.definitions';
 import './MapboxComponent.scss';
+import config from '../../config';
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN
-  ? process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN
-  : '';
+mapboxgl.accessToken = config.mapBoxToken || '';
 
 const MapboxComponent = (props: MapComponentProps) => {
   const mapContainerRef = useRef(null);

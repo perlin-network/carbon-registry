@@ -1,6 +1,7 @@
 import { Col, Divider, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import sliderLogo from '../../Assets/Images/logo-slider.png';
+import config from '../../config';
 import './layout.footer.scss';
 import { CcCircle } from 'react-bootstrap-icons';
 import { ReactComponent as LogoSvg } from '../../Assets/Images/logo-inverted.svg';
@@ -21,7 +22,7 @@ const LayoutFooter = () => {
                 <div className="title-sub">{'REGISTRY'}</div>
               </div>
               <div className="footer-country-name">
-                {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
+                {config.countryName}
               </div>
             </div> */}
             </div>
@@ -31,7 +32,7 @@ const LayoutFooter = () => {
         <div className="footertext">{t('homepage:footertext1')}</div>
         <div className="footer-bottom">
           <div className="footertext-bottom">
-            {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
+            {config.countryName}
             <CcCircle className="cc" color="#FFFF" size="10px" />
           </div>
           <div className="footertext-link-container">

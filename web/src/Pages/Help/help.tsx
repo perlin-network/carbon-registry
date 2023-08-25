@@ -7,6 +7,8 @@ import sliderLogo from '../../Assets/Images/logo-slider.png';
 import LayoutFooter from '../../Components/Footer/layout.footer';
 import './help.scss';
 import { CcCircle } from 'react-bootstrap-icons';
+import config from '../../config';
+
 const CarbonHelp = () => {
   const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ const CarbonHelp = () => {
                 <div className="title">{'CARBON'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
               </div>
-              <div className="country-name">{process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}</div>
+              <div className="country-name">{config.countryName}</div>
             </div>
           </div>
         </Col>
