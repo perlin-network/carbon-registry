@@ -1,0 +1,74 @@
+# NOT USED SO FAR
+Resources:
+ CRUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: ${self:provider.stage}-${self:service}-user-pool
+      AdminCreateUserConfig: 
+        AllowAdminCreateUserOnly: true
+        InviteMessageTemplate:
+          EmailMessage: Your username is {username} and temporary password is {####}.  
+          EmailSubject: Perlin Carbon Registry
+          SMSMessage: Your username is {username} and temporary password is {####}.
+        # UnusedAccountValidityDays: 7
+      UsernameAttributes: 
+        - email
+      AutoVerifiedAttributes: 
+        - email
+      Schema:
+        - Name: email
+          Required: true
+          Mutable: true
+      EmailConfiguration: 
+        ReplyToEmailAddress: admin@bioeconomy.co
+      EmailVerificationMessage: Your verification code is {####}.
+      EmailVerificationSubject: Your verification code
+      MfaConfiguration: OFF
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 6
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: false
+          RequireUppercase: true
+
+  CRUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: cr-webui-${self:provider.stage}
+      GenerateSecret: false
+      AccessTokenValidity: 60 # (minutes)
+      IdTokenValidity: 60 # (minutes)
+      RefreshTokenValidity: 30 # (days) default value.
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthFlows:
+        - code
+        - implicit
+      AllowedOAuthScopes:
+        - aws.cognito.signin.user.admin
+        - email
+        - openid
+        - phone
+        - profile
+      CallbackURLs:
+        - "https://carbon-registry.perlin.net/login"
+      EnableTokenRevocation: true # default value.
+      ExplicitAuthFlows:
+        - ALLOW_CUSTOM_AUTH
+        - ALLOW_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+        - ALLOW_USER_SRP_AUTH
+      LogoutURLs:
+        - "https://carbon-registry.perlin.net/logout"
+      PreventUserExistenceErrors: ENABLED # default value.
+      TokenValidityUnits:
+        AccessToken: minutes
+        IdToken: minutes
+        RefreshToken: days
+      UserPoolId: !Ref CRUserPool
+
+  CRUserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: "cr-pool-${self:provider.stage}"
+      UserPoolId: !Ref CRUserPool
