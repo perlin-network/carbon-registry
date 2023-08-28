@@ -1724,7 +1724,7 @@ const ProgrammeView = () => {
                     <Row className="region-list">
                       {data.programmeProperties.geographicalLocation &&
                         data.programmeProperties.geographicalLocation.map((e: any, idx: number) => (
-                          <Col className="loc-tag">
+                          <Col key={idx} className="loc-tag">
                             {data.geographicalLocationCordintes &&
                               data.geographicalLocationCordintes[idx] !== null &&
                               data.geographicalLocationCordintes[idx] !== undefined && (
