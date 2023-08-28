@@ -12,7 +12,9 @@ export class OpenStreetLocationService implements LocationInterface {
     private logger: Logger,
     private configService: ConfigService,
     @InjectRepository(Region) private regionRepo: Repository<Region>
-  ) {}
+  ) {
+    logger.log('Constructor initialized', 'OpenStreetLocationService');
+  }
 
   public async init(): Promise<void> {
     this.logger.log('open street init')

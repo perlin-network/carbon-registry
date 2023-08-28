@@ -9,7 +9,9 @@ export class MapboxLocationService implements LocationInterface {
   constructor(
     private logger: Logger,
     private configService: ConfigService
-  ) {}
+  ) {
+    logger.log('Constructor initialized', 'MapboxLocationService');
+  }
   
   public init(): Promise<void> {
     return null;

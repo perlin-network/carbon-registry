@@ -14,7 +14,7 @@ provider:
     IS_EMAIL_DISABLED: 'false'
     ASYNC_OPERATIONS_TYPE: Queue
     COUNTRY_NAME: 'CountryX'
-    COUNTRY_CODE: 'BS'
+    COUNTRY_CODE: 'NG'
   # iam:
   #   role: arn:aws:iam::909101490035:role/lambda-role
   # vpc:

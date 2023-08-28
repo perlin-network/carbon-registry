@@ -14,7 +14,7 @@ env:
   REACT_APP_MAPBOXGL_ACCESS_TOKEN: ${{ secrets.MAPBOXGL_ACCESS_TOKEN }}
   REACT_APP_BACKEND: https://cr-api.perlin.net/${{ github.event.inputs.stage_name }}
   REACT_APP_COUNTRY_NAME: 'CountryX'
-  REACT_APP_COUNTRY_CODE: 'BS'
+  REACT_APP_COUNTRY_CODE: 'NG'
 
 jobs:
   default:
