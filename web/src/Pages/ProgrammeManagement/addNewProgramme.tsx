@@ -166,7 +166,7 @@ const AddNewProgramme = () => {
   return (
     <div className="content-container add-programme-container">
       <div className="title-bar">
-        <div className="body-title">{t('addProgramme:title')}</div>
+        <div className="body-title">{t('addProgramme:heading')}</div>
         <div className="body-sub-title">{t('addProgramme:desc')}</div>
       </div>
       <div className="content-card">
