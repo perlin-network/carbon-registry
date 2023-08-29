@@ -136,4 +136,10 @@ export class CompanyController {
   async getAvailableCountries(@Request() req) {
     return await this.countryService.getAvailableCountries();
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Post("regions")
+  async queryAvailableRegions(@Body() query: QueryDto, @Request() req) {
+    return await this.companyService.queryRegions(query, req.abilityCondition);
+  }
 }
