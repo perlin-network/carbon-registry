@@ -18,6 +18,7 @@ import { User } from "../entities/user.entity";
 import { AsyncOperationsModule } from "../async-operations/async-operations.module";
 import { ConfigurationSettingsService } from "./configurationSettings.service";
 import { ConfigurationSettings } from "../entities/configuration.settings";
+import { Region } from "../entities/region.entity";
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { ConfigurationSettings } from "../entities/configuration.settings";
     TypeOrmModule.forFeature([
       Counter,
       Country,
+      Region,
       PasswordReset,
       User,
       ConfigurationSettings,

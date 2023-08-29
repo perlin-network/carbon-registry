@@ -140,6 +140,6 @@ export class CompanyController {
   @UseGuards(JwtAuthGuard)
   @Post("regions")
   async queryAvailableRegions(@Body() query: QueryDto, @Request() req) {
-    return await this.companyService.queryRegions(query, req.abilityCondition);
+    return await this.countryService.queryRegions(query, req.abilityCondition);
   }
 }

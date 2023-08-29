@@ -32,7 +32,6 @@ import { SystemActionType } from "../enum/system.action.type";
 import { FileHandlerInterface } from "../file-handler/filehandler.interface";
 import { CounterType } from "../util/counter.type.enum";
 import { CounterService } from "../util/counter.service";
-import { Region } from "../entities/region.entity";
 
 @Injectable()
 export class CompanyService {
@@ -47,8 +46,7 @@ export class CompanyService {
     @InjectRepository(ProgrammeTransfer)
     private programmeTransferRepo: Repository<ProgrammeTransfer>,
     private fileHandler: FileHandlerInterface,
-    private counterService: CounterService,
-    @InjectRepository(Region) private regionRepo: Repository<Region>
+    private counterService: CounterService
   ) {
     logger.log("Constructor initialized", 'CompanyService');
   }
@@ -275,25 +273,6 @@ export class CompanyService {
       .getRawMany();
 
     console.log(resp);
-    return new DataListResponseDto(resp, undefined);
-  }
-
-  async queryRegions(query: QueryDto, abilityCondition: string): Promise<any> {
-    const resp = await this.regionRepo
-      .createQueryBuilder()
-      .select(['"key"', '"name"', '"countryAlpha2"'])
-      .where(
-        this.helperService.generateWhereSQL(
-          query,
-          this.helperService.parseMongoQueryToSQL(abilityCondition)
-        )
-      )
-      .orderBy(query?.sort?.key && `"${query?.sort?.key}"`, query?.sort?.order)
-      .offset(query.size * query.page - query.size)
-      .limit(query.size)
-      .getRawMany();
-
-    console.log('[queryRegions]', resp);
     return new DataListResponseDto(resp, undefined);
   }
 
