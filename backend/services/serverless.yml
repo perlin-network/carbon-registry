@@ -13,6 +13,7 @@ provider:
     LEDGER_TYPE: QLDB #QLDB, PGSQL
     IS_EMAIL_DISABLED: 'false'
     ASYNC_OPERATIONS_TYPE: Queue
+    LOCATION_SERVICE: FILE
     COUNTRY_NAME: 'CountryX'
     COUNTRY_CODE: 'NG'
   # iam:
