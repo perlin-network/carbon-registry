@@ -4,6 +4,8 @@ import { Form, Row, Col, Input, InputNumber, DatePicker, Select, Button, message
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
+// import moment from 'moment';
+import ErrorDisplay from './errorDisplay';
 
 const sectorOptions = [
   { label: 'Energy', value: 'Energy' },
@@ -73,6 +75,37 @@ const typeOfMitigationOptions = [
   { label: 'Transport', value: 'Transport' },
   { label: 'Wind', value: 'Wind' },
 ];
+
+const validateMessages = {
+  required: '${label} is required',
+};
+
+const initialValues = {
+  // title: 'Title',
+  // externalId: '-',
+  // sectoralScope: '-',
+  // sector: 'Energy',
+  // startTime: moment(),
+  // endTime: moment(),
+  // proponentTaxVatId: ['TAXID003'],
+  // proponentPercentage: [100],
+  // maxInternationalTransferAmount: '-',
+  // creditingPeriodInYears: 1,
+  // estimatedProgrammeCostUSD: 100,
+  // sourceOfFunding: 'Other',
+  // grantEquivalentAmount: 100,
+  // carbonPriceUSDPerTon: 100,
+  // buyerCountryEligibility: '-',
+  // geographicalLocation: ['Abuja,FCT'],
+  // greenHouseGasses: ['CO2'],
+  // typeOfMitigation: 'Agriculture',
+  // userEstimatedCredits: 100,
+  // systemEstimatedCredits: 100,
+  // actionId: '-',
+  // constantVersion: '-',
+  // creditEst: 100,
+  // creditIssued: 100,
+};
 
 const AddNewProgramme = () => {
   const navigate = useNavigate();
@@ -154,9 +187,9 @@ const AddNewProgramme = () => {
     } catch (error: any) {
       message.open({
         type: 'error',
-        content: `${error.message}`,
+        content: <ErrorDisplay error={error} />,
         duration: 3,
-        style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+        style: { textAlign: 'left', marginRight: 15, marginTop: 10 },
       });
     } finally {
       setLoading(false);
@@ -177,6 +210,8 @@ const AddNewProgramme = () => {
           requiredMark={true}
           form={form}
           onFinish={onFinish}
+          validateMessages={validateMessages}
+          initialValues={initialValues}
         >
           <Row className="row" gutter={[16, 16]}>
             <Col xl={12} md={24}>
