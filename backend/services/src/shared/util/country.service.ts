@@ -72,7 +72,7 @@ export class CountryService {
     async queryRegions(query: QueryDto, abilityCondition: string): Promise<any> {
         const resp = await this.regionRepo
           .createQueryBuilder()
-          .select(['"key"', '"name"', '"countryAlpha2"'])
+          .select(['"key"', '"regionName"', '"countryAlpha2"'])
           .where(
             this.helperService.generateWhereSQL(
               query,
