@@ -186,7 +186,7 @@ export const handler: Handler = async (event) => {
     await ledgerDBInterface.createIndex("txId", "overall");
     const creditOverall = new CreditOverall();
     creditOverall.credit = 0;
-    creditOverall.txId = event["systemCountryCode"];
+    creditOverall.txId = event["systemCountry"];
     creditOverall.txRef = "genesis block";
     creditOverall.txType = TxType.ISSUE;
     await ledgerDBInterface.insertRecord(creditOverall, "overall");
@@ -199,7 +199,7 @@ export const handler: Handler = async (event) => {
 
   try {
     const company = new OrganisationDto();
-    company.country = event["systemCountryCode"];
+    company.country = event["systemCountry"];
     company.name = event["name"];
     company.logo = event["logoBase64"];
     company.companyRole = CompanyRole.GOVERNMENT;

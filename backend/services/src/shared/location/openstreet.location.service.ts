@@ -27,7 +27,7 @@ export class OpenStreetLocationService implements LocationInterface {
       (await this.regionRepo.count()) <= 0
     ) {
       const data: Region[] = [];
-      const countryCode = this.configService.get("systemCountryCode");
+      const countryCode = this.configService.get("systemCountry");
       const query = `data=%5Bout%3Ajson%5D%3B%0Aarea%5B%22ISO3166-1%22%3D%22${countryCode}%22%5D-%3E.a%3B%0A%28%0A%20%20node%28area.a%29%5B%22admin_level%22%3D%224%22%5D%3B%0A%29%3B%0Aout%20body%3B`;
       this.logger.log('Region query', query);
       const response = await axios

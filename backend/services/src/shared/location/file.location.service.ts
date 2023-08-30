@@ -39,7 +39,7 @@ export class FileLocationService implements LocationInterface {
     if (this.regionMap.length)
       return this.regionMap;
 
-    const countryCode = this.configService.get("systemCountryCode");
+    const countryCode = this.configService.get("systemCountry");
 
     this.regionMap = await this.regionRepo.find({
       where: {

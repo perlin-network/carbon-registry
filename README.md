@@ -201,7 +201,7 @@ The below diagram demonstrates the the ledger behavior of programme create, auth
     - DB_NAME (Default carbondbdev)
 - Move to folder `cd backend/service`
 - Run `yarn run sls:install `
-- Initial user data setup `serverless invoke local --stage=local --function setup --data '{"rootEmail": "<Root user email>","systemCountryCode": "<System country Alpha 2 code>", "name": "<System country name>", "logoBase64": "<System country logo base64>"}'`
+- Initial user data setup `serverless invoke local --stage=local --function setup --data '{"rootEmail": "<Root user email>","systemCountry": "<System country Alpha 2 code>", "name": "<System country name>", "logoBase64": "<System country logo base64>"}'`
 - Start all the services by executing `sls offline --stage=local`
 - Now all the system services are up and running. Swagger documentation will be available on `http://localhost:3000/local/national`
 
@@ -222,7 +222,7 @@ The below diagram demonstrates the the ledger behavior of programme create, auth
     ```
     aws lambda invoke \
         --function-name carbon-registry-services-dev-setup --cli-binary-format raw-in-base64-out\
-        --payload '{"rootEmail": "<Root user email>","systemCountryCode": "<System country Alpha 2 code>", "name": "<System country name>", "logoBase64": "<System country logo base64>"}' \
+        --payload '{"rootEmail": "<Root user email>","systemCountry": "<System country Alpha 2 code>", "name": "<System country name>", "logoBase64": "<System country logo base64>"}' \
         response.json
     ```
 
