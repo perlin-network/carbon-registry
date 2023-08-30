@@ -1,5 +1,4 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { AgricultureConstants, SolarConstants } from "@undp/carbon-credit-calculator";
 import { IsNotEmpty, IsEnum, ValidateIf, IsNotEmptyObject } from "class-validator";
 import { TypeOfMitigation } from "../enum/typeofmitigation.enum";
 import { AgricultureConstantsDto } from "./agriculture.constants.dto";

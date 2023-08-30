@@ -3634,9 +3634,9 @@
   integrity sha512-XAMpaw1s1+6zM+jn2tmw8MyaRDIJfXxqmIQIS0HfoGYPuf7dUWeiUKopwq13KFX9lEp1+THGtlaaYx39Nxr58g==
 
 "@types/node@^18.11.9":
-  version "18.16.16"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.16.tgz#3b64862856c7874ccf7439e6bab872d245c86d8e"
-  integrity sha512-NpaM49IGQQAUlBhHMF82QH80J08os4ZmyF9MkpCzWAGuOHqE4gTEbhzd7L3l5LmWuZ6E0OiC1FweQ4tsiW35+g==
+  version "18.17.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.17.12.tgz#c6bd7413a13e6ad9cfb7e97dd5c4e904c1821e50"
+  integrity sha512-d6xjC9fJ/nSnfDeU0AMDsaJyb1iHsqCSOdi84w4u+SlN/UgQdY5tRhpMzaFYsI4mnpvgTivEaQd0yOUhAtOnEQ==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -3870,14 +3870,18 @@
   dependencies:
     "@ucast/core" "^1.4.1"
 
-"@undp/carbon-credit-calculator@../../libs/carbon-credit-calculator":
+"@undp/carbon-credit-calculator@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@undp/carbon-credit-calculator/-/carbon-credit-calculator-1.0.0.tgz#fbdfbb606cb7bd402ed74887dfc1f0861cfca892"
+  integrity sha512-7wbGm7uEYdRBWlKzATKIhFLd9Zip8yxLCi3cfAcufb5kACw8ZKqtbn+08EyZQiJbDoPB3ouM6Dx8Dl+FnqqPVg==
   dependencies:
     "@types/node" "^18.11.9"
     convert-units "^2.3.4"
 
-"@undp/serial-number-gen@../../libs/serial-number-gen":
+"@undp/serial-number-gen@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@undp/serial-number-gen/-/serial-number-gen-1.0.0.tgz#1a3d3f28ea42d522552069f60d6037c58f447ebe"
+  integrity sha512-dt6bTVpGThndtP1VLqtq5s7VTJKlynlF0ZoV1avtfoQ/LQ7nZA5FJc+Lc46c8LmCYqZ4zF9ema2S6LhYAaNU+g==
 
 "@vendia/serverless-express@^3.4.0":
   version "3.4.0"
