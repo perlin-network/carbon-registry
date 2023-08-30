@@ -9,7 +9,8 @@
     "devBuild": "yarn install && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "build": "yarn install --production && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "prepublishOnly": "yarn install --production && yarn run build",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "deploy": "yarn build && yarn publish"
   },
   "files": [
     "dist/"
@@ -27,11 +28,11 @@
   "types": "./dist/esm/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xeptagondev/carbon-registry.git#develop"
+    "url": "git+https://github.com/perlin-network/carbon-registry"
   },
   "author": "UNDP",
-  "bugs": {
-    "url": "https://github.com/xeptagondev/carbon-registry/issues"
-  },
-  "homepage": "https://github.com/xeptagondev/carbon-registry/tree/develop#readme"
+  "homepage": "https://github.com/perlin-network/carbon-registry/tree/main#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
