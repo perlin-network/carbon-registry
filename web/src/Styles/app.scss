@@ -1,5 +1,9 @@
 @import './variables.scss';
 
+iframe#webpack-dev-server-client-overlay {
+  display:none!important
+}
+
 body {
   background-color: $background-color;
   font-family: $primary-font-family;

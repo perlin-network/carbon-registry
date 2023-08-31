@@ -25,7 +25,6 @@ The following work steps are suggested for the national implementation of the DP
 	- status page for monitoring uptime, utlizing https://github.com/undp/carbon-registry-status 
 	- *(Deliverable: Fully localized Carbon Registry running on staging (test) environment & productive (live) environment)*
  
-- Build carbon credit calculators for locally-determined sectors & according to local regulations. Referencing https://github.com/undp/carbon-registry/tree/main/libs/carbon-credit-calculator . Push new calculators to main codebase.
 - [Optional] Creation of new features / modules. Reporting update on https://github.com/undp/carbon-registry/tree/main/modules.
 - - Successful end-to-end test of the registry. This test needs to cover the full lifecycle of one dummy project including at least project creation, authorization, implementation, MRV, issuance and transfer. 
 *(Deliverable: Test Report)*

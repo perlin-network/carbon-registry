@@ -226,14 +226,6 @@ The below diagram demonstrates the the ledger behavior of programme create, auth
         response.json
     ```
 
-    
-### Carbon Credit Calculator
-Carbon credit calculation implemented in a separate node module. [Please refer this](./libs/carbon-credit-calculator/README.md) for more information.
-
-
-### Serial Number Generation
-Serial Number generation implemented in a separate node module. [Please refer this](./libs/serial-number-gen/README.md) for more information.
-
 <a name="external"></a>
 ## External Connectivity
 
