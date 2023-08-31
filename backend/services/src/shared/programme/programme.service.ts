@@ -94,7 +94,7 @@ export class ProgrammeService {
 
   private toProgramme(programmeDto: ProgrammeDto): Programme {
     const data = instanceToPlain(programmeDto);
-    this.logger.log("Converted programme", 'toProgramme', JSON.stringify(data));
+    console.info("Converted programmeDto %j", '[toProgramme]', data);
     return plainToClass(Programme, data);
   }
 
@@ -1131,9 +1131,10 @@ export class ProgrammeService {
   }
 
   async create(programmeDto: ProgrammeDto): Promise<Programme | undefined> {
-    this.logger.log("ProgrammeDTO received", 'create', JSON.stringify(programmeDto));
+    console.info("ProgrammeDTO received %j", '[create]', programmeDto);
     const programme: Programme = this.toProgramme(programmeDto);
-    this.logger.log("Programme create", 'create', JSON.stringify(programme));
+    console.info("Converted programme %j", '[create]', programme);
+    //this.logger.log("Programme create", 'create', JSON.stringify(programme));
 
     if (
       programmeDto.proponentTaxVatId.length > 1 &&
