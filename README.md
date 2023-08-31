@@ -45,7 +45,7 @@ https://digitalprinciples.org/
 ## System Architecture
 PERL.eco Carbon & Bio Asset Registry is built on the UNDP Carbon Registry which is based on service oriented architecture (SOA). Following diagram visualize the basic components in the system.
 
-![alt text](./documention/imgs/PERL%20System%20Architecture.svg)	
+![alt text](./docs/imgs/PERL%20System%20Architecture.svg)	
 
 <a name="services"></a>	
 ### **System Services**	
@@ -133,7 +133,7 @@ Carbon Registry contains 3 ledger tables.
 
 The below diagram demonstrates the the ledger behavior of programme create, authorise, issue and transfer processes. Blue color document icon denotes a single data block in a ledger.
 
-![alt text](./documention/imgs/Ledger.svg)
+![alt text](./docs/imgs/Ledger.svg)
 
 ### **Authentication**
 - JWT Authentication - All endpoints based on role permissions.
@@ -235,7 +235,7 @@ The below diagram demonstrates the the ledger behavior of programme create, auth
 3. The Carbon Registry update when the programmes are Issued with credits in the ITMO Platform 
 
 #### <b>Lifecycle</b>
-![alt text](./documention/imgs/ITMOxCARBON_LifeCycle.svg)
+![alt text](./docs/imgs/ITMOxCARBON_LifeCycle.svg)
 
 #### <b>Programme Creation and Authorisation</b>
 - Authorisation of programmes in the ITMO Platform identified by the event name: "ITMO-Design Document (DD) & Validation Report / Upload on National Public Registry". 
