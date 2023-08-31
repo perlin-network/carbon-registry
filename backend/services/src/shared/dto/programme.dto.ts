@@ -118,9 +118,9 @@ export class ProgrammeDto {
     @IsNumber()
     creditEst: number;
 
-    @ApiPropertyOptional()
-    @IsNotEmpty()
-    @IsOptional()
-    @IsNumber()
-    creditIssued: number;
+    // @ApiPropertyOptional()
+    // @IsNotEmpty()
+    // @IsOptional()
+    // @IsNumber()
+    // creditIssued: number;
 }
