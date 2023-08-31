@@ -93,7 +93,7 @@ export class ProgrammeService {
   ) {}
 
   private toProgramme(programmeDto: ProgrammeDto): Programme {
-    const data = instanceToPlain(programmeDto);
+    const data = instanceToPlain(programmeDto, { excludePrefixes: ['designDoc'] });
     console.info("Converted programmeDto %j", '[toProgramme]', data);
     return plainToClass(Programme, data);
   }

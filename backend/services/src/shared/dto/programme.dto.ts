@@ -8,7 +8,6 @@ import { ProgrammeProperties } from "./programme.properties";
 import { Sector } from "../enum/sector.enum";
 import { Type } from "class-transformer";
 import { MitigationProperties } from "./mitigation.properties";
-import { Exclude } from 'class-transformer';
 
 export class ProgrammeDto {
 
@@ -76,7 +75,6 @@ export class ProgrammeDto {
     creditUnit: string;
 
     @ApiPropertyOptional()
-    @Exclude()
     @IsOptional()
     @IsString()
     designDocument?: string;
