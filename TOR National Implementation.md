@@ -5,10 +5,10 @@ These worksteps can also be intergrated with larger TORs, especially TORs coveri
 ## 1. Installation
 The following work steps are suggested for the national implementation of the DPG carbon registry in any country.
 
-- Installation of a Carbon Registry from https://github.com/undp/carbon-registry
+- Installation of a Carbon Registry from https://github.com/perlin-network/carbon-registry
 
 - Technical timeline/roadmap
-- Fork the [Carbon Registry](https://github.com/undp/carbon-registry). Send pull requests to `staging` for added features (languages, security patchees, modules, etc.). 
+- Fork the [Carbon Registry](https://github.com/perlin-network/carbon-registry). Send pull requests to `staging` for added features (languages, security patchees, modules, etc.). 
 
 - Initial Setup of the Carbon Registry, including localization to national requirements:
 	- translation of text into relevant national languages
@@ -22,10 +22,10 @@ The following work steps are suggested for the national implementation of the DP
 	- integration with existing NDC management tools (if applicable) [API]
 	- adjustment of user types to national requirements
 	- creation of government accounts
-	- status page for monitoring uptime, utlizing https://github.com/undp/carbon-registry-status 
+	- status page for monitoring uptime, utlizing https://github.com/perlin-network/carbon-registry-status 
 	- *(Deliverable: Fully localized Carbon Registry running on staging (test) environment & productive (live) environment)*
  
-- [Optional] Creation of new features / modules. Reporting update on https://github.com/undp/carbon-registry/tree/main/modules.
+- [Optional] Creation of new features / modules. Reporting update on https://github.com/perlin-network/carbon-registry/tree/main/modules.
 - - Successful end-to-end test of the registry. This test needs to cover the full lifecycle of one dummy project including at least project creation, authorization, implementation, MRV, issuance and transfer. 
 *(Deliverable: Test Report)*
 - Creation of a nationally appropriate signup proceedure for non-government accounts

@@ -381,7 +381,7 @@ Web frontend implemented using ReactJS framework. Please refer [getting started 
 ### Localization
 * Languages (Current): English
 * Languages (In Progress): French. Spanish 
-For updating translations or adding new ones, reference https://github.com/undp/carbon-registry/tree/main/web/public/Assets/i18n 
+For updating translations or adding new ones, reference https://github.com/perlin-network/carbon-registry/tree/main/web/public/Assets/i18n 
 
 <a name="api"></a>
 ### Application Programming Interface (API)
@@ -404,7 +404,7 @@ Note: Above resource requirement mentioned for a single instance from each micro
 <a name="status"></a>
 ### Status Page
 For transparent uptime monitoring go to status.APP_URL
-Open source code available at https://github.com/undp/carbon-registry-status
+Open source code available at https://github.com/perlin-network/carbon-registry-status
 
 <a name="support"></a>
 ### Governance and Support
