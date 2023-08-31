@@ -1049,7 +1049,7 @@ export class ProgrammeService {
   }
 
   async addDocument(document: ProgrammeDocumentDto): Promise<DataResponseDto | undefined> {
-    this.logger.log('Add Document triggered')
+    this.logger.log('Add Document triggered', JSON.stringify(document));
 
     const certifierId = (await this.companyService.findByTaxId(document.certifierTaxId))?.companyId;
     const resp = await this.programmeLedger.addDocument(document.externalId, document.actionId, document.data, document.type, 0, certifierId);
@@ -1134,16 +1134,6 @@ export class ProgrammeService {
     this.logger.log("ProgrammeDTO received", 'create', JSON.stringify(programmeDto));
     const programme: Programme = this.toProgramme(programmeDto);
     this.logger.log("Programme create", 'create', JSON.stringify(programme));
-
-    // if (programmeDto.designDocument){
-    //   await this.addDocument({
-    //     data: programmeDto.designDocument,
-    //     externalId: programmeDto.externalId, 
-    //     type: 'pdf',
-    //     actionId: programme.mitigationActions?.[0]?.actionId,
-    //     certifierTaxId: undefined
-    //   })
-    // }
 
     if (
       programmeDto.proponentTaxVatId.length > 1 &&
@@ -1288,6 +1278,17 @@ export class ProgrammeService {
       programme.proponentPercentage = [100];
       programme.creditOwnerPercentage = [100];
     }
+
+    if (programmeDto.designDocument){
+      await this.addDocument({
+        data: programmeDto.designDocument,
+        externalId: programmeDto.externalId, 
+        type: 'pdf',
+        actionId: programme.mitigationActions?.[0]?.actionId,
+        certifierTaxId: undefined
+      })
+    }
+
     const savedProgramme = await this.programmeLedger.createProgramme(
       programme
     );

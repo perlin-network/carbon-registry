@@ -43,12 +43,12 @@ export class QLDBLedgerService implements LedgerDBInterface {
         //Use driver's default backoff function for this example (no second parameter provided to RetryConfig)
         const retryConfig: RetryConfig = new RetryConfig(retryLimit);
 
-        const driver = new QldbDriver(ledgerName, 
+        const driver = new QldbDriver(ledgerName,
             serviceConfigurationOptions,
             lowLevelClientHttpOptions,
             maxConcurrentTransactions,
             retryConfig);
-        
+
         this.logger.debug('[createQldbDriver] Created.');
 
         return driver;
@@ -58,14 +58,14 @@ export class QLDBLedgerService implements LedgerDBInterface {
     private async execute<TM>(sql, ...parameters: any[]): Promise<Result> {
         let result: Result;
 
-        try {
-            //this.driver = this.createQldbDriver(this.ledgerName);
-            result = await this.driver.executeLambda(async (txn: TransactionExecutor) =>
-                this.executeTxn(txn, sql, ...parameters));
-            this.logger.debug('[execute] Response', JSON.stringify(result));
-        } catch (error) {
-            this.logger.error('[execute]', error);
-        }
+        // try {
+        //this.driver = this.createQldbDriver(this.ledgerName);
+        result = await this.driver.executeLambda(async (txn: TransactionExecutor) =>
+            this.executeTxn(txn, sql, ...parameters));
+        this.logger.debug('[execute] Response', JSON.stringify(result));
+        // } catch (error) {
+        //     this.logger.error('[execute]', error);
+        // }
         // finally {
         //     this.driver.close();
         // }
@@ -76,15 +76,11 @@ export class QLDBLedgerService implements LedgerDBInterface {
     private async executeTxn<TM>(txn: TransactionExecutor, sql, ...parameters: any[]): Promise<Result> {
         this.logger.debug(`[QLDBLedger executeTxn] Statement: ${sql}, parameter: ${JSON.stringify(parameters)}`);
 
-        try {
-            if (parameters.length > 0) {
-                return await txn.execute(sql, ...parameters);
-            } else {
-                return await txn.execute(sql);
-            }
-        } catch (error) {
-            console.error('[QLDBLedger executeTxn] %j', error);
-        } 
+        if (parameters.length > 0) {
+            return await txn.execute(sql, ...parameters);
+        } else {
+            return await txn.execute(sql);
+        }
     }
 
     public async createTable(tableName?: string): Promise<void> {
@@ -92,7 +88,7 @@ export class QLDBLedgerService implements LedgerDBInterface {
     }
 
     public async createIndex(indexCol: string, tableName?: string): Promise<void> {
-       await this.execute(`CREATE INDEX ON ${tableName ? tableName : this.tableName} (${indexCol})`);
+        await this.execute(`CREATE INDEX ON ${tableName ? tableName : this.tableName} (${indexCol})`);
     }
 
     public async insertRecord(document: Record<string, any>, tableName?: string): Promise<void> {
