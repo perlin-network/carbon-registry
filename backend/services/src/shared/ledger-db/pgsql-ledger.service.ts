@@ -80,7 +80,7 @@ export class PgSqlLedgerService implements LedgerDBInterface {
     client: Client,
     queries: { [key: string]: TxElement }
   ): Promise<{ [key: string]: QueryResult }> {
-    console.info(`[executeTxn] Statement %j`, queries);
+    console.info(`[PGSQLLedger executeTxn] Statement %j`, queries);
     try {
       const responses = {};
       await client.query("BEGIN");
@@ -88,12 +88,12 @@ export class PgSqlLedgerService implements LedgerDBInterface {
         const c = queries[k];
         const resp = await client.query(c.sql, c.params);
         responses[k] = resp;
-        console.info("[executeTxn] Response", resp);
+        console.info("[PGSQLLedger executeTxn] Response", resp);
       }
       await client.query("COMMIT");
       return responses;
     } catch (e) {
-      console.error("[executeTxn]", e);
+      console.error("[PGSQLLedger executeTxn] %j", e);
       await client.query("ROLLBACK");
       throw e;
     }

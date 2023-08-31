@@ -94,7 +94,7 @@ export class ProgrammeService {
 
   private toProgramme(programmeDto: ProgrammeDto): Programme {
     const data = instanceToPlain(programmeDto);
-    this.logger.verbose("Converted programme", JSON.stringify(data));
+    this.logger.log("Converted programme", 'toProgramme', JSON.stringify(data));
     return plainToClass(Programme, data);
   }
 
@@ -279,7 +279,7 @@ export class ProgrammeService {
         },
       ],
       filterOr: undefined,
-      sort: undefined,
+      sort: undefined
     };
 
     const resp = await this.programmeTransferViewRepo
@@ -1131,9 +1131,19 @@ export class ProgrammeService {
   }
 
   async create(programmeDto: ProgrammeDto): Promise<Programme | undefined> {
-    this.logger.verbose("ProgrammeDTO received", programmeDto);
+    this.logger.log("ProgrammeDTO received", 'create', JSON.stringify(programmeDto));
     const programme: Programme = this.toProgramme(programmeDto);
-    this.logger.verbose("Programme create", programme);
+    this.logger.log("Programme create", 'create', JSON.stringify(programme));
+
+    // if (programmeDto.designDocument){
+    //   await this.addDocument({
+    //     data: programmeDto.designDocument,
+    //     externalId: programmeDto.externalId, 
+    //     type: 'pdf',
+    //     actionId: programme.mitigationActions?.[0]?.actionId,
+    //     certifierTaxId: undefined
+    //   })
+    // }
 
     if (
       programmeDto.proponentTaxVatId.length > 1 &&

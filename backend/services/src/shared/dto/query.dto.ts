@@ -75,5 +75,5 @@ export class QueryDto {
   @IsOptional()
   @ValidateNested({ each: true })
   @Type(() => FilterBy)
-  filterBy: FilterBy;
+  filterBy?: FilterBy;
 }

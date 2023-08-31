@@ -74,7 +74,7 @@ export class QLDBLedgerService implements LedgerDBInterface {
     }
 
     private async executeTxn<TM>(txn: TransactionExecutor, sql, ...parameters: any[]): Promise<Result> {
-        this.logger.debug(`[executeTxn] Statement: ${sql}, parameter: ${JSON.stringify(parameters)}`);
+        this.logger.debug(`[QLDBLedger executeTxn] Statement: ${sql}, parameter: ${JSON.stringify(parameters)}`);
 
         try {
             if (parameters.length > 0) {
@@ -83,7 +83,7 @@ export class QLDBLedgerService implements LedgerDBInterface {
                 return await txn.execute(sql);
             }
         } catch (error) {
-            this.logger.error('[executeTxn]', error);
+            console.error('[QLDBLedger executeTxn] %j', error);
         } 
     }
 
