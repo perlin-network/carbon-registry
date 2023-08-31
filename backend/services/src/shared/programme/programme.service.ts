@@ -1280,20 +1280,20 @@ export class ProgrammeService {
       programme.creditOwnerPercentage = [100];
     }
 
-    if (programmeDto.designDocument){
-      await this.addDocument({
-        data: programmeDto.designDocument,
-        externalId: programmeDto.externalId, 
-        type: 'pdf',
-        actionId: programme.mitigationActions?.[0]?.actionId,
-        certifierTaxId: undefined
-      })
-    }
-
     const savedProgramme = await this.programmeLedger.createProgramme(
       programme
     );
     if (savedProgramme) {
+      if (programmeDto.designDocument){
+        await this.addDocument({
+          data: programmeDto.designDocument,
+          externalId: programmeDto.externalId, 
+          type: 'pdf',
+          actionId: programme.mitigationActions?.[0]?.actionId,
+          certifierTaxId: undefined
+        })
+      }
+
       const hostAddress = this.configService.get("host");
       await this.emailHelperService.sendEmailToGovernmentAdmins(
         EmailTemplates.PROGRAMME_CREATE,
