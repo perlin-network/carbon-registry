@@ -22,6 +22,8 @@
   "proponentPercentValidation": "Proponent percentage error",
   "duplicateOrg": "Duplicate organisation",
   "programmeCreationSuccess": "Programme successfully created",
+  "programmeDocumentUploadStart": "Started Document Upload",
+  "programmeDocumentUploadSuccess": "Document Successfully Attached",
   "editProgramme": "Edit programme",
   "editProgrammeSub": "Fill the info for update",
   "addProgramme": "Add programme",
