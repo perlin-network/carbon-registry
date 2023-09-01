@@ -1284,15 +1284,15 @@ export class ProgrammeService {
       programme
     );
     if (savedProgramme) {
-      if (programmeDto.designDocument){
-        await this.addDocument({
-          data: programmeDto.designDocument,
-          externalId: programmeDto.externalId, 
-          type: 'pdf',
-          actionId: programme.mitigationActions?.[0]?.actionId,
-          certifierTaxId: undefined
-        })
-      }
+      // if (programmeDto.designDocument){
+      //   await this.addDocument({
+      //     data: programmeDto.designDocument,
+      //     externalId: programmeDto.externalId, 
+      //     type: 'pdf',
+      //     actionId: programme.mitigationActions?.[0]?.actionId,
+      //     certifierTaxId: undefined
+      //   })
+      // }
 
       const hostAddress = this.configService.get("host");
       await this.emailHelperService.sendEmailToGovernmentAdmins(
@@ -1759,6 +1759,7 @@ export class ProgrammeService {
         continue;
       }
 
+      console.log('Preparing Retire Transfer %j', { fromCompanyMap, toCompany, requester });
       const transfer = new ProgrammeTransfer();
       transfer.programmeId = req.programmeId;
       transfer.fromCompanyId = fromCompanyId;
