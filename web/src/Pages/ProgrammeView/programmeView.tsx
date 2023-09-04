@@ -150,13 +150,33 @@ const ProgrammeView = () => {
     );
   };
 
+  const base64FileItemContent = (base64Content: string) => {
+    const fileId = `Doc_${base64Content?.substring(0, 10)}.pdf`;
+    const linkSource = `data:application/pdf;base64,${base64Content}`;
+    return (
+      <Row className="field" key={fileId}>
+        <Col span={12} className="field-key">
+          <a
+            target="_blank"
+            href={linkSource}
+            download={fileId}
+            rel="noopener noreferrer"
+            className="file-name"
+          >
+            {fileId} <Icon.Download style={{ verticalAlign: 'middle' }} />
+          </a>
+        </Col>
+      </Row>
+    );
+  };
+
   const getFileContent = (files: any) => {
     if (Array.isArray(files)) {
       return files.map((filePath: any) => {
-        return fileItemContent(filePath);
+        return isBase64(filePath) ? base64FileItemContent(filePath) : fileItemContent(files);
       });
     } else {
-      return fileItemContent(files);
+      return isBase64(files) ? base64FileItemContent(files) : fileItemContent(files);
     }
   };
 
