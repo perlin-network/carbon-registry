@@ -12,14 +12,14 @@ export class S3FileHandlerService implements FileHandlerInterface {
     private configService: ConfigService
   ) {}
   
-  public async uploadFile(path: string, content: string): Promise<string> {
-    const imgBuffer = Buffer.from(content, "base64");
+  public async uploadFile(path: string, content: string, type?: string): Promise<string> {
+    const fileBuffer = Buffer.from(content, "base64");
     var uploadParams = {
       Bucket: this.configService.get<string>("s3CommonBucket.name"),
       Key: "",
-      Body: imgBuffer,
+      Body: fileBuffer,
       ContentEncoding: "base64",
-      ContentType: "image/png",
+      ContentType: type || "image/png",
     };
     
     // uploadParams.Key = `profile_images/${companyId}_${new Date().getTime()}.png`;

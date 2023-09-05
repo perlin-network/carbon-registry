@@ -5,7 +5,7 @@ const fsAync = require("fs");
 
 @Injectable()
 export class LocalFileHandlerService implements FileHandlerInterface {
-  public async uploadFile(path: string, content: string): Promise<string> {
+  public async uploadFile(path: string, content: string, type?: string): Promise<string> {
     // This must run inside a function marked `async`:
     const parts = path.split("/");
     if (parts.length > 1) {
