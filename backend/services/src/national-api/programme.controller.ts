@@ -52,6 +52,15 @@ export class ProgrammeController {
     @ApiBearerAuth()
     @UseGuards(ApiKeyJwtAuthGuard, PoliciesGuard)
     @CheckPolicies((ability: AppAbility) => ability.can(Action.Create, Programme))
+    @Post('addDocumentToFileStorage')
+    async addDocumentToFileStorage(@Body()document: ProgrammeDocumentDto) {
+      return this.programmeService.addDocumentToFileStorage(document)
+    }
+
+    @ApiBearerAuth('api_key')
+    @ApiBearerAuth()
+    @UseGuards(ApiKeyJwtAuthGuard, PoliciesGuard)
+    @CheckPolicies((ability: AppAbility) => ability.can(Action.Create, Programme))
     @Post('addDocument')
     async addDocument(@Body()document: ProgrammeDocumentDto) {
       return this.programmeService.addDocument(document)

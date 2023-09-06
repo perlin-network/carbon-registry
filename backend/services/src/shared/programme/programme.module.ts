@@ -15,6 +15,7 @@ import { UserModule } from '../user/user.module';
 import { EmailHelperModule } from '../email-helper/email-helper.module';
 import { LocationModule } from '../location/location.module';
 import { AsyncOperationsModule } from '../async-operations/async-operations.module';
+import { FileHandlerModule } from '../file-handler/filehandler.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { AsyncOperationsModule } from '../async-operations/async-operations.modu
     UserModule,
     EmailHelperModule,
     LocationModule,
-    AsyncOperationsModule
+    AsyncOperationsModule,
+    FileHandlerModule,
   ],
   providers: [Logger, ProgrammeService],
   exports: [ProgrammeService]

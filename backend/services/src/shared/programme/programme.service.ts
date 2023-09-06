@@ -59,6 +59,7 @@ import { MitigationAddDto } from "../dto/mitigation.add.dto";
 import { AsyncAction, AsyncOperationsInterface } from "../async-operations/async-operations.interface";
 import { AsyncActionType } from "../enum/async.action.type.enum";
 import { ProgrammeAcceptedDto } from "../dto/programme.accepted.dto";
+import { FileHandlerInterface } from "../file-handler/filehandler.interface";
 
 export declare function PrimaryGeneratedColumn(
   options: PrimaryGeneratedColumnType
@@ -89,7 +90,8 @@ export class ProgrammeService {
     @InjectRepository(ConstantEntity)
     private constantRepo: Repository<ConstantEntity>,
     private logger: Logger,
-    private asyncOperationsInterface: AsyncOperationsInterface
+    private asyncOperationsInterface: AsyncOperationsInterface,
+    private fileHandler: FileHandlerInterface,
   ) {}
 
   private toProgramme(programmeDto: ProgrammeDto): Programme {
@@ -1048,10 +1050,24 @@ export class ProgrammeService {
     return new DataListResponseDto(allTransferList, allTransferList.length);
   }
 
-  async addDocument(document: ProgrammeDocumentDto): Promise<DataResponseDto | undefined> {
-    this.logger.log('Add Document triggered', JSON.stringify(document));
+  async addDocumentToFileStorage(document: ProgrammeDocumentDto): Promise<DataResponseDto | undefined> {
+    this.logger.log('Triggered', 'addDocumentToFileStorage', JSON.stringify(document));
+    const { externalId, type, data } = document;
+    const uploadedUrl = await this.fileHandler.uploadFile(
+      `programme_docs/${externalId}_${new Date().getTime()}.${type}`,
+      data,
+      type,
+    );
 
-    const certifierId = (await this.companyService.findByTaxId(document.certifierTaxId))?.companyId;
+    const certifierId = document.certifierTaxId && (await this.companyService.findByTaxId(document.certifierTaxId))?.companyId;
+    const resp = await this.programmeLedger.addDocument(document.externalId, document.actionId, uploadedUrl, document.type, 0, certifierId);
+    return new DataResponseDto(HttpStatus.OK, resp);
+  }
+
+  async addDocument(document: ProgrammeDocumentDto): Promise<DataResponseDto | undefined> {
+    this.logger.log('Triggered', 'addDocument', JSON.stringify(document));
+
+    const certifierId =  document.certifierTaxId && (await this.companyService.findByTaxId(document.certifierTaxId))?.companyId;
     const resp = await this.programmeLedger.addDocument(document.externalId, document.actionId, document.data, document.type, 0, certifierId);
     return new DataResponseDto(HttpStatus.OK, resp);
   }
@@ -1288,7 +1304,7 @@ export class ProgrammeService {
       //   await this.addDocument({
       //     data: programmeDto.designDocument,
       //     externalId: programmeDto.externalId, 
-      //     type: 'pdf',
+      //     type: 'application/pdf',
       //     actionId: programme.mitigationActions?.[0]?.actionId,
       //     certifierTaxId: undefined
       //   })
