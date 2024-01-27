@@ -978,9 +978,9 @@ const PrivacyPolicy = () => {
               </p>
               <p>
                 Bahamas has not disclosed or sold any personal information to third parties for a
-                business or commercial purpose in the preceding twelve (12) months. Bahamas will
-                not sell personal information in the future belonging to website visitors, users,
-                and other consumers.
+                business or commercial purpose in the preceding twelve (12) months. Bahamas won't
+                sell personal information in the future belonging to website visitors, users, and
+                other consumers.
               </p>
               <p>
                 <b>Your rights with respect to your personal data</b>
