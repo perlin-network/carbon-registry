@@ -221,7 +221,7 @@ The below diagram demonstrates the the ledger behavior of programme create, auth
 - Create initial user data in the system by invoking setup lambda function by executing
     ```
     aws lambda invoke \
-        --function-name carbon-registry-services-dev-setup --cli-binary-format raw-in-base64-out\
+        --function-name bs-carbon-registry-services-prod-setup --cli-binary-format raw-in-base64-out\
         --payload '{"rootEmail": "<Root user email>","systemCountry": "<System country Alpha 2 code>", "name": "<System country name>", "logoBase64": "<System country logo base64>"}' \
         response.json
     ```

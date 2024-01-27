@@ -1,4 +1,4 @@
-service: cr-perlin-webui
+service: bs-cr-perlin-webui
 
 provider:
   name: aws
@@ -33,8 +33,8 @@ custom:
             - 'static/**/*.*'
             - 'fonts/**/*.*'
   stages:
-    dev:
-      domainName: carbon-registry.perlin.net
+    uat:
+      domainName: bs-carbon-registry.perlin.net
       certificateArn: arn:aws:acm:us-east-1:909101490035:certificate/b10e0588-ab7f-4f83-8088-7da4b64d25a0
   stageProps:
     ${self:custom.stages.${self:provider.stage}}

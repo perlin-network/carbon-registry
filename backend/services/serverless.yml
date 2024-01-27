@@ -1,9 +1,9 @@
-service: carbon-registry-services
+service: bs-carbon-registry-services
 
 provider:
   name: aws
   runtime: nodejs16.x
-  stage: ${opt:stage, 'dev'}
+  stage: ${opt:stage, 'prod'}
   region: us-east-1
   environment:
     PROJECT_NAME: ${self:service}
@@ -14,8 +14,8 @@ provider:
     IS_EMAIL_DISABLED: 'false'
     ASYNC_OPERATIONS_TYPE: Queue
     LOCATION_SERVICE: FILE
-    COUNTRY_NAME: 'CountryX'
-    COUNTRY_CODE: 'NG'
+    COUNTRY_NAME: 'Bahamas'
+    COUNTRY_CODE: 'BS'
   # iam:
   #   role: arn:aws:iam::909101490035:role/lambda-role
   # vpc:
@@ -48,9 +48,9 @@ plugins:
 #     depLayerArn1: arn:aws:lambda:us-west-2:111111111111:layer:layer:1
 #     depLayerArn2: arn:aws:lambda:us-west-2:111111111111:layer:layer:1
 
-functions:
-  - ${file(./iaac/v1-api.yml)}
-  - ${file(./iaac/v1-handlers.yml)}
+# functions:
+#   - ${file(./iaac/v1-api.yml)}
+#   - ${file(./iaac/v1-handlers.yml)}
 
 custom:
   customDomain: ${file(./iaac/gateway/dns.yml):customDomain}

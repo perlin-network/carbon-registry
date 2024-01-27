@@ -4,7 +4,7 @@ v1Replicator:
   handler: src/ledger-replicator/handler.handler
   events:
     - stream:
-        arn: arn:aws:kinesis:us-east-1:909101490035:stream/carbon-stream-${self:provider.stage}
+        arn: arn:aws:kinesis:us-east-1:909101490035:stream/bs-carbon-stream-${self:provider.stage}
         batchSize: 2
         startingPosition: LATEST
         maximumRetryAttempts: 10
@@ -67,7 +67,7 @@ v1AsyncOperationsHandler:
   handler: src/async-operations-handler/handler.handler
   events:
     - sqs:
-        arn: arn:aws:sqs:us-east-1:909101490035:AsyncQueue${self:provider.stage}.fifo
+        arn: arn:aws:sqs:us-east-1:909101490035:BSAsyncQueue${self:provider.stage}.fifo
         batchSize: 10
   ssmToEnvironment:
     - SMTP_USERNAME
@@ -105,7 +105,7 @@ v1SetupHandler:
     - SMTP_USERNAME
     - SMTP_PASSWORD
   environment:
-    ASYNC_QUEUE_NAME: https://sqs.us-east-1.amazonaws.com/909101490035/AsyncQueuedev.fifo
+    ASYNC_QUEUE_NAME: https://sqs.us-east-1.amazonaws.com/909101490035/BSAsyncQueueprod.fifo
   layers:
     - ${param:depLayerArn1}
     - ${param:depLayerArn2}

@@ -1,5 +1,5 @@
 customDomain:
-  domainName: cr-api.perlin.net
+  domainName: bs-cr-api.perlin.net
   stage: ${self:provider.stage}
   basePath: ${self:provider.stage}
   certificateName: 'perlin.net'

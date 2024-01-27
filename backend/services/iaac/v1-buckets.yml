@@ -3,7 +3,7 @@ Resources:
     Type: AWS::S3::Bucket
     DeletionPolicy: Delete
     Properties:
-      BucketName: cr-perlin-common-${self:provider.stage}
+      BucketName: bs-cr-perlin-common-${self:provider.stage}
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
         BlockPublicPolicy: false

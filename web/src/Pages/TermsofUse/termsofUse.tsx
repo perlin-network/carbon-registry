@@ -941,7 +941,7 @@ const TermsOfUse = () => {
               <br /> City, Region
               <br /> Country
               <br /> Phone: +1-123-456-7890
-              <br /> address@CountryX.org
+              <br /> support@bahamas.gov.bs
               <br /> These terms of use were created using Termly's{' '}
               <a target="_blank" href="https://termly.io/products/terms-and-conditions-generator/">
                 Terms and Conditions Generator.

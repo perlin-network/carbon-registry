@@ -46,7 +46,7 @@ const PrivacyPolicy = () => {
             <div className="privacytitle">SAMPLE PRIVACY NOTICE</div>
             <div className="privacy-sub">Last updated February 02, 2023</div>
             <div className="privacy-body">
-              This privacy notice for CountryX (<b>"Company"</b>, <b>"we"</b>, <b>"us"</b>, and{' '}
+              This privacy notice for Bahamas (<b>"Company"</b>, <b>"we"</b>, <b>"us"</b>, and{' '}
               <b>"our"</b>) describes how and why we might collect, store, use, and/or share ("
               <b>process</b>")your information when you use our services ("<b>Services</b>"), such
               as when you:
@@ -63,7 +63,7 @@ const PrivacyPolicy = () => {
                 <b>Questions or concerns?</b> Reading this privacy notice will help you understand
                 your privacy rights and choices. If you do not agree with our policies and
                 practices, please do not use our Services. If you still have any questions or
-                concerns, please contact us at address@CountryX.org.
+                concerns, please contact us at support@bahamas.gov.bs.
               </p>
             </div>
           </Col>
@@ -84,7 +84,7 @@ const PrivacyPolicy = () => {
               <p>
                 <b>What personal information do we process? </b>When you visit, use, or navigate our
                 Services, we may process personal information depending on how you interact with
-                CountryX and the Services, the choices you make, and the products and features you
+                Bahamas and the Services, the choices you make, and the products and features you
                 use. Click<a href="#infocollect"> here</a> to learn more.
               </p>
               <p>
@@ -134,7 +134,7 @@ const PrivacyPolicy = () => {
                 applicable data protection laws.
               </p>
               <p>
-                Want to learn more about what CountryX does with any information we collect? Click{' '}
+                Want to learn more about what Bahamas does with any information we collect? Click{' '}
                 <a href="#toc"> here</a> to review the notice in full.
               </p>
             </div>
@@ -977,8 +977,8 @@ const PrivacyPolicy = () => {
                 is not considered to be "selling" of your personal information.
               </p>
               <p>
-                CountryX has not disclosed or sold any personal information to third parties for a
-                business or commercial purpose in the preceding twelve (12) months. CountryX will
+                Bahamas has not disclosed or sold any personal information to third parties for a
+                business or commercial purpose in the preceding twelve (12) months. Bahamas will
                 not sell personal information in the future belonging to website visitors, users,
                 and other consumers.
               </p>
@@ -1110,19 +1110,19 @@ const PrivacyPolicy = () => {
             <div className="privacy-body">
               <p>
                 If you have questions or comments about this notice, you may contact our Data
-                Protection Officer (DPO) by email at address@CountryX.org, or by post to:
+                Protection Officer (DPO) by email at support@bahamas.gov.bs, or by post to:
               </p>
               <p>
-                CountryX
+                P. O. Box N 831
                 <br />
-                1 United Nations Plaza
+                New Providence
                 <br />
-                New York, New York, United States
+                Bahamas
               </p>
               <p>
                 <b>
                   If you are a resident in the European Economic Area, the "data controller" of your
-                  personal information is CountryX. United Nations Development Programme has
+                  personal information is Bahamas. United Nations Development Programme has
                   appointed DPO to be its representative in the EEA. You can contact them directly
                   regarding the processing of your information by United Nations Development
                   Programme, or by post to:

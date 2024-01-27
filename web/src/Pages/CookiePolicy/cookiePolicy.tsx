@@ -46,7 +46,7 @@ const CookiePolicy = () => {
             <div className="cookietitle">SAMPLE COOKIE POLICY</div>
             <div className="cookie-sub">Last updated February 02, 2023</div>
             <div className="cookie-body">
-              This Cookie Policy explains how CountryX (<b>"Company"</b>, "<b>we</b>","<b>us</b>",
+              This Cookie Policy explains how Bahamas (<b>"Company"</b>, "<b>we</b>","<b>us</b>",
               and "<b>our</b>") uses cookies and similar technologies to recognize you when you
               visit our websites at{' '}
               <a target="_blank" href="https://carbon-registry.perlin.net">
@@ -621,11 +621,11 @@ const CookiePolicy = () => {
             <div className="cookie-subtitle">Where can I get further information?</div>
             <div className="cookie-body-contact">
               If you have any questions about our use of cookies or other technologies, please email
-              us at address@CountryX.org or by post to:
+              us at support@bahamas.gov.bs or by post to:
               <br />
               <br />
               <br />
-              CountryX
+              Bahamas
               <br />
               Address
               <br />

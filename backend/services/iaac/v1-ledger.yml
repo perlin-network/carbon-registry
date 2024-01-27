@@ -3,13 +3,13 @@ Resources:
     Type: AWS::QLDB::Ledger
     Properties: 
       DeletionProtection: false
-      Name: carbon-registry-${self:provider.stage}
+      Name: bs-carbon-registry-${self:provider.stage}
       PermissionsMode: STANDARD
 
   KinesisStream:
     Type: AWS::Kinesis::Stream
     Properties: 
-      Name: carbon-stream-${self:provider.stage}
+      Name: bs-carbon-stream-${self:provider.stage}
       ShardCount: 1
 
   QLDBRole:
@@ -36,4 +36,4 @@ Resources:
         StreamArn: !GetAtt KinesisStream.Arn
       LedgerName: !Ref LedgerInstance
       RoleArn: !GetAtt QLDBRole.Arn
-      StreamName: qldb-${self:provider.stage}
+      StreamName: bs-qldb-${self:provider.stage}

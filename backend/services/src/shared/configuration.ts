@@ -1,19 +1,19 @@
 export default () => ({
-  stage: process.env.STAGE || "local",
+  stage: process.env.STAGE || "prod",
   projectName: process.env.PROJECT_NAME,
-  systemCountry: process.env.COUNTRY_CODE || "NG",
-  systemCountryName: process.env.COUNTRY_NAME || "CountryX",
+  systemCountry: process.env.COUNTRY_CODE || "BS",
+  systemCountryName: process.env.COUNTRY_NAME || "Bahamas",
   defaultCreditUnit: process.env.defaultCreditUnit || "ITMO",
   dateTimeFormat: "DD LLLL yyyy @ HH:mm",
   dateFormat: "DD LLLL yyyy",
   database: {
     type: "postgres",
-    host: process.env.DB_HOST || "carbondbdev.c0rjpojmhdkp.us-east-1.rds.amazonaws.com",
+    host: process.env.DB_HOST || "bs-carbondbprod.c0rjpojmhdkp.us-east-1.rds.amazonaws.com",
     port: parseInt(process.env.DB_PORT) || 5432,
     username: process.env.DB_USER || "root",
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME || "carbondbdev",
-    synchronize: process.env.NODE_ENV == "prod" ? true : true,
+    database: process.env.DB_NAME || "bs-carbondbprod",
+    synchronize: true,
     autoLoadEntities: true,
     logging: ["error"],
   },
@@ -24,9 +24,9 @@ export default () => ({
   },
   ledger: {
     host: process.env.LEDGER_TYPE === 'PGSQL' 
-          ? process.env.DB_LEDGER_HOST  || 'carbondbdevevents.c0rjpojmhdkp.us-east-1.rds.amazonaws.com' 
+          ? process.env.DB_LEDGER_HOST  || 'bs-carbondbprodevents.c0rjpojmhdkp.us-east-1.rds.amazonaws.com' 
           : undefined,
-    name: process.env.LEDGER_TYPE === 'PGSQL' ?  `${process.env.DB_NAME}Events` : "carbon-registry-" + (process.env.NODE_ENV || "dev"),
+    name: process.env.LEDGER_TYPE === 'PGSQL' ?  `${process.env.DB_NAME}Events` : "bs-carbon-registry-" + (process.env.NODE_ENV || "prod"),
     table: "programmes",
     overallTable: "overall",
     companyTable: "company",
@@ -47,9 +47,9 @@ export default () => ({
       process.env.DISABLE_LOW_PRIORITY_EMAIL === "true" ? true : false,
   },
   s3CommonBucket: {
-    name: "cr-perlin-common-" + (process.env.NODE_ENV || "dev"),
+    name: "bs-cr-perlin-common-" + (process.env.NODE_ENV || "prod"),
   },
-  host: process.env.HOST || "https://carbon-registry.perlin.net",
+  host: process.env.HOST || "https://bs-carbon-registry.perlin.net",
   liveChat: "https://undp2020cdo.typeform.com/to/emSWOmDo",
   mapbox: {
     key: process.env.MAPBOX_PK,
@@ -59,7 +59,7 @@ export default () => ({
   },
   asyncQueueName:
     process.env.ASYNC_QUEUE_NAME ||
-    "https://sqs.us-east-1.amazonaws.com/909101490035/AsyncQueuedev.fifo",
+    "https://sqs.us-east-1.amazonaws.com/909101490035/BSAsyncQueueprod.fifo",
   ITMOSystem: {
     endpoint:
       process.env.ITMO_ENDPOINT ||

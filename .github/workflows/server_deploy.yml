@@ -4,9 +4,8 @@ on:
     inputs:
       stage_name:
         type: choice
-        description: 'Stage name (default: dev)'
+        description: 'Stage name (default: prod)'
         options:
-        - dev
         - prod
 
 jobs:
