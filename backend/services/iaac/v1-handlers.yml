@@ -1,33 +1,33 @@
-# v1Replicator:
-#   timeout: 60
-#   name: ${self:provider.stage}-v1-${self:service}-rerlicator
-#   handler: src/ledger-replicator/handler.handler
-#   events:
-#     - stream:
-#         arn: arn:aws:kinesis:us-east-1:909101490035:stream/bs-carbon-stream-${self:provider.stage}
-#         batchSize: 2
-#         startingPosition: LATEST
-#         maximumRetryAttempts: 10
-#         enabled: true
-#   ssmToEnvironment:
-#     - DB_PASSWORD
-#     - MAPBOX_PK
-#   layers:
-#     - ${param:depLayerArn1}
-#     - ${param:depLayerArn2}
-#   iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-replicator-role
-#   iamRoleStatementsInherit: true
-#   iamRoleStatements:
-#     - Effect: Allow
-#       Action:
-#         - sqs:*
-#         - sns:*
-#         - kinesis:*
-#         - ses:*
-#         - qldb:*
-#         - rds:*
-#         - s3:*
-#       Resource: "*"
+v1Replicator:
+  timeout: 60
+  name: ${self:provider.stage}-v1-${self:service}-rerlicator
+  handler: src/ledger-replicator/handler.handler
+  events:
+    - stream:
+        arn: arn:aws:kinesis:us-east-1:909101490035:stream/bs-carbon-stream-${self:provider.stage}
+        batchSize: 2
+        startingPosition: LATEST
+        maximumRetryAttempts: 10
+        enabled: true
+  ssmToEnvironment:
+    - DB_PASSWORD
+    - MAPBOX_PK
+  layers:
+    - ${param:depLayerArn1}
+    - ${param:depLayerArn2}
+  iamRoleStatementsName: ${self:provider.stage}-v1-${self:service}-replicator-role
+  iamRoleStatementsInherit: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:*
+        - sns:*
+        - kinesis:*
+        - ses:*
+        - qldb:*
+        - rds:*
+        - s3:*
+      Resource: "*"
 
 v1DataImporter:
   timeout: 60
