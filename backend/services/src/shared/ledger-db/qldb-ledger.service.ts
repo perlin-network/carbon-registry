@@ -60,8 +60,9 @@ export class QLDBLedgerService implements LedgerDBInterface {
 
         // try {
         //this.driver = this.createQldbDriver(this.ledgerName);
-        result = await this.driver.executeLambda(async (txn: TransactionExecutor) =>
-            this.executeTxn(txn, sql, ...parameters));
+        result = await this.driver.executeLambda(async (txn: TransactionExecutor) => {
+            return await this.executeTxn(txn, sql, ...parameters);
+        });
         this.logger.debug('[execute] Response', JSON.stringify(result));
         // } catch (error) {
         //     this.logger.error('[execute]', error);
