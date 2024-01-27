@@ -12,7 +12,7 @@ export default () => ({
     port: parseInt(process.env.DB_PORT) || 5432,
     username: process.env.DB_USER || "root",
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME || "bs-carbondbprod",
+    database: process.env.DB_NAME || "bscarbondbprod",
     synchronize: true,
     autoLoadEntities: true,
     logging: ["error"],
