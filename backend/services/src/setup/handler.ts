@@ -23,6 +23,7 @@ import { ProgrammeService } from "../shared/programme/programme.service";
 import { ConfigService } from "@nestjs/config";
 const fs = require("fs");
 
+// Please Run Manually a few times with different event.type.
 export const handler: Handler = async (event) => {
   console.log(`[setup] Handler Started with %j`, event);
 
@@ -159,99 +160,109 @@ export const handler: Handler = async (event) => {
     return;
   }
 
-  const rootUser = await userService.findOne(event["rootEmail"]);
-  if (rootUser != undefined) {
-    console.warn("[setup] Root user %s already created and setup is completed", event["rootEmail"]);
-    return;
+  if (event.type === "CREATE_LEDGER" && event.body) {
+    let ledgerDBInterface: LedgerDBInterface;
+
+    try {
+      const app = await NestFactory.createApplicationContext(LedgerDbModule, {
+        logger: getLogger(LedgerDbModule),
+      });
+
+      ledgerDBInterface = app.get(LedgerDBInterface);
+      console.log(`[setup] Ledger module initialized`);
+    } catch (e) {
+      console.error("[setup] Ledger module failed to initialize, stopping.", e);
+      return;
+    }
+
+    try {
+      await ledgerDBInterface.createTable("company");
+      await ledgerDBInterface.createIndex("txId", "company");
+
+      await ledgerDBInterface.createTable("overall");
+      await ledgerDBInterface.createIndex("txId", "overall");
+      const creditOverall = new CreditOverall();
+      creditOverall.credit = 0;
+      creditOverall.txId = event["systemCountry"];
+      creditOverall.txRef = "genesis block";
+      creditOverall.txType = TxType.ISSUE;
+      await ledgerDBInterface.insertRecord(creditOverall, "overall");
+      await ledgerDBInterface.createTable();
+      await ledgerDBInterface.createIndex("programmeId");
+      console.info("[setup] QLDB Table company created",);
+    } catch (e) {
+      console.error("[setup] QLDB table does not create", e);
+      return;
+    }
   }
 
-  let ledgerDBInterface: LedgerDBInterface;
+  if (event.type === "CREATE_USER" && event.body) {
+    const rootUser = await userService.findOne(event["rootEmail"]);
+    if (rootUser != undefined) {
+      console.warn("[setup] Root user %s already created and setup is completed", event["rootEmail"]);
+      return;
+    }
 
-  try {
-    const app = await NestFactory.createApplicationContext(LedgerDbModule, {
-      logger: getLogger(LedgerDbModule),
-    });
+    try {
+      const company = new OrganisationDto();
+      company.country = event["systemCountry"];
+      company.name = event["name"];
+      company.logo = event["logoBase64"];
+      company.companyRole = CompanyRole.GOVERNMENT;
 
-    ledgerDBInterface = app.get(LedgerDBInterface);
-    console.log(`[setup] Ledger module initialized`);
-  } catch (e) {
-    console.error("[setup] Ledger module failed to initialize, stopping.", e);
-    return;
+      const user = new UserDto();
+      user.email = event["rootEmail"];
+      user.name = "Root";
+      user.role = Role.Root;
+      user.phoneNo = "-";
+      user.company = company;
+
+      console.log("[setup] Adding company", company);
+      console.log("[setup] Adding user", user);
+
+      await userService.create(user, -1, CompanyRole.GOVERNMENT);
+    } catch (e) {
+      console.error(`[setup] User ${event["rootEmail"]} failed to create`, e);
+      return;
+    }
   }
 
-  try {
-    await ledgerDBInterface.createTable("company");
-    await ledgerDBInterface.createIndex("txId", "company");
+  if (event.type === "CREATE_COUNTRIES" && event.body) {
+    try {
+      console.log("[setup] Adding countryData");
+      const countryData = fs.readFileSync("countries.json", "utf8");
+      const jsonCountryData = JSON.parse(countryData);
+      const utils = await NestFactory.createApplicationContext(UtilModule);
+      const countryService = utils.get(CountryService);
 
-    await ledgerDBInterface.createTable("overall");
-    await ledgerDBInterface.createIndex("txId", "overall");
-    const creditOverall = new CreditOverall();
-    creditOverall.credit = 0;
-    creditOverall.txId = event["systemCountry"];
-    creditOverall.txRef = "genesis block";
-    creditOverall.txType = TxType.ISSUE;
-    await ledgerDBInterface.insertRecord(creditOverall, "overall");
-    await ledgerDBInterface.createTable();
-    await ledgerDBInterface.createIndex("programmeId");
-    console.info("[setup] QLDB Table company created",);
-  } catch (e) {
-    console.error("[setup] QLDB table does not create", e);
+      jsonCountryData.forEach(async (countryItem) => {
+        if (countryItem["UN Member States"] === "x") {
+          const country = new Country();
+          country.alpha2 = countryItem["ISO-alpha2 Code"];
+          country.alpha3 = countryItem["ISO-alpha3 Code"];
+          country.name = countryItem["English short"];
+          await countryService.insertCountry(country);
+        }
+      });
+    } catch (e) {
+      console.error("[setup] Failed to create country data, stopping", e);
+      return;
+    }
   }
 
-  try {
-    const company = new OrganisationDto();
-    company.country = event["systemCountry"];
-    company.name = event["name"];
-    company.logo = event["logoBase64"];
-    company.companyRole = CompanyRole.GOVERNMENT;
-
-    const user = new UserDto();
-    user.email = event["rootEmail"];
-    user.name = "Root";
-    user.role = Role.Root;
-    user.phoneNo = "-";
-    user.company = company;
-
-    console.log("[setup] Adding company", company);
-    console.log("[setup] Adding user", user);
-
-    await userService.create(user, -1, CompanyRole.GOVERNMENT);
-  } catch (e) {
-    console.error(`[setup] User ${event["rootEmail"]} failed to create`, e);
-  }
-
-  try {
-    console.log("[setup] Adding countryData");
-    const countryData = fs.readFileSync("countries.json", "utf8");
-    const jsonCountryData = JSON.parse(countryData);
-    const utils = await NestFactory.createApplicationContext(UtilModule);
-    const countryService = utils.get(CountryService);
-
-    jsonCountryData.forEach(async (countryItem) => {
-      if (countryItem["UN Member States"] === "x") {
-        const country = new Country();
-        country.alpha2 = countryItem["ISO-alpha2 Code"];
-        country.alpha3 = countryItem["ISO-alpha3 Code"];
-        country.name = countryItem["English short"];
-        await countryService.insertCountry(country);
-      }
-    });
-  } catch (e) {
-    console.error("[setup] Failed to create country data, stopping", e);
-    return;
-  }
-
-  try {
-    const locationApp = await NestFactory.createApplicationContext(
-      LocationModule,
-      {
-        logger: getLogger(LocationModule),
-      }
-    );
-    const locationInterface = locationApp.get(LocationInterface);
-    await locationInterface.init();
-    console.log(`[setup] Location module initialized`);
-  } catch (e) {
-    console.error("[setup] Location module failed to initialize, stopping.", e);
+  if (event.type === "CREATE_REGIONS" && event.body) {
+    try {
+      const locationApp = await NestFactory.createApplicationContext(
+        LocationModule,
+        {
+          logger: getLogger(LocationModule),
+        }
+      );
+      const locationInterface = locationApp.get(LocationInterface);
+      await locationInterface.init();
+      console.log(`[setup] Location module initialized`);
+    } catch (e) {
+      console.error("[setup] Location module failed to initialize, stopping.", e);
+    }
   }
 };

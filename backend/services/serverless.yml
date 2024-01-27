@@ -8,10 +8,15 @@ provider:
   environment:
     PROJECT_NAME: ${self:service}
     NODE_ENV: ${self:provider.stage}
+    FILE_SERVICE: 'S3'
+    LOG_LEVEL: 'debug'
+    DOMAIN_MAP: 'false'
+    SOURCE_EMAIL: 'admin@bioeconomy.co'
     NODE_PATH: './:/opt/node_modules'
     STAGE: ${self:provider.stage}
     LEDGER_TYPE: QLDB #QLDB, PGSQL
     IS_EMAIL_DISABLED: 'false'
+    DISABLE_LOW_PRIORITY_EMAIL: 'true'
     ASYNC_OPERATIONS_TYPE: Queue
     LOCATION_SERVICE: FILE
     COUNTRY_NAME: 'Bahamas'
