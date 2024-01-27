@@ -162,6 +162,7 @@ export const handler: Handler = async (event) => {
   const rootUser = await userService.findOne(event["rootEmail"]);
   if (rootUser != undefined) {
     console.warn("[setup] Root user %s already created and setup is completed", event["rootEmail"]);
+    return;
   }
 
   let ledgerDBInterface: LedgerDBInterface;
@@ -240,19 +241,17 @@ export const handler: Handler = async (event) => {
     return;
   }
 
-  if (event.type === "LOAD_REGIONS") {
-    try {
-      const locationApp = await NestFactory.createApplicationContext(
-        LocationModule,
-        {
-          logger: getLogger(LocationModule),
-        }
-      );
-      const locationInterface = locationApp.get(LocationInterface);
-      await locationInterface.init();
-      console.log(`[setup] Location module initialized`);
-    } catch (e) {
-      console.error("[setup] Location module failed to initialize, stopping.", e);
-    }
+  try {
+    const locationApp = await NestFactory.createApplicationContext(
+      LocationModule,
+      {
+        logger: getLogger(LocationModule),
+      }
+    );
+    const locationInterface = locationApp.get(LocationInterface);
+    await locationInterface.init();
+    console.log(`[setup] Location module initialized`);
+  } catch (e) {
+    console.error("[setup] Location module failed to initialize, stopping.", e);
   }
 };
