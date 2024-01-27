@@ -16,7 +16,7 @@ provider:
     STAGE: ${self:provider.stage}
     LEDGER_TYPE: QLDB #QLDB, PGSQL
     IS_EMAIL_DISABLED: 'false'
-    DISABLE_LOW_PRIORITY_EMAIL: 'true'
+    DISABLE_LOW_PRIORITY_EMAIL: 'false'
     ASYNC_OPERATIONS_TYPE: Queue
     LOCATION_SERVICE: FILE
     COUNTRY_NAME: 'Bahamas'
