@@ -84,5 +84,5 @@ resources:
   - ${file(./iaac/gateway/defaults.yml)}
   - ${file(./iaac/v1-databases.yml)}
   - ${file(./iaac/v1-queues.yml)}
-  - ${file(./iaac/v1-ledger.yml)}
+  # - ${file(./iaac/v1-ledger.yml)}
   - ${file(./iaac/v1-buckets.yml)}

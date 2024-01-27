@@ -160,7 +160,7 @@ export const handler: Handler = async (event) => {
     return;
   }
 
-  if (event.type === "CREATE_LEDGER" && event.body) {
+  if (event.type === "CREATE_LEDGER") {
     let ledgerDBInterface: LedgerDBInterface;
 
     try {
@@ -196,7 +196,7 @@ export const handler: Handler = async (event) => {
     }
   }
 
-  if (event.type === "CREATE_USER" && event.body) {
+  if (event.type === "CREATE_USER") {
     const rootUser = await userService.findOne(event["rootEmail"]);
     if (rootUser != undefined) {
       console.warn("[setup] Root user %s already created and setup is completed", event["rootEmail"]);
@@ -227,7 +227,7 @@ export const handler: Handler = async (event) => {
     }
   }
 
-  if (event.type === "CREATE_COUNTRIES" && event.body) {
+  if (event.type === "CREATE_COUNTRIES") {
     try {
       console.log("[setup] Adding countryData");
       const countryData = fs.readFileSync("countries.json", "utf8");
@@ -250,7 +250,7 @@ export const handler: Handler = async (event) => {
     }
   }
 
-  if (event.type === "CREATE_REGIONS" && event.body) {
+  if (event.type === "CREATE_REGIONS") {
     try {
       const locationApp = await NestFactory.createApplicationContext(
         LocationModule,
