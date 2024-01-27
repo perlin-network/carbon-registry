@@ -9,7 +9,7 @@ provider:
     PROJECT_NAME: ${self:service}
     NODE_ENV: ${self:provider.stage}
     FILE_SERVICE: 'S3'
-    LOG_LEVEL: 'debug'
+    LOG_LEVEL: 'info'
     DOMAIN_MAP: 'false'
     SOURCE_EMAIL: 'admin@bioeconomy.co'
     NODE_PATH: './:/opt/node_modules'
