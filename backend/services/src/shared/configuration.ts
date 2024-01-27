@@ -8,7 +8,7 @@ export default () => ({
   dateFormat: "DD LLLL yyyy",
   database: {
     type: "postgres",
-    host: process.env.DB_HOST || "bs-carbondbprod.c0rjpojmhdkp.us-east-1.rds.amazonaws.com",
+    host: process.env.DB_HOST || "bscarbondbprod.c0rjpojmhdkp.us-east-1.rds.amazonaws.com",
     port: parseInt(process.env.DB_PORT) || 5432,
     username: process.env.DB_USER || "root",
     password: process.env.DB_PASSWORD,
@@ -24,7 +24,7 @@ export default () => ({
   },
   ledger: {
     host: process.env.LEDGER_TYPE === 'PGSQL' 
-          ? process.env.DB_LEDGER_HOST  || 'bs-carbondbprodevents.c0rjpojmhdkp.us-east-1.rds.amazonaws.com' 
+          ? process.env.DB_LEDGER_HOST  || 'bscarbondbprod.c0rjpojmhdkp.us-east-1.rds.amazonaws.com' 
           : undefined,
     name: process.env.LEDGER_TYPE === 'PGSQL' ?  `${process.env.DB_NAME}Events` : "bs-carbon-registry-" + (process.env.NODE_ENV || "prod"),
     table: "programmes",
