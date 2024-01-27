@@ -1,5 +1,5 @@
 import { RegistryClientService } from "../shared/registry-client/registry-client.service";
-import { PerlLedgerService } from "../shared/perl-ledger/perl-ledger.service";
+// import { PerlLedgerService } from "../shared/perl-ledger/perl-ledger.service";
 import { AsyncActionType } from "../shared/enum/async.action.type.enum";
 import { EmailService } from "../shared/email/email.service";
 import { Injectable, Logger } from "@nestjs/common";
@@ -9,7 +9,7 @@ export class AsyncOperationsHandlerService {
   constructor(
     private emailService: EmailService,
     private registryClient: RegistryClientService,
-    private perlLedgerService: PerlLedgerService,
+    // private perlLedgerService: PerlLedgerService,
     private logger: Logger
   ) {
     logger.log("Constructor initialized", 'AsyncOperationsHandlerService');
@@ -30,8 +30,8 @@ export class AsyncOperationsHandlerService {
           return await this.registryClient.issueCredit(dataObject);
         case AsyncActionType.RejectProgramme.toString():
           return await this.registryClient.rejectProgramme(dataObject);
-        case AsyncActionType.PublishToPerlLedger.toString():
-          return await this.perlLedgerService.createLedgerRecord(dataObject);
+        // case AsyncActionType.PublishToPerlLedger.toString():
+        //   return await this.perlLedgerService.createLedgerRecord(dataObject);
       }
     }
   }
