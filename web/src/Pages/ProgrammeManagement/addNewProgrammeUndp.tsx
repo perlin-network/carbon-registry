@@ -362,30 +362,31 @@ const ProgrammeCreationComponent = () => {
         });
 
         // Initital Doc upload support
-        // message.open({
-        //   type: 'info',
-        //   content: t('addProgramme:programmeDocumentUploadStart'),
-        //   duration: 4,
-        //   style: { textAlign: 'right', marginRight: 15, marginTop: 20 },
-        // });
+        message.open({
+          type: 'info',
+          content: t('addProgramme:programmeDocumentUploadStart'),
+          duration: 4,
+          style: { textAlign: 'right', marginRight: 15, marginTop: 20 },
+        });
 
-        // const docUploadResponse: any = await post('national/programme/addDocument', {
-        //   data: payload.designDocument,
-        //   externalId: payload.externalId,
-        //   type: 'application/pdf',
-        //   actionId: undefined,
-        //   certifierTaxId: undefined,
-        // });
+        const docUploadResponse: any = await post('national/programme/addDocument', {
+          data: payload.designDocument,
+          externalId: payload.externalId,
+          type: 'application/pdf',
+          actionId: undefined,
+          certifierTaxId: undefined,
+        });
 
-        // if (docUploadResponse?.statusText === 'SUCCESS') {
-        //   message.open({
-        //     type: 'success',
-        //     content: t('addProgramme:programmeDocumentUploadSuccess'),
-        //     duration: 4,
-        //     style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
-        //   });
-        // }
+        if (docUploadResponse?.statusText === 'SUCCESS') {
+          message.open({
+            type: 'success',
+            content: t('addProgramme:programmeDocumentUploadSuccess'),
+            duration: 4,
+            style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+          });
+        }
       }
+
       onNavigateToProgrammeView();
     } catch (error: any) {
       console.log('Error in programme creation - ', error);
