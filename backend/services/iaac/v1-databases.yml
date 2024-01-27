@@ -2,8 +2,8 @@ Resources:
   DBInstance:
     Type: AWS::RDS::DBInstance
     Properties:
-      DBInstanceIdentifier: bs-carbondb${self:provider.stage}
-      DBName: bs-carbondb${self:provider.stage}
+      DBInstanceIdentifier: bscarbondb${self:provider.stage}
+      DBName: bscarbondb${self:provider.stage}
       AllocatedStorage: 20
       DBInstanceClass: db.t3.micro
       StorageType: gp2
