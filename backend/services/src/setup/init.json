@@ -1,4 +1,5 @@
 {
+    "type": "CREATE_USER",
     "rootEmail": "mike@perlin.net",
     "systemCountry": "BS",
     "name": "Bahamas Goverment",

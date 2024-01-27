@@ -19,7 +19,7 @@
   "next": "Next",
   "addProgramme1": "Initial info",
   "addProgramme2": "Pricing info",
-  "proponentPercentValidation": "Proponent percentage error",
+  "proponentPercentValidation": "Proponent percentage total should be 100%",
   "duplicateOrg": "Duplicate organisation",
   "programmeCreationSuccess": "Programme successfully created",
   "programmeDocumentUploadStart": "Started Document Upload",
