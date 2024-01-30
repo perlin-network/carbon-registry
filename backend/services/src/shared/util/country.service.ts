@@ -57,7 +57,7 @@ export class CountryService {
             );
     }
 
-    async getAvailableCountries() {
+    async getAvailableCountries(): Promise<Country[]> {
         const resp = await this.countryRepo
             .find({
                 select:{
@@ -66,7 +66,8 @@ export class CountryService {
                 }
             })
 
-        return resp;
+        const sortedCountries = resp.sort((a, b) => a.name.localeCompare(b.name));
+        return sortedCountries;
     }
 
     async queryRegions(query: QueryDto, abilityCondition: string): Promise<any> {
