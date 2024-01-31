@@ -1,12 +1,13 @@
 export enum Sector {
     Energy = 'Energy',
-    Health = 'Health',
-    Education = 'Education',
     Transport = 'Transport',
-    Manufacturing = 'Manufacturing',
-    Hospitality = 'Hospitality',
-    Forestry = 'Forestry',
-    Waste = 'Waste',
+    Buildings = 'Buildings',
+    Extractives = 'Extractives',
+    Industry = 'Industry',
+    Hospitality = 'Tourism & Hospitality',
     Agriculture = 'Agriculture',
+    Forestry = 'Forestry',
+    Aquaculture = 'Fisheries & Aquaculture',
+    Waste = 'Waste Management',
     Other = 'Other'
 }

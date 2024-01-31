@@ -184,12 +184,13 @@ export class AnalyticsAPIService {
           }
           let dataSector = {
             energy: [],
-            health: [],
-            education: [],
+            buildings: [],
+            extractives: [],
             transport: [],
-            manufacturing: [],
+            industry: [],
             hospitality: [],
             forestry: [],
+            aquaculture: [],
             waste: [],
             agriculture: [],
             other: [],
@@ -198,14 +199,15 @@ export class AnalyticsAPIService {
           for (let index = 1; index <= durationSectorCounts; index++) {
             let eTime = sTimeSector + duraionSectorT;
             let energyC = 0;
-            let healthC = 0;
-            let educationC = 0;
+            let buildingsC = 0;
+            let extractivesC = 0;
             let transportC = 0;
-            let manufacturingC = 0;
+            let industryC = 0;
             let hospitalityC = 0;
             let forestryC = 0;
             let wasteC = 0;
             let agricultureC = 0;
+            let aquacultureC = 0;
             let otherC = 0;
             let programmesC = 0;
             // console.log("week count ---- ", index, { sTimeSector, eTime });
@@ -226,19 +228,21 @@ export class AnalyticsAPIService {
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
                   "Energy" && energyC++;
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
-                  "Health" && healthC++;
+                  "Buildings" && buildingsC++;
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
-                  "Education" && educationC++;
+                  "Extractives" && extractivesC++;
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
                   "Transport" && transportC++;
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
-                  "Manufacturing" && manufacturingC++;
+                  "Industry" && industryC++;
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
-                  "Hospitality" && hospitalityC++;
+                  "Tourism & Hospitality" && hospitalityC++;
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
                   "Forestry" && forestryC++;
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
-                  "Waste" && wasteC++;
+                  "Fisheries & Aquaculture" && aquacultureC++;
+                totalProgrammesResponseSector[indexProgramme]?.sector ===
+                  "Waste Management" && wasteC++;
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
                   "Agriculture" && agricultureC++;
                 totalProgrammesResponseSector[indexProgramme]?.sector ===
@@ -246,14 +250,15 @@ export class AnalyticsAPIService {
               }
               if (indexProgramme === totalProgrammesResponseSector.length - 1) {
                 dataSector?.energy.push({ [sTimeSector]: energyC });
-                dataSector?.health.push({ [sTimeSector]: healthC });
-                dataSector?.education.push({ [sTimeSector]: educationC });
+                dataSector?.buildings.push({ [sTimeSector]: buildingsC });
+                dataSector?.extractives.push({ [sTimeSector]: extractivesC });
                 dataSector?.transport.push({ [sTimeSector]: transportC });
-                dataSector?.manufacturing.push({
-                  [sTimeSector]: manufacturingC,
+                dataSector?.industry.push({
+                  [sTimeSector]: industryC,
                 });
                 dataSector?.hospitality.push({ [sTimeSector]: hospitalityC });
                 dataSector?.forestry.push({ [sTimeSector]: forestryC });
+                dataSector?.aquaculture.push({ [sTimeSector]: aquacultureC });
                 dataSector?.waste.push({ [sTimeSector]: wasteC });
                 dataSector?.agriculture.push({ [sTimeSector]: agricultureC });
                 dataSector?.other.push({ [sTimeSector]: otherC });
