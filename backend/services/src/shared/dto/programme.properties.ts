@@ -30,7 +30,7 @@ export class ProgrammeProperties {
   creditingPeriodInYears?: number;
 
   @ApiProperty()
-  @IsPositive()
+  // @IsPositive()
   @IsNumber()
   @IsNotEmpty()
   estimatedProgrammeCostUSD?: number;
@@ -52,7 +52,7 @@ export class ProgrammeProperties {
   grantEquivalentAmount?: number;
 
   @ApiPropertyOptional()
-  @IsPositive()
+  // @IsPositive()
   @IsNumber()
   @IsOptional()
   carbonPriceUSDPerTon?: number;
