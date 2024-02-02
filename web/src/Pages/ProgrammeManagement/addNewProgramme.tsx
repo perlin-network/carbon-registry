@@ -9,14 +9,15 @@ import ErrorDisplay from './errorDisplay';
 
 const sectorOptions = [
   { label: 'Energy', value: 'Energy' },
-  { label: 'Health', value: 'Health' },
-  { label: 'Education', value: 'Education' },
   { label: 'Transport', value: 'Transport' },
-  { label: 'Manufacturing', value: 'Manufacturing' },
-  { label: 'Hospitality', value: 'Hospitality' },
-  { label: 'Forestry', value: 'Forestry' },
-  { label: 'Waste', value: 'Waste' },
+  { label: 'Buildings', value: 'Buildings' },
+  { label: 'Extractives', value: 'Extractives' },
+  { label: 'Industry', value: 'Industry' },
+  { label: 'Hospitality', value: 'Tourism & Hospitality' },
   { label: 'Agriculture', value: 'Agriculture' },
+  { label: 'Forestry', value: 'Forestry' },
+  { label: 'Aquaculture', value: 'Fisheries & Aquaculture' },
+  { label: 'Waste', value: 'Waste Management' },
   { label: 'Other', value: 'Other' },
 ];
 const proponentTaxVatIdOptions = [{ label: 'TAXID003', value: 'TAXID003' }];
@@ -280,7 +281,7 @@ const AddNewProgramme = () => {
               <Form.Item
                 name="estimatedProgrammeCostUSD"
                 label="Estimated Programme Cost, USD"
-                rules={[{ required: true }]}
+                rules={[{ required: false }]}
               >
                 <InputNumber size="large" />
               </Form.Item>

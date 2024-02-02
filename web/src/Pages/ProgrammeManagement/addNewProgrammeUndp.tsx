@@ -24,6 +24,7 @@ import {
   CompanyRole,
   Sector,
   SectoralScope,
+  SectoralScopeDisplayNames,
   addCommSepRound,
 } from '../../Definitions/InterfacesAndType/programme.definitions';
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
@@ -44,7 +45,7 @@ const sectoralScopes: any = {
     'Energy Demand',
   ],
   Transport: ['Transport'],
-  Manufacturing: ['Manufacturing Industries', 'Chemical Industries', 'Metal Production'],
+  Industry: ['Manufacturing Industries', 'Chemical Industries', 'Metal Production'],
   Forestry: ['Afforestation and Reforestation'],
   Waste: ['Waste Handling and Disposal', 'Fugitive Emissions From Fuels (Solid, Oil and Gas)'],
   Agriculture: ['Agriculture'],
@@ -101,11 +102,11 @@ const ProgrammeCreationComponent = () => {
   ];
 
   const selectedSectoralScopes =
-    selectedSector !== String(Sector.Health) &&
-    selectedSector !== String(Sector.Education) &&
+    selectedSector !== String(Sector.Buildings) &&
+    selectedSector !== String(Sector.Extractives) &&
     selectedSector !== String(Sector.Hospitality)
       ? sectoralScopes[selectedSector]
-      : Object.entries(SectoralScope).map(([key, value]) => key);
+      : Object.entries(SectoralScopeDisplayNames).map(([key, value]) => key);
 
   const getBase64 = (file: RcFile): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -225,7 +226,7 @@ const ProgrammeCreationComponent = () => {
               }
             });
           });
-          setAvailableSectar([...sectors, 'Health', 'Education', 'Hospitality']);
+          setAvailableSectar([...sectors, 'Buildings', 'Extractives', 'Tourism & Hospitality']);
         }
       }
       setLoading(false);
@@ -428,12 +429,12 @@ const ProgrammeCreationComponent = () => {
 
   const addFinancingSoughtData = (values: any) => {
     const programmeDetails: any = stepOneData;
-    programmeDetails.creditEst = Number(values?.creditEst);
+    programmeDetails.creditEst = Number(values?.creditEst ?? '0');
     programmeDetails.programmeProperties.estimatedProgrammeCostUSD = Number(
-      values?.estimatedProgrammeCostUSD
+      values?.estimatedProgrammeCostUSD ?? '0'
     );
     programmeDetails.programmeProperties.carbonPriceUSDPerTon = Number(
-      values?.minViableCarbonPrice
+      values?.minViableCarbonPrice ?? '0'
     );
     setProgrammeDetailsObj(programmeDetails);
     return programmeDetails;
@@ -535,8 +536,8 @@ const ProgrammeCreationComponent = () => {
     if (selectedSector !== '' && userInfoState?.companyRole === CompanyRole.MINISTRY) {
       formOne.setFieldValue('sectoralScope', '');
       if (
-        selectedSector === String(Sector.Health) ||
-        selectedSector === String(Sector.Education) ||
+        selectedSector === String(Sector.Buildings) ||
+        selectedSector === String(Sector.Extractives) ||
         selectedSector === String(Sector.Hospitality)
       ) {
         setSelectableSectoralScope(availableSecoralScope);
@@ -977,11 +978,11 @@ const ProgrammeCreationComponent = () => {
                                       ))
                                     : selectedSectoralScopes?.map((val: any) => {
                                         if (val in SectoralScope) {
-                                          const key = val as keyof typeof SectoralScope;
+                                          const key = val as keyof typeof SectoralScopeDisplayNames;
                                           return (
                                             <Select.Option
-                                              key={SectoralScope[key]}
-                                              value={SectoralScope[key]}
+                                              key={SectoralScopeDisplayNames[key]}
+                                              value={SectoralScopeDisplayNames[key]}
                                             >
                                               {val}
                                             </Select.Option>
@@ -1189,7 +1190,7 @@ const ProgrammeCreationComponent = () => {
                                 name="estimatedProgrammeCostUSD"
                                 rules={[
                                   {
-                                    required: true,
+                                    required: false,
                                     message: '',
                                   },
                                   {
@@ -1200,12 +1201,8 @@ const ProgrammeCreationComponent = () => {
                                         value === null ||
                                         value === undefined
                                       ) {
-                                        throw new Error(
-                                          `${t('addProgramme:estimatedProgrammeCostUSD')} ${t(
-                                            'isRequired'
-                                          )}`
-                                        );
-                                      } else if (!isNaN(value) && Number(value) > 0) {
+                                        return Promise.resolve();
+                                      } else if (!isNaN(value) && Number(value) >= 0) {
                                         return Promise.resolve();
                                       } else {
                                         throw new Error(
@@ -1242,7 +1239,7 @@ const ProgrammeCreationComponent = () => {
                                 name="creditEst"
                                 rules={[
                                   {
-                                    required: true,
+                                    required: false,
                                     message: '',
                                   },
                                   {
@@ -1253,10 +1250,8 @@ const ProgrammeCreationComponent = () => {
                                         value === null ||
                                         value === undefined
                                       ) {
-                                        throw new Error(
-                                          `${t('addProgramme:creditEst')} ${t('isRequired')}`
-                                        );
-                                      } else if (!isNaN(value) && Number(value) > 0) {
+                                        return Promise.resolve();
+                                      } else if (!isNaN(value) && Number(value) >= 0) {
                                         return Promise.resolve();
                                       } else {
                                         throw new Error(
