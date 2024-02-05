@@ -1,3 +1,5 @@
+import { RcFile } from 'antd/lib/upload';
+
 export const isBase64 = (str: string) => {
   if (str === '' || str.trim() === '') {
     return false;
@@ -28,3 +30,11 @@ export const getBase64ObjectUrl = (base64String: string) => {
   const blob = base64toBlob(base64String);
   return URL.createObjectURL(blob);
 };
+
+export const getBase64 = (file: RcFile): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
