@@ -140,7 +140,7 @@ export class ITMOSystemImporter implements ImporterInterface {
               const company = await this.companyService.findByTaxId(taxId);
               if (!company) {
 
-                const email = `nce.digital+${project.company}@undp.org`.replace(' ', '');
+                const email = `nce.digital+${project.company}@perlin.net`.replace(' ', '');
                 await this.userService.create(
                   {
                     email: email,
