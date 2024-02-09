@@ -61,12 +61,11 @@ export class CompanyService {
     const company = await this.companyRepo
       .createQueryBuilder()
       .where(
-        `"companyId" = '${companyId}' and state = '1' ${
-          abilityCondition
-            ? " AND (" +
-              this.helperService.parseMongoQueryToSQL(abilityCondition) +
-              ")"
-            : ""
+        `"companyId" = '${companyId}' and state = '1' ${abilityCondition
+          ? " AND (" +
+          this.helperService.parseMongoQueryToSQL(abilityCondition) +
+          ")"
+          : ""
         }`
       )
       .getOne();
@@ -106,12 +105,17 @@ export class CompanyService {
           companyId,
           `${remarks}#${user.companyId}#${user.id}#${SystemActionType.SUSPEND_AUTO_CANCEL}#${company.name}#${user.companyName}`
         );
-        await this.emailHelperService.sendEmail(
-          company.email,
-          EmailTemplates.PROGRAMME_DEVELOPER_ORG_DEACTIVATION,
-          {},
-          user.companyId
-        );
+        if (company.email) {
+          await this.emailHelperService.sendEmail(
+            company.email,
+            EmailTemplates.PROGRAMME_DEVELOPER_ORG_DEACTIVATION,
+            {},
+            user.companyId
+          );
+        } else {
+          this.logger.warn(`Email PROGRAMME_DEVELOPER_ORG_DEACTIVATION was not sent due to empty email for ${companyId}`, 'suspend');
+        }
+
       } else if (company.companyRole === CompanyRole.CERTIFIER) {
         await this.programmeLedgerService.revokeCompanyCertifications(
           companyId,
@@ -137,12 +141,17 @@ export class CompanyService {
           }
         );
 
-        await this.emailHelperService.sendEmail(
-          company.email,
-          EmailTemplates.CERTIFIER_ORG_DEACTIVATION,
-          {},
-          user.companyId
-        );
+        if (company.email) {
+          await this.emailHelperService.sendEmail(
+            company.email,
+            EmailTemplates.CERTIFIER_ORG_DEACTIVATION,
+            {},
+            user.companyId
+          );
+        }
+        else {
+          this.logger.warn(`Email CERTIFIER_ORG_DEACTIVATION was not sent due to empty email for ${companyId}`, 'suspend');
+        }
       }
       return new BasicResponseDto(
         HttpStatus.OK,
@@ -168,12 +177,11 @@ export class CompanyService {
     const company = await this.companyRepo
       .createQueryBuilder()
       .where(
-        `"companyId" = '${companyId}' and state = '0' ${
-          abilityCondition
-            ? " AND (" +
-              this.helperService.parseMongoQueryToSQL(abilityCondition) +
-              ")"
-            : ""
+        `"companyId" = '${companyId}' and state = '0' ${abilityCondition
+          ? " AND (" +
+          this.helperService.parseMongoQueryToSQL(abilityCondition) +
+          ")"
+          : ""
         }`
       )
       .getOne();
@@ -206,12 +214,19 @@ export class CompanyService {
         this.getUserRefWithRemarks(user, `${remarks}#${company.name}`),
         false
       );
-      await this.emailHelperService.sendEmail(
-        company.email,
-        EmailTemplates.ORG_REACTIVATION,
-        {},
-        user.companyId
-      );
+
+      if (company.email) {
+        await this.emailHelperService.sendEmail(
+          company.email,
+          EmailTemplates.ORG_REACTIVATION,
+          {},
+          user.companyId
+        );
+      } 
+      else {
+        this.logger.warn(`Email ORG_REACTIVATION was not sent due to empty email for ${companyId}`, 'suspend');
+      }
+
       return new BasicResponseDto(
         HttpStatus.OK,
         this.helperService.formatReqMessagesString(
@@ -305,7 +320,7 @@ export class CompanyService {
   ): Promise<Company[] | undefined> {
     const data: Company[] = [];
 
-    if (!(req.companyIds instanceof Array)) { 
+    if (!(req.companyIds instanceof Array)) {
       throw new HttpException("Invalid companyId list", HttpStatus.BAD_REQUEST);
     }
     for (let i = 0; i < req.companyIds.length; i++) {
@@ -333,7 +348,7 @@ export class CompanyService {
   }
 
   async create(companyDto: OrganisationDto): Promise<Company | undefined> {
-    this.logger.verbose("Company create received", 'create', companyDto.email);
+    this.logger.verbose("Company create received", 'create', companyDto.name);
 
     if (!companyDto.companyId) {
       companyDto.companyId = parseInt(
@@ -365,12 +380,11 @@ export class CompanyService {
     const company = await this.companyRepo
       .createQueryBuilder()
       .where(
-        `"companyId" = '${companyUpdateDto.companyId}' ${
-          abilityCondition
-            ? " AND (" +
-              this.helperService.parseMongoQueryToSQL(abilityCondition) +
-              ")"
-            : ""
+        `"companyId" = '${companyUpdateDto.companyId}' ${abilityCondition
+          ? " AND (" +
+          this.helperService.parseMongoQueryToSQL(abilityCondition) +
+          ")"
+          : ""
         }`
       )
       .getOne();
@@ -386,8 +400,7 @@ export class CompanyService {
 
     if (companyUpdateDto.logo) {
       const response: any = await this.fileHandler.uploadFile(
-        `profile_images/${
-          companyUpdateDto.companyId
+        `profile_images/${companyUpdateDto.companyId
         }_${new Date().getTime()}.png`,
         companyUpdateDto.logo
       );

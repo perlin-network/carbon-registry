@@ -587,6 +587,9 @@ export class UserService {
         };
         await this.asyncOperationsInterface.AddAction(action);
       }
+      else {
+        this.logger.warn(`Email ORGANISATION_CREATE was not sent due to empty email for ${companyId}`, 'create');
+      }
     }
 
     this.logger.verbose(`[create] User prepare email async action  ${userDto.email} ${companyId}`);
