@@ -20,7 +20,7 @@ export class OrganisationDto {
   @ValidateIf(
     (c) => ![CompanyRole.GOVERNMENT, CompanyRole.API].includes(c.companyRole)
   )
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @ApiProperty()
   taxId: string;
@@ -33,7 +33,7 @@ export class OrganisationDto {
   @ValidateIf(
     (c) => ![CompanyRole.GOVERNMENT, CompanyRole.API].includes(c.companyRole)
   )
-  @IsNotEmpty()
+  @IsOptional()
   @IsEmail()
   @ApiProperty()
   email: string;
