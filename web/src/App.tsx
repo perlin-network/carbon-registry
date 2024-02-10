@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ConnectionContextProvider } from './Context/ConnectionContext/connectionContext';
 import 'antd/dist/antd.css';
@@ -17,7 +17,7 @@ import ProgrammeManagement from './Pages/ProgrammeManagement/programmeManagement
 import AddNewProgramme from './Pages/ProgrammeManagement/addNewProgramme';
 import AddNewProgrammeUndp from './Pages/ProgrammeManagement/addNewProgrammeUndp';
 import ProgrammeView from './Pages/ProgrammeView/programmeView';
-import i18next from 'i18next';
+// import i18next from 'i18next';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import CreditTransfers from './Pages/Transfers/creditTransfers';
 import Homepage from './Pages/Homepage/homepage';
@@ -30,9 +30,9 @@ import UserProfile from './Pages/UserProfile/UserProfile';
 import CompanyProfile from './Pages/CompanyProfile/companyProfile';
 import { AbilityContext } from './Casl/Can';
 import { defineAbility, updateUserAbility } from './Casl/ability';
-import { message } from 'antd';
 import { SettingsContextProvider } from './Context/SettingsContext/settingsContext';
 import config from './config';
+import CommonLayout from './Components/CommonLayout/CommonLayout';
 
 // message.config({
 //   duration: 60,
@@ -73,7 +73,11 @@ const App = () => {
                 <Route path="codeconduct" element={<CodeOfConduct />} />
                 <Route path="cookie" element={<CookiePolicy />} />
                 <Route path="terms" element={<TermsOfUse />} />
-                <Route path="/" element={<Homepage />} />
+                <Route path="/" element={<CommonLayout />}>
+                  <Route index element={<Homepage />} />
+                  <Route path="/about" element={<Homepage />} />
+                  <Route path="/nationally-determined-contributions" element={<Homepage />} />
+                </Route>
                 <Route path="/" element={<PrivateRoute />}>
                   <Route path="/dashboard" element={<CustomLayout selectedKey="dashboard" />}>
                     <Route index element={<Dashboard />} />

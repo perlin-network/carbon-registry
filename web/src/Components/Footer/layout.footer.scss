@@ -2,9 +2,42 @@
 @import '../../Styles/variables.scss';
 
 .homepage-footer-container {
-  background: linear-gradient(200deg, #128d89 0%, #333336 100%), #232e3d;
-  min-height: 200px;
-  height: 100%;
+  padding: 32px 0;
+  color: #fff;
+  background: $color-primary-dark;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: $md-size) {
+      display: block;
+    }
+  }
+
+  .credits {
+    max-width: 320px;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    img {
+      display: block;
+      height: 56px;
+      margin-bottom: 14px;
+    }
+  }
+
+  .bottom-menu {
+    display: flex;
+    gap: 16px;
+    @media (max-width: $md-size) {
+      margin-top: 36px;
+      flex-direction: column;
+    }
+    a {
+      color: #fff;
+      font-weight: 500;
+    }
+  }
 
   .footertext {
     color: $dark-text-color;

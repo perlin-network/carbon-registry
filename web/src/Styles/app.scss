@@ -1,7 +1,7 @@
 @import './variables.scss';
 
 iframe#webpack-dev-server-client-overlay {
-  display:none!important
+  display: none !important;
 }
 
 body {
@@ -721,8 +721,8 @@ body {
 }
 
 .container {
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-right: 24px;
+  padding-left: 24px;
   margin-right: auto;
   margin-left: auto;
   width: 100%;
@@ -734,11 +734,15 @@ body {
 }
 @media (min-width: $lg-size) {
   .container {
+    padding-right: 16px;
+    padding-left: 16px;
     max-width: $lg-size;
   }
 }
 @media (min-width: $xl-size) {
   .container {
+    padding-right: 16px;
+    padding-left: 16px;
     max-width: $xl-size;
   }
 }

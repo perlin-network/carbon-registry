@@ -1,10 +1,11 @@
-import { Col, Divider, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
-import sliderLogo from '../../Assets/Images/logo-slider.png';
-import config from '../../config';
+// import sliderLogo from '../../Assets/Images/logo-slider.png';
+// import config from '../../config';
 import './layout.footer.scss';
-import { CcCircle } from 'react-bootstrap-icons';
-import { ReactComponent as LogoSvg } from '../../Assets/Images/logo-inverted.svg';
+// import { CcCircle } from 'react-bootstrap-icons';
+// import { ReactComponent as LogoSvg } from '../../Assets/Images/logo-inverted.svg';
+import LogoPng from '../../Assets/Images/logo.png';
+import { NavLink } from 'react-router-dom';
 
 const LayoutFooter = () => {
   const { i18n, t } = useTranslation(['common', 'homepage']);
@@ -12,11 +13,10 @@ const LayoutFooter = () => {
   return (
     <div className="homepage-footer-container">
       <div className="container">
-        <Row>
-          <Col md={24} lg={24}>
-            <div className="logocontainer">
-              <LogoSvg height={48} />
-              {/* <div>
+        <div className="credits">
+          <img src={LogoPng} alt="National Emission Registry" />
+          {/* <LogoSvg height={48} /> */}
+          {/* <div>
               <div style={{ display: 'flex' }}>
                 <div className="title">{'PERL.eco Carbon & Bio Assets'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
@@ -25,12 +25,17 @@ const LayoutFooter = () => {
                 {config.countryName}
               </div>
             </div> */}
-            </div>
-          </Col>
-        </Row>
-        <Divider className="divider" />
-        <div className="footertext">{t('homepage:footertext1')}</div>
-        <div className="footer-bottom">
+          <div>Government of The Commonwealth of The Bahamas</div>
+        </div>
+        <div className="bottom-menu">
+          <NavLink to="/contact-us">{t('homepage:contactus')}</NavLink>
+          <NavLink to="/privacy">{t('homepage:privacy')}</NavLink>
+          <NavLink to="/accessibility-statement">{t('homepage:accessibilitystatement')}</NavLink>
+        </div>
+
+        {/* <Divider className="divider" /> */}
+        {/* <div className="footertext">{t('homepage:footertext1')}</div> */}
+        {/* <div className="footer-bottom">
           <div className="footertext-bottom">
             {config.countryName}
             <CcCircle className="cc" color="#FFFF" size="10px" />
@@ -55,7 +60,7 @@ const LayoutFooter = () => {
               {t('homepage:privacy')}
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
