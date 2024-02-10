@@ -49,15 +49,21 @@ const Homepage = () => {
         <Col md={24} lg={24} flex="auto">
           <div className="homepage-img-container image-container">
             <div className="container">
-              <div className="hero-content">
-                <div className="hero-inner">
-                  <h1 className="hero-title">{t('The Bahamas National Emission Registry')}</h1>
-                  <p className="hero-subtitle">
+              <div className="homepage-hero-content">
+                <div className="homepage-hero-inner">
+                  <h1 className="homepage-hero-title">
+                    {t('The Bahamas National Emission Registry')}
+                  </h1>
+                  <p className="homepage-hero-subtitle">
                     {t(
                       "Welcome to The Bahamas' National Emission Registry, the official platform for carbon credits international mitigation outcomes, and emission reduction transfers of The Commonwealth of the Bahamas."
                     )}
                   </p>
-                  <Button className="hero-button" type="primary" onClick={() => navigate('/login')}>
+                  <Button
+                    className="homepage-hero-button"
+                    type="primary"
+                    onClick={() => navigate('/login')}
+                  >
                     Sign In
                   </Button>
                 </div>

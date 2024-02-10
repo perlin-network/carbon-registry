@@ -1,0 +1,63 @@
+@import '../../Assets/Fonts/fonts.scss';
+@import '../../Styles/variables.scss';
+
+.about-container {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: $background-color;
+  scroll-behavior: smooth;
+  color: #333336;
+  font-family: $font-family-regular;
+  font-size: 1.125rem;
+
+  .page-content {
+    background-color: $outside-background-color;
+    padding: 60px 0;
+    @media (max-width: $md-size) {
+      padding: 24px 0;
+    }
+  }
+
+  .about-publications,
+  .about-news {
+    padding-top: 20px;
+    ul {
+      padding: 0;
+    }
+    ol {
+      padding-left: 1rem;
+    }
+  }
+
+  .about-section-title {
+    margin: 12px 0;
+    color: $color-green;
+    border-bottom: 1px solid $color-green;
+    font-size: 1.25rem;
+  }
+
+  .publication-item {
+    display: flex;
+    margin-top: 12px;
+
+    .publication-image {
+      margin-right: 24px;
+      width: 128px;
+    }
+
+    .publication-body {
+      max-width: 50%;
+    }
+
+    .publication-title {
+      color: $color-link;
+      text-decoration: underline;
+    }
+
+    .publication-date {
+      margin-top: 8px;
+      color: $color-midnight-green;
+    }
+  }
+}

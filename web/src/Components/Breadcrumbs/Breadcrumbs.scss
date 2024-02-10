@@ -1,0 +1,16 @@
+@import '../../Styles/variables.scss';
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    vertical-align: center;
+  }
+
+  svg {
+    fill: currentColor;
+    width: 0.875rem;
+  }
+}

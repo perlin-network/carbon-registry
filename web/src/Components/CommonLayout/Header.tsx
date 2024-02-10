@@ -37,7 +37,11 @@ const Header = () => {
               open={visible}
             >
               {menuItems.map(({ link, text }) => (
-                <NavLink to={link} className={({ isActive }) => (isActive ? 'active' : '')}>
+                <NavLink
+                  key={text}
+                  to={link}
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
                   {text}
                 </NavLink>
               ))}
@@ -48,7 +52,11 @@ const Header = () => {
           </div>
           <div className="header-menu">
             {menuItems.map(({ link, text }) => (
-              <NavLink to={link} className={({ isActive }) => (isActive ? 'active' : '')}>
+              <NavLink
+                key={text}
+                to={link}
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
                 {text}
               </NavLink>
             ))}

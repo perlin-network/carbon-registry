@@ -1,0 +1,70 @@
+@import '../../Assets/Fonts/fonts.scss';
+@import '../../Styles/variables.scss';
+
+.ndc-container {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: $background-color;
+  scroll-behavior: smooth;
+  color: #333336;
+  font-family: $font-family-regular;
+
+  .page-content {
+    background-color: $outside-background-color;
+    padding: 100px 0;
+    @media (max-width: $md-size) {
+      padding: 24px 0;
+    }
+
+    .title {
+      margin-bottom: 20px;
+      color: $color-secondary-dark;
+      font-size: 3rem;
+      font-weight: 700;
+      font-family: $font-family-title;
+      line-height: 1.25;
+      @media (max-width: $md-size) {
+        margin-bottom: 8px;
+        font-size: 2rem;
+      }
+    }
+
+    .content-body {
+      font-size: 1.125rem;
+      line-height: 1.55;
+
+      a {
+        color: #0066ff;
+        text-decoration: underline;
+      }
+
+      ul {
+        padding-left: 24px;
+      }
+
+      li {
+        margin: 1em 0;
+        list-style-image: url('../../Assets/Images/list-item-icon.svg');
+      }
+    }
+
+    .section-row {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      gap: 60px;
+      align-items: center;
+      @media (max-width: $md-size) {
+        display: block;
+      }
+    }
+
+    .section-column {
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

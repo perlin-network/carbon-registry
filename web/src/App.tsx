@@ -3,9 +3,17 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ConnectionContextProvider } from './Context/ConnectionContext/connectionContext';
 import 'antd/dist/antd.css';
 import './Styles/app.scss';
-import Login from './Pages/Login/login';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { UserInformationContextProvider } from './Context/UserInformationContext/userInformationContext';
 import PrivateRoute from './Components/PrivateRoute/privateRoute';
+import { AbilityContext } from './Casl/Can';
+import { defineAbility, updateUserAbility } from './Casl/ability';
+import { SettingsContextProvider } from './Context/SettingsContext/settingsContext';
+import config from './config';
+// import i18next from 'i18next';
+import CommonLayout from './Components/CommonLayout/CommonLayout';
+
+import Login from './Pages/Login/login';
 import SignUp from './Pages/Signup/signup';
 import CustomLayout from './Components/Layout/layout';
 import AddUser from './Pages/AddUser/addUser';
@@ -17,8 +25,6 @@ import ProgrammeManagement from './Pages/ProgrammeManagement/programmeManagement
 import AddNewProgramme from './Pages/ProgrammeManagement/addNewProgramme';
 import AddNewProgrammeUndp from './Pages/ProgrammeManagement/addNewProgrammeUndp';
 import ProgrammeView from './Pages/ProgrammeView/programmeView';
-// import i18next from 'i18next';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import CreditTransfers from './Pages/Transfers/creditTransfers';
 import Homepage from './Pages/Homepage/homepage';
 import PrivacyPolicy from './Pages/PrivacyPolicy/privacyPolicy';
@@ -28,11 +34,8 @@ import TermsOfUse from './Pages/TermsofUse/termsofUse';
 import CarbonHelp from './Pages/Help/help';
 import UserProfile from './Pages/UserProfile/UserProfile';
 import CompanyProfile from './Pages/CompanyProfile/companyProfile';
-import { AbilityContext } from './Casl/Can';
-import { defineAbility, updateUserAbility } from './Casl/ability';
-import { SettingsContextProvider } from './Context/SettingsContext/settingsContext';
-import config from './config';
-import CommonLayout from './Components/CommonLayout/CommonLayout';
+import NationallyDeterminedContributions from './Pages/NationallyDeterminedContributions/nationallyDeterminedContributions';
+import About from './Pages/About/about';
 
 // message.config({
 //   duration: 60,
@@ -75,8 +78,11 @@ const App = () => {
                 <Route path="terms" element={<TermsOfUse />} />
                 <Route path="/" element={<CommonLayout />}>
                   <Route index element={<Homepage />} />
-                  <Route path="/about" element={<Homepage />} />
-                  <Route path="/nationally-determined-contributions" element={<Homepage />} />
+                  <Route path="/about" element={<About />} />
+                  <Route
+                    path="/nationally-determined-contributions"
+                    element={<NationallyDeterminedContributions />}
+                  />
                 </Route>
                 <Route path="/" element={<PrivateRoute />}>
                   <Route path="/dashboard" element={<CustomLayout selectedKey="dashboard" />}>

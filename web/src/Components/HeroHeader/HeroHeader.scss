@@ -1,0 +1,52 @@
+@import '../../Assets/Fonts/fonts.scss';
+@import '../../Styles/variables.scss';
+
+.hero-container {
+  display: flex;
+  height: 50vh;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  background-size: cover;
+  @media (max-width: $md-size) {
+    height: auto;
+  }
+  .container {
+    display: flex;
+    flex: 1;
+  }
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 24px;
+}
+
+.hero-title {
+  margin-bottom: 4px;
+  color: $outside-background-color;
+  font-family: $font-family-title;
+  font-size: 3.5rem;
+  line-height: 1.1;
+  @media (max-width: $md-size) {
+    font-size: 2.5rem;
+  }
+}
+
+.hero-subtitle {
+  margin-top: 20px;
+  color: #fff;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.hero-button {
+  height: 48px;
+  width: 130px;
+  background-color: $color-secondary;
+  text-transform: uppercase;
+}

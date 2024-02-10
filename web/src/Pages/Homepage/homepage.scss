@@ -10,7 +10,7 @@
   color: #333336;
   font-family: $font-family-regular;
 
-  .hero-content {
+  .homepage-hero-content {
     display: grid;
     grid-template-columns: 60% 40%;
     align-self: center;
@@ -20,25 +20,26 @@
     }
   }
 
-  .hero-title {
+  .homepage-hero-title {
     color: $outside-background-color;
     font-family: $font-family-title;
     font-size: 4rem;
     line-height: 1.1;
     text-transform: uppercase;
     @media (max-width: $md-size) {
+      padding-top: 0;
       font-size: 2.5rem;
     }
   }
 
-  .hero-subtitle {
+  .homepage-hero-subtitle {
     margin-top: 20px;
     color: #fff;
     font-size: 1.125rem;
     line-height: 1.65;
   }
 
-  .hero-button {
+  .homepage-hero-button {
     height: 48px;
     width: 130px;
     background-color: $color-secondary;
@@ -58,7 +59,7 @@
   }
 
   .homepage-img-container {
-    height: calc(100vh - 90px);
+    min-height: calc(100vh - 90px);
     flex-direction: column;
     justify-content: flex-start;
     display: flex;
