@@ -4,11 +4,11 @@ export const EmailTemplates = {
     subject: "Welcome!",
     html: `
         Welcome {{organisationName}},<br><br>
-        Your Organisation has been registered with the {{countryName}} Carbon Registry as a {{organisationRole}} Organisation. <br><br>
+        Your Organisation has been registered with The Bahamas National Emission Registry as a {{organisationRole}} Organisation. <br><br>
         Explore the Registry here {{home}}. <br><br>
 
         Sincerely,<br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   USER_CREATE: {
@@ -17,44 +17,30 @@ export const EmailTemplates = {
     html: `
         Welcome {{name}}, <br><br>
 
-        Your account has been created for the {{countryName}} Carbon Credit
+        Your account has been created for The Bahamas National Emission
         Registry. You can access your account using the temporary Homepage: {{home}} <br><br>
 
         User: {{email}} <br>
         Password (temporary): {{tempPassword}} <br><br>
 
-        If you have any questions, feel free to email our customer success
-        team <a href="mailto:admin@bioeconomy.co?subject=I Need Help With The {{countryName}} Carbon Credit Registry">customer success team</a>
-        (We’re lightning quick at replying.) We also offer live chat {{liveChat}}.
+        If you have any questions, feel free to email our team
         <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team <br><br>
-
-        <div style="font-size:12px">
-            P.S.Need immediate help getting started? Check out our help
-            <a href="{{helpDoc}}">documentation</a>. Or, just reply to this email, the
-            {{countryName}} Carbon Credit Registry Team is always ready to help!
-        </div>
-        <br>
-        <div style="font-size:12px">
-            {{countryName}} <br>
-            Address  <br>
-            Region, Country Zipcode 
-        </div>
+        The Bahamas National Emission Registry Team
         `,
     text: "",
   },
   API_KEY_EMAIL: {
     id: "API_KEY_EMAIL",
-    subject: "Carbon Credit Registry API Key Generation",
+    subject: "The Bahamas National Emission Registry API Key Generation",
     html: `
         Hi {{name}},<br><br>
 
-        You carbon registry account api key regenerated  - {{apiKey}}.
+        You emission registry account api key regenerated  - {{apiKey}}.
         <br><br>
         Sincerely,<br>
-        The Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
     `,
     text: "",
   },
@@ -67,7 +53,7 @@ export const EmailTemplates = {
 
         <br><br>
         Sincerely,<br>
-        The Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
     text: "",
   },
@@ -76,14 +62,12 @@ export const EmailTemplates = {
     subject: "Your Password was Changed",
     html: `
         Hi {{name}},<br><br>
-        The password of your Carbon Registry account was changed successfully. <br><br>
-        If you do not use {{countryName}} Carbon Credit Registry or did not request a password reset, please ignore this email or
-        <a href="mailto:admin@bioeconomy.co?subject=Password Problem with the {{countryName}} Carbon Credit Registry">contact support</a>
-        if you have questions.
+        The password of your Emission Registry account was changed successfully. <br><br>
+        If you do not use The Bahamas National Emission Registry or did not request a password reset, please ignore this email.
 
         <br><br>
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
     text: "",
   },
@@ -92,20 +76,18 @@ export const EmailTemplates = {
     subject: "Password Reset Request",
     html: `
         Hi {{name}},<br><br>
-        We received a request to reset your Carbon Registry password. <br><br>
+        We received a request to reset your Emission Registry password. <br><br>
         Use the link below to set a new password for your account. This password reset is only valid for the next hour.
         <br><br>
 
         <a href="{{home}}/resetPassword/{{requestId}}">Click here to reset the password</a>
         <br><br>
 
-        If you do not use {{countryName}} Carbon Credit Registry or did not request a password reset, please ignore this email or
-        <a href="mailto:admin@bioeconomy.co?subject=Password Problem with the {{countryName}} Carbon Credit Registry">contact support</a>
-        if you have questions.
+        If you do not use The Bahamas National Emission Registry or did not request a password reset, please ignore this email.
 
         <br><br>
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
     text: "",
   },
@@ -121,7 +103,7 @@ export const EmailTemplates = {
         <br><br>
 
         Sincerely,  <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   PROGRAMME_AUTHORISATION: {
@@ -137,7 +119,7 @@ export const EmailTemplates = {
         <br><br>
 
         Sincerely,  <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   PROGRAMME_REJECTION: {
@@ -149,10 +131,10 @@ export const EmailTemplates = {
         {{programmeName}} of your Organisation has been rejected on {{date}} due to the following reason/s: <br>
         {{reason}} <br><br>
 
-        Click <a href="{{pageLink}}">here</a> for more details of the programme.  <br><br>
+        Click <a href="{{pageLink}}">here</a> for more details of the programme.<br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_ISSUANCE: {
@@ -166,7 +148,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the programme.<br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_TRANSFER_REQUISITIONS: {
@@ -179,7 +161,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request.<br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_TRANSFER_CANCELLATION: {
@@ -192,7 +174,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request.<br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_TRANSFER_CANCELLATION_SYS_TO_INITIATOR: {
@@ -205,7 +187,7 @@ export const EmailTemplates = {
       Click <a href="{{pageLink}}">here</a> for more details of the transfer request. <br><br>
 
       Sincerely, <br>
-      The {{countryName}} Carbon Credit Registry Team
+      The Bahamas National Emission Registry Team
     `,
   },
   CREDIT_TRANSFER_CANCELLATION_SYS_TO_SENDER: {
@@ -218,7 +200,7 @@ export const EmailTemplates = {
       Click <a href="{{pageLink}}">here</a> for more details of the transfer request. <br><br>
 
       Sincerely, <br>
-      The {{countryName}} Carbon Credit Registry Team
+      The Bahamas National Emission Registry Team
     `,
   },
   CREDIT_TRANSFER_ACCEPTED: {
@@ -231,7 +213,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_TRANSFER_REJECTED: {
@@ -245,7 +227,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team`,
+        The Bahamas National Emission Registry Team`,
   },
   CREDIT_TRANSFER_GOV: {
     id: "CREDIT_TRANSFER_GOV",
@@ -259,7 +241,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_TRANSFER_GOV_CANCELLATION: {
@@ -274,7 +256,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_TRANSFER_GOV_ACCEPTED_TO_INITIATOR: {
@@ -287,7 +269,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request.<br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_TRANSFER_GOV_ACCEPTED_TO_RECEIVER: {
@@ -300,7 +282,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request <br> <br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_TRANSFER_GOV_REJECTED: {
@@ -313,7 +295,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_SEND_DEVELOPER: {
@@ -327,7 +309,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the transfer request. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   PROGRAMME_CERTIFICATION: {
@@ -340,7 +322,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the certification. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   PROGRAMME_CERTIFICATION_REVOKE_BY_CERT: {
@@ -353,7 +335,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the certification. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   PROGRAMME_CERTIFICATION_REVOKE_BY_GOVT_TO_PROGRAMME: {
@@ -366,7 +348,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the certification. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   PROGRAMME_CERTIFICATION_REVOKE_BY_GOVT_TO_CERT: {
@@ -379,7 +361,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the certification. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   PROGRAMME_CERTIFICATION_REVOKE_BY_SYSTEM: {
@@ -392,7 +374,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the certification. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   PROGRAMME_DEVELOPER_ORG_DEACTIVATION: {
@@ -408,7 +390,7 @@ export const EmailTemplates = {
          · All the international transfer retire requests sent by your Organisation were cancelled.<br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CERTIFIER_ORG_DEACTIVATION: {
@@ -422,7 +404,7 @@ export const EmailTemplates = {
         · All the certificates given by your Organisation were revoked. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_RETIREMENT_BY_GOV: {
@@ -435,7 +417,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the retirement. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_RETIREMENT_BY_DEV: {
@@ -448,7 +430,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the international transfer retire request. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_RETIREMENT_CANCEL: {
@@ -461,7 +443,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the international transfer retire request. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_RETIREMENT_CANCEL_SYS_TO_INITIATOR: {
@@ -473,7 +455,7 @@ export const EmailTemplates = {
       Click <a href="{{pageLink}}">here</a> for more details of the international transfer retire request. <br><br>
 
       Sincerely,  <br>
-      The {{countryName}} Carbon Credit Registry Team
+      The Bahamas National Emission Registry Team
     `,
   },
   CREDIT_RETIREMENT_CANCEL_SYS_TO_GOV: {
@@ -485,7 +467,7 @@ export const EmailTemplates = {
       Click <a href="{{pageLink}}">here</a> for more details of the international transfer retire request. <br><br>
 
       Sincerely,  <br>
-      The {{countryName}} Carbon Credit Registry Team
+      The Bahamas National Emission Registry Team
     `,
   },
   CREDIT_RETIREMENT_RECOGNITION: {
@@ -498,7 +480,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the international transfer retire request. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   CREDIT_RETIREMENT_NOT_RECOGNITION: {
@@ -511,7 +493,7 @@ export const EmailTemplates = {
         Click <a href="{{pageLink}}">here</a> for more details of the international transfer retire request. <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
   ORG_REACTIVATION: {
@@ -523,7 +505,7 @@ export const EmailTemplates = {
         Your Organisation has been reactivated by the {{government}}. Your Organisation will be able to perform actions as before and all the users of the Organisation will be reactivated.  <br><br>
 
         Sincerely, <br>
-        The {{countryName}} Carbon Credit Registry Team
+        The Bahamas National Emission Registry Team
         `,
   },
 };
