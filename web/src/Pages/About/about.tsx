@@ -21,6 +21,39 @@ const news = [
   },
 ];
 
+interface NewsItemProps {
+  title: string;
+  url: string;
+}
+
+const NewsItem: React.FC<NewsItemProps> = ({ title, url }) => (
+  <li className="news-item">
+    <span className="news-title">
+      {title}
+      {' - '}
+      <a href={url}>{url}</a>
+    </span>
+  </li>
+);
+
+interface PublicationItemProps {
+  title: string;
+  date: string;
+  image: string;
+}
+
+const PublicationItem: React.FC<PublicationItemProps> = ({ title, date, image }) => (
+  <li className="publication-item">
+    <img src={image} alt="" className="publication-image" />
+    <div className="publication-body">
+      <a href="#" className="publication-title">
+        {title}
+      </a>
+      <div className="publication-date">{date}</div>
+    </div>
+  </li>
+);
+
 const About = () => {
   const navigate = useNavigate();
 
@@ -54,38 +87,5 @@ const About = () => {
     </div>
   );
 };
-
-interface PublicationItemProps {
-  title: string;
-  date: string;
-  image: string;
-}
-
-const PublicationItem: React.FC<PublicationItemProps> = ({ title, date, image }) => (
-  <li className="publication-item">
-    <img src={image} alt="" className="publication-image" />
-    <div className="publication-body">
-      <a href="#" className="publication-title">
-        {title}
-      </a>
-      <div className="publication-date">{date}</div>
-    </div>
-  </li>
-);
-
-interface NewsItemProps {
-  title: string;
-  url: string;
-}
-
-const NewsItem: React.FC<NewsItemProps> = ({ title, url }) => (
-  <li className="news-item">
-    <span className="news-title">
-      {title}
-      {' - '}
-      <a href={url}>{url}</a>
-    </span>
-  </li>
-);
 
 export default About;
