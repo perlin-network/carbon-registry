@@ -601,7 +601,7 @@ export const AddNewCompanyComponent = (props: any) => {
                           >
                             <Tooltip placement="top" title="Bahamas Goverment">
                               <Radio.Button className="govt" value="Goverment">
-                                <ExperimentOutlined className="role-icons" />
+                                <AuditOutlined className="role-icons" />
                                 Bahamas Govt
                               </Radio.Button>
                             </Tooltip>
@@ -619,7 +619,7 @@ export const AddNewCompanyComponent = (props: any) => {
                           >
                             <Tooltip placement="top" title="Management Company Trader">
                               <Radio.Button className="trader" value="Trader">
-                                <ExperimentOutlined className="role-icons" />
+                                <MoneyCollectOutlined className="role-icons" />
                                 Management Company Trader
                               </Radio.Button>
                             </Tooltip>
@@ -637,7 +637,7 @@ export const AddNewCompanyComponent = (props: any) => {
                           >
                             <Tooltip placement="top" title="Dev Bank">
                               <Radio.Button className="dev-bank" value="DevBank">
-                                <ExperimentOutlined className="role-icons" />
+                                <BankOutlined className="role-icons" />
                                 Dev Bank
                               </Radio.Button>
                             </Tooltip>
