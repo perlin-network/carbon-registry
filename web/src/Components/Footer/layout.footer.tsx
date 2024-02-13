@@ -8,10 +8,10 @@ import LogoPng from '../../Assets/Images/logo.png';
 import { NavLink } from 'react-router-dom';
 
 const LayoutFooter = () => {
-  const { i18n, t } = useTranslation(['common', 'homepage']);
+  const { t } = useTranslation(['common', 'homepage']);
 
   return (
-    <div className="homepage-footer-container">
+    <footer className="homepage-footer-container">
       <div className="container">
         <div className="credits">
           <img src={LogoPng} alt="National Emission Registry" />
@@ -62,7 +62,7 @@ const LayoutFooter = () => {
           </div>
         </div> */}
       </div>
-    </div>
+    </footer>
   );
 };
 

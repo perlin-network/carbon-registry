@@ -79,7 +79,7 @@ const Header = () => {
             ))}
           </div>
           <div className="header-signin">
-            <Button type="primary" onClick={() => navigate('/login')}>
+            <Button type="primary" onClick={() => navigate('/signUp')}>
               Sign Up
             </Button>
           </div>

@@ -4,6 +4,25 @@ iframe#webpack-dev-server-client-overlay {
   display: none !important;
 }
 
+html {
+  height: 100%;
+}
+
+body,
+#root {
+  min-height: 100%;
+}
+
+#root,
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 body {
   background-color: $background-color;
   font-family: $primary-font-family;

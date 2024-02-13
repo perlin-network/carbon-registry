@@ -67,10 +67,6 @@ const App = () => {
           <SettingsContextProvider>
             <BrowserRouter>
               <Routes>
-                <Route path="login" element={<Login />} />
-                <Route path="forgotPassword" element={<Login forgotPassword={true} />} />
-                <Route path="resetPassword/:requestid" element={<Login resetPassword={true} />} />
-                <Route path="signUp" element={<SignUp />} />
                 <Route path="privacy" element={<PrivacyPolicy />} />
                 <Route path="help" element={<CarbonHelp />} />
                 <Route path="codeconduct" element={<CodeOfConduct />} />
@@ -78,11 +74,15 @@ const App = () => {
                 <Route path="terms" element={<TermsOfUse />} />
                 <Route path="/" element={<CommonLayout />}>
                   <Route index element={<Homepage />} />
-                  <Route path="/about" element={<About />} />
+                  <Route path="about" element={<About />} />
                   <Route
-                    path="/nationally-determined-contributions"
+                    path="nationally-determined-contributions"
                     element={<NationallyDeterminedContributions />}
                   />
+                  <Route path="login" element={<Login />} />
+                  <Route path="forgotPassword" element={<Login forgotPassword={true} />} />
+                  <Route path="resetPassword/:requestid" element={<Login resetPassword={true} />} />
+                  <Route path="signUp" element={<SignUp />} />
                 </Route>
                 <Route path="/" element={<PrivateRoute />}>
                   <Route path="/dashboard" element={<CustomLayout selectedKey="dashboard" />}>
