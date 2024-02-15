@@ -845,10 +845,46 @@ export const AddNewCompanyComponent = (props: any) => {
                     placeholder="Phone number"
                     international
                     value={formatPhoneNumberIntl(contactNoInput)}
-                    defaultCountry="LK"
+                    defaultCountry="BS"
                     countryCallingCodeEditable={false}
                     onChange={(v) => {}}
                   />
+                </Form.Item>
+              </div>
+            </Col>
+            <Col xl={12} md={24}>
+              <div className="details-part-two">
+                <Form.Item
+                  label="Email"
+                  name="email"
+                  rules={[
+                    {
+                      required: true,
+                      message: '',
+                    },
+                    {
+                      validator: async (rule, value) => {
+                        if (
+                          String(value).trim() === '' ||
+                          String(value).trim() === undefined ||
+                          value === null ||
+                          value === undefined
+                        ) {
+                          throw new Error(`Email ${t('isRequired')}`);
+                        } else {
+                          const val = value.trim();
+                          const reg =
+                            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                          const matches = val.match(reg) ? val.match(reg) : [];
+                          if (matches.length === 0) {
+                            throw new Error(`Email ${t('isInvalid')}`);
+                          }
+                        }
+                      },
+                    },
+                  ]}
+                >
+                  <Input size="large" />
                 </Form.Item>
               </div>
             </Col>
