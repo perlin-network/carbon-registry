@@ -40,7 +40,7 @@ const maximumImageSize = process.env.REACT_APP_MAXIMUM_FILE_SIZE
 
 const sectoralScopes: any = {
   Energy: [
-    'Energy Industries (Renewable – / Non-Renewable Sources)',
+    'Energy Industries (Renewable - / Non-Renewable Sources)',
     'Energy Distribution',
     'Energy Demand',
   ],
@@ -977,7 +977,7 @@ const ProgrammeCreationComponent = () => {
                                         </Select.Option>
                                       ))
                                     : selectedSectoralScopes?.map((val: any) => {
-                                        if (val in SectoralScope) {
+                                        if (val in SectoralScopeDisplayNames) {
                                           const key = val as keyof typeof SectoralScopeDisplayNames;
                                           return (
                                             <Select.Option
