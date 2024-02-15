@@ -236,7 +236,6 @@ export const AddNewCompanyComponent = (props: any) => {
         state?.record?.companyRole !== CompanyRole.MINISTRY
       ) {
         values.taxId = formOneValues.taxId;
-        values.paymentId = formOneValues.paymentId;
       }
 
       if (state?.record?.companyRole === CompanyRole.MINISTRY) {
@@ -366,35 +365,6 @@ export const AddNewCompanyComponent = (props: any) => {
                                   value === undefined
                                 ) {
                                   return Promise.resolve();
-                                }
-                              },
-                            },
-                          ]}
-                        >
-                          <Input size="large" />
-                        </Form.Item>
-                      )
-                    : null}
-                  {companyRole !== CompanyRole.MINISTRY
-                    ? (!isUpdate || (isUpdate && companyRole !== CompanyRole.GOVERNMENT)) && (
-                        <Form.Item
-                          label="Registration Payment ID"
-                          initialValue={state?.record?.paymentId}
-                          name="paymentId"
-                          rules={[
-                            {
-                              required: true,
-                              message: '',
-                            },
-                            {
-                              validator: async (rule, value) => {
-                                if (
-                                  String(value).trim() === '' ||
-                                  String(value).trim() === undefined ||
-                                  value === null ||
-                                  value === undefined
-                                ) {
-                                  throw new Error(`Registration Payment ID ${t('isRequired')}`);
                                 }
                               },
                             },
