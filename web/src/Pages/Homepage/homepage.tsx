@@ -96,7 +96,7 @@ const Homepage = () => {
                   Trading Act) to meet the Bahamas obligations under the Paris Climate Agreement.
                 </p>
                 <p>The Act provides for the Establishment of National Emission Registry:</p>
-                <ul>
+                <ul className="check-list">
                   <li>
                     A national registry shall be established for the purposes of this Act
                     (hereinafter referred to as “the National Emission Registry”).

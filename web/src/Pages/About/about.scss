@@ -11,14 +11,6 @@
   font-family: $font-family-regular;
   font-size: 1.125rem;
 
-  .page-content {
-    background-color: $outside-background-color;
-    padding: 60px 0;
-    @media (max-width: $md-size) {
-      padding: 24px 0;
-    }
-  }
-
   .about-publications,
   .about-news {
     padding-top: 20px;

@@ -36,6 +36,8 @@ import UserProfile from './Pages/UserProfile/UserProfile';
 import CompanyProfile from './Pages/CompanyProfile/companyProfile';
 import NationallyDeterminedContributions from './Pages/NationallyDeterminedContributions/nationallyDeterminedContributions';
 import About from './Pages/About/about';
+import AccessibilityStatement from './Pages/AccessibilityStatement/accessibilityStatement';
+import RegistrarFunctions from './Pages/RegistrarFunctions/registrarFunctions';
 
 // message.config({
 //   duration: 60,
@@ -67,7 +69,6 @@ const App = () => {
           <SettingsContextProvider>
             <BrowserRouter>
               <Routes>
-                <Route path="privacy" element={<PrivacyPolicy />} />
                 <Route path="help" element={<CarbonHelp />} />
                 <Route path="codeconduct" element={<CodeOfConduct />} />
                 <Route path="cookie" element={<CookiePolicy />} />
@@ -76,9 +77,12 @@ const App = () => {
                   <Route index element={<Homepage />} />
                   <Route path="about" element={<About />} />
                   <Route
-                    path="nationally-determined-contributions"
+                    path="nationallyDeterminedContributions"
                     element={<NationallyDeterminedContributions />}
                   />
+                  <Route path="accessibilityStatement" element={<AccessibilityStatement />} />
+                  <Route path="registrarFunctions" element={<RegistrarFunctions />} />
+                  <Route path="privacy" element={<PrivacyPolicy />} />
                   <Route path="login" element={<Login />} />
                   <Route path="forgotPassword" element={<Login forgotPassword={true} />} />
                   <Route path="resetPassword/:requestid" element={<Login resetPassword={true} />} />

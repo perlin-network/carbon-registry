@@ -10,7 +10,7 @@ const menuItems = [
   },
   {
     text: 'Nationally Determined Contributions',
-    link: '/nationally-determined-contributions',
+    link: '/nationallyDeterminedContributions',
   },
 ];
 

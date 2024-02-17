@@ -30,7 +30,7 @@ const LayoutFooter = () => {
         <div className="bottom-menu">
           <NavLink to="/contact-us">{t('homepage:contactus')}</NavLink>
           <NavLink to="/privacy">{t('homepage:privacy')}</NavLink>
-          <NavLink to="/accessibility-statement">{t('homepage:accessibilitystatement')}</NavLink>
+          <NavLink to="/accessibilityStatement">{t('homepage:accessibilitystatement')}</NavLink>
         </div>
 
         {/* <Divider className="divider" /> */}

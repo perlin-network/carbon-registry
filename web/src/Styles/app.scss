@@ -29,6 +29,10 @@ body {
   font-weight: 400;
 }
 
+a {
+  color: $color-link;
+}
+
 .ant-menu {
   background-color: $background-color;
 }

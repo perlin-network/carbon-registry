@@ -25,13 +25,20 @@ const NationallyDeterminedContributions = () => {
                   Nationally determined contributions (NDCs) are at the heart of the Paris Agreement
                   and the achievement of its long-term goals. NDCs embody efforts by each country to
                   reduce national emissions and adapt to the impacts of climate change. The{' '}
-                  <a href="#">Paris Agreement</a> (Article 4, paragraph 2) requires each Party to
-                  prepare, communicate and maintain successive nationally determined contributions
-                  (NDCs) that it intends to achieve. Parties shall pursue domestic mitigation
-                  measures, with the aim of achieving the objectives of such contributions.
+                  <a href="https://unfccc.int/process/conferences/pastconferences/paris-climate-change-conference-november-2015/paris-agreement">
+                    Paris Agreement
+                  </a>{' '}
+                  (Article 4, paragraph 2) requires each Party to prepare, communicate and maintain
+                  successive nationally determined contributions (NDCs) that it intends to achieve.
+                  Parties shall pursue domestic mitigation measures, with the aim of achieving the
+                  objectives of such contributions.
                 </p>
                 <p>
-                  Full Details of the Bahamas NDCs can be found <a href="#">here</a>.
+                  Full Details of the Bahamas NDCs can be found{' '}
+                  <a href="https://unfccc.int/sites/default/files/NDC/2022-11/Bahamas%20Updated%20Nationally%20Determined%20Contribution.pdf">
+                    here
+                  </a>
+                  .
                 </p>
               </div>
             </div>

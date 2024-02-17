@@ -6,14 +6,21 @@ interface HeroHeaderProps {
   title?: string;
   backgroundImage?: string;
   breadcrumbs?: string[];
+  overlay?: boolean;
 }
 
-const HeroHeader: React.FC<HeroHeaderProps> = ({ title, backgroundImage, breadcrumbs }) => (
+const HeroHeader: React.FC<HeroHeaderProps> = ({
+  title,
+  backgroundImage,
+  breadcrumbs,
+  overlay,
+}) => (
   <div
     className="hero-container"
     style={{
-      backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%),
-  url(${backgroundImage})`,
+      backgroundImage: `${
+        overlay ? 'linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%), ' : ''
+      }url(${backgroundImage})`,
     }}
   >
     <div className="container">

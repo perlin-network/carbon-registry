@@ -173,12 +173,14 @@
       }
 
       ul {
-        padding-left: 24px;
+        padding: 0;
+        list-style: none;
       }
 
       li {
         margin: 1em 0;
-        list-style-image: url('../../Assets/Images/list-item-icon.svg');
+        padding-left: 24px;
+        background: url('../../Assets/Images/list-item-icon.svg') no-repeat 0px 4px;
       }
     }
 
