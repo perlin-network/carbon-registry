@@ -38,6 +38,7 @@ import NationallyDeterminedContributions from './Pages/NationallyDeterminedContr
 import About from './Pages/About/about';
 import AccessibilityStatement from './Pages/AccessibilityStatement/accessibilityStatement';
 import RegistrarFunctions from './Pages/RegistrarFunctions/registrarFunctions';
+import Contact from './Pages/Contact/contact';
 
 // message.config({
 //   duration: 60,
@@ -83,6 +84,7 @@ const App = () => {
                   <Route path="accessibilityStatement" element={<AccessibilityStatement />} />
                   <Route path="registrarFunctions" element={<RegistrarFunctions />} />
                   <Route path="privacy" element={<PrivacyPolicy />} />
+                  <Route path="contact" element={<Contact />} />
                   <Route path="login" element={<Login />} />
                   <Route path="forgotPassword" element={<Login forgotPassword={true} />} />
                   <Route path="resetPassword/:requestid" element={<Login resetPassword={true} />} />

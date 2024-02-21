@@ -1,0 +1,105 @@
+@import '../../Assets/Fonts/fonts.scss';
+@import '../../Styles/variables.scss';
+
+.sign-up {
+  padding: 60px 0;
+  background: #fff;
+  font-family: $font-family-regular;
+
+  .title {
+    color: $color-secondary-dark;
+    font-family: $font-family-title;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .group-title {
+    margin: 36px 0 24px;
+  }
+
+  .form-container {
+    padding: 30px;
+    color: $color-neutral-700;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px;
+
+    label {
+      color: $color-neutral-700;
+    }
+
+    input {
+      height: 52px;
+    }
+
+    input,
+    textarea {
+      padding: 8px 14px;
+      &:hover,
+      &:focus {
+        border-color: $color-primary-dark;
+        box-shadow: none;
+      }
+    }
+
+    .ant-radio-checked .ant-radio-inner,
+    .ant-radio:hover .ant-radio-inner {
+      border-color: $color-primary-dark;
+      &::after {
+        background: $color-primary-dark;
+      }
+    }
+
+    .ant-upload.ant-upload-drag {
+      background: none;
+      border: 1px solid #d9d9d9;
+      border-radius: 8px;
+      &:hover {
+        border: 1px solid $color-primary-dark;
+      }
+      &.ant-upload-drag-hover {
+        background: #f9fafb;
+      }
+      .upload-icon {
+        display: inline-flex;
+        margin-bottom: 8px;
+        padding: 8px;
+        color: $color-primary-dark;
+        background: #f2f4f7;
+        border-radius: 50%;
+        box-shadow: 0 0 0 6px #f9fafb;
+      }
+      .anticon {
+        font-size: 24px;
+      }
+      .ant-upload-text {
+        color: $color-neutral-600;
+        font-size: 0.875rem;
+        strong {
+          color: $color-primary-dark;
+          font-weight: 500;
+        }
+      }
+      .ant-upload-hint {
+        color: $color-neutral-500;
+        font-size: 0.75rem;
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .ant-btn {
+      height: 52px;
+      min-width: 120px;
+      color: $color-neutral-500;
+      font-size: 1rem;
+      font-weight: 500;
+      &.ant-btn-primary {
+        color: #fff;
+      }
+    }
+  }
+}

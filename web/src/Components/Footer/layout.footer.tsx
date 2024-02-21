@@ -28,7 +28,7 @@ const LayoutFooter = () => {
           <div>Government of The Commonwealth of The Bahamas</div>
         </div>
         <div className="bottom-menu">
-          <NavLink to="/contact-us">{t('homepage:contactus')}</NavLink>
+          <NavLink to="/contact">{t('homepage:contactus')}</NavLink>
           <NavLink to="/privacy">{t('homepage:privacy')}</NavLink>
           <NavLink to="/accessibilityStatement">{t('homepage:accessibilitystatement')}</NavLink>
         </div>

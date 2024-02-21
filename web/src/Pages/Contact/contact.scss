@@ -1,0 +1,26 @@
+@import '../../Assets/Fonts/fonts.scss';
+@import '../../Styles/variables.scss';
+
+.contact-container {
+  h2 {
+    margin: 8px 0 32px;
+  }
+
+  label {
+    color: $color-neutral-700;
+  }
+
+  input {
+    height: 52px;
+  }
+
+  input,
+  textarea {
+    padding: 8px 14px;
+    &:hover,
+    &:focus {
+      border-color: $color-primary-dark;
+      box-shadow: none;
+    }
+  }
+}
