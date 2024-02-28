@@ -102,11 +102,12 @@ const ProgrammeCreationComponent = () => {
   ];
 
   const selectedSectoralScopes =
-    selectedSector !== String(Sector.Buildings) &&
-    selectedSector !== String(Sector.Extractives) &&
-    selectedSector !== String(Sector.Hospitality)
-      ? sectoralScopes[selectedSector]
-      : Object.entries(SectoralScopeDisplayNames).map(([key, value]) => key);
+    // selectedSector !== String(Sector.Buildings) &&
+    // selectedSector !== String(Sector.Extractives) &&
+    // selectedSector !== String(Sector.Hospitality)
+    //   ? sectoralScopes[selectedSector]
+    //   :
+    Object.entries(SectoralScopeDisplayNames).map(([key, value]) => key);
 
   const getBase64 = (file: RcFile): Promise<string> =>
     new Promise((resolve, reject) => {

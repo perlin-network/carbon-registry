@@ -73,21 +73,25 @@
       .logo {
         display: flex;
         align-items: center;
+        justify-content: center;
         // height: 52px;
         // width: 80px;
         height: 52px;
         width: 100%;
+        padding: 4px;
+        background: $color-primary-dark;
+        border-radius: 8px;
 
         svg {
           max-width: 100%;
         }
 
         img {
-          object-fit: cover;
-          height: auto;
-          height: 78%;
-          margin-top: 6px;
-          margin-right: 5px;
+          // object-fit: cover;
+          height: 100%;
+          // height: 78%;
+          // margin-top: 6px;
+          // margin-right: 5px;
         }
       }
     }
