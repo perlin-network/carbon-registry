@@ -61,10 +61,8 @@ export const EmailTemplates = {
     id: "CHANGE_PASSOWRD",
     subject: "Your Password was Changed",
     html: `
-        Hi {{name}},<br><br>
-        The password of your Emission Registry account was changed successfully. <br><br>
-        If you do not use The Bahamas National Emission Registry or did not request a password reset, please ignore this email.
-
+        Dear {{name}},<br><br>
+        This email serves to notify you that your password for the National Emission Registry was successfully changed. If you did not request this change, please click here.
         <br><br>
         Sincerely, <br>
         The Bahamas National Emission Registry Team

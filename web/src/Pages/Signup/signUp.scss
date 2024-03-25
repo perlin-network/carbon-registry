@@ -28,7 +28,8 @@
       color: $color-neutral-700;
     }
 
-    input {
+    input,
+    .ant-select-selector {
       height: 52px;
     }
 
@@ -84,6 +85,20 @@
         color: $color-neutral-500;
         font-size: 0.75rem;
       }
+    }
+
+    .ant-select-selector {
+      border-radius: 5px;
+    }
+    .ant-select-selection-search {
+      padding: 8px 0;
+    }
+    .ant-select-selection-placeholder {
+      padding: 0 3px;
+      line-height: 50px;
+    }
+    .ant-select-selection-item {
+      line-height: 50px;
     }
 
     .action-buttons {

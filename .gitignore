@@ -8,3 +8,4 @@ backend/services/.env.local
 .env.local
 ./data/*
 !./data/README.md
+.DS_Store

@@ -37,7 +37,7 @@ const ProgrammeRejectAndTransfer: FC<ProgrammeRejectAndTransferCardItemProps> = 
       ) : (
         <>
           <div className="title-section">
-            <div className="title">Programmes</div>
+            <div className="title">Projects</div>
             <div className="info-container">
               <Tooltip
                 arrowPointAtCenter
@@ -80,7 +80,7 @@ const ProgrammeRejectAndTransfer: FC<ProgrammeRejectAndTransferCardItemProps> = 
                 </div>
               </div>
             </div>
-            <div className="transfered-details margin-top-1">
+            {/* <div className="transfered-details margin-top-1">
               <div className="icon">
                 <div className="icon-container reject">
                   <XCircle
@@ -105,8 +105,8 @@ const ProgrammeRejectAndTransfer: FC<ProgrammeRejectAndTransferCardItemProps> = 
                   />
                 </div>
               </div>
-            </div>
-            <div className="transfered-details margin-top-1">
+            </div> */}
+            {/* <div className="transfered-details margin-top-1">
               <div className="icon">
                 <div className="icon-container pending">
                   <ClockHistory color="#6c6c6c" size={25} />
@@ -126,7 +126,7 @@ const ProgrammeRejectAndTransfer: FC<ProgrammeRejectAndTransferCardItemProps> = 
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="updated-on margin-top-6">
             {updatedDate !== '0' && <div className="updated-moment-container">{updatedDate}</div>}

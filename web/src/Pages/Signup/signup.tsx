@@ -1,5 +1,5 @@
 import './signUp.scss';
-import { Button, Form, Input, Row, Col, Checkbox, Radio, Space } from 'antd';
+import { Button, Form, Input, Row, Col, Checkbox, Radio, Space, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import UploadArea from './uploadArea';
 
@@ -26,7 +26,12 @@ const SignUp = () => {
               </Col>
               <Col xs={24} md={12}>
                 <Form.Item label="Type of Company" name="companyType">
-                  <Input placeholder="Enter company type" />
+                  <Select placeholder="Enter company type">
+                    <Select.Option value="Management Company">Management Company</Select.Option>
+                    <Select.Option value="National Reporting Entity">
+                      National Reporting Entity
+                    </Select.Option>
+                  </Select>
                 </Form.Item>
               </Col>
             </Row>

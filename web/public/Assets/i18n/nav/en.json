@@ -1,8 +1,8 @@
 {
   "dashboard": "Dashboard",
-  "programmes": "Programmes",
-  "transfers": "Transfers",
-  "companies": "Organisations",
+  "programmes": "Projects",
+  "transfers": "Accounts",
+  "companies": "Mgmt Companies",
   "users": "Users",
   "viewAll": "View All",
   "addNew": "Add New"

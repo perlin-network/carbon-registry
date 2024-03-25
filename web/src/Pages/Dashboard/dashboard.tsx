@@ -1941,7 +1941,7 @@ ${total}
           </Col>
         </Row>
       </div>
-      <div className="stastics-and-charts-container center">
+      {/* <div className="stastics-and-charts-container center">
         <Row gutter={[40, 40]} className="stastic-card-row">
           <Col xxl={12} xl={12} md={12} className="stastic-card-col">
             <BarChartsStat
@@ -1982,7 +1982,7 @@ ${total}
             />
           </Col>
         </Row>
-      </div>
+      </div> */}
       {mapType !== MapTypes.None ? (
         <div className="stastics-and-charts-container center">
           <Row gutter={[40, 40]} className="stastic-card-row">
