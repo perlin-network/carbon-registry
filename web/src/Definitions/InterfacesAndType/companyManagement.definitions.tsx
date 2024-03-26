@@ -14,7 +14,38 @@ export interface CompanyTableDataType {
   programmeCount?: number;
 }
 
+export class Company {
+  companyId?: number;
+
+  taxId?: string;
+
+  name?: string;
+
+  email?: string;
+
+  phoneNo?: string;
+
+  website?: string;
+
+  address?: string;
+
+  logo?: string;
+
+  country?: string;
+
+  companyRole?: string;
+}
+
 export enum CompanyState {
   SUSPENDED = 0,
   ACTIVE = 1,
+}
+
+export enum CompanyManagementColumns {
+  logo = 'logo',
+  name = 'name',
+  taxId = 'taxId',
+  companyRole = 'companyRole',
+  programmeCount = 'programmeCount',
+  creditBalance = 'creditBalance',
 }
