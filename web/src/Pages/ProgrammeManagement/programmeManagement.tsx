@@ -42,7 +42,7 @@ const ProgrammeManagement = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [tableData, setTableData] = useState<TableDataType[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(10);
+  const [pageSize, setPageSize] = useState<number>(50);
   // const [filter, setFilter] = useState<any>([]);
   const [search, setSearch] = useState<string>();
   const [searchText, setSearchText] = useState<string>();
@@ -286,8 +286,18 @@ const ProgrammeManagement = () => {
         filterAnd: filter,
         sort: sort,
       });
-      setTableData(response.data);
-      setTotalProgramme(response.response.data.total);
+
+      if (userInfoState?.companyRole !== 'Government') {
+        const filteredData = (response.data || []).filter((item: any) =>
+          item.companyId.includes(userInfoState?.companyId + '')
+        );
+        setTableData(filteredData);
+        setTotalProgramme(filteredData.length);
+      } else {
+        setTableData(response.data);
+        setTotalProgramme(response.response.data.total);
+      }
+
       setLoading(false);
     } catch (error: any) {
       console.log('Error in getting programme', error);

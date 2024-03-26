@@ -86,7 +86,7 @@ const CreditTransfer = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [tableData, setTableData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(10);
+  const [pageSize, setPageSize] = useState<number>(50);
   const [search, setSearch] = useState<string>();
   const [searchText, setSearchText] = useState<string>();
   const [statusFilter, setStatusFilter] = useState<any>();
@@ -183,10 +183,19 @@ const CreditTransfer = () => {
         filterOr: dataFilter,
         sort: sort,
       });
-
       console.log(response);
-      setTableData(response.data);
-      setTotalProgramme(response.response.data.total);
+
+      if (userInfoState?.companyRole !== 'Government') {
+        const filteredData = (response.data || []).filter((item: any) =>
+          item.companyId.includes(userInfoState?.companyId + '')
+        );
+        setTableData(filteredData);
+        setTotalProgramme(filteredData.length);
+      } else {
+        setTableData(response.data);
+        setTotalProgramme(response.response.data.total);
+      }
+
       setLoading(false);
     } catch (error: any) {
       console.log('Error in getting programme transfers', error);
