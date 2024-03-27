@@ -36,6 +36,7 @@ import {
   MinColor,
 } from '../../Styles/role.color.constants';
 import { addCommSep, CompanyRole } from '../../Definitions/InterfacesAndType/programme.definitions';
+import { useUserContext } from '../../Context/UserInformationContext/userInformationContext';
 import {
   Company,
   CompanyTableDataType,
@@ -66,6 +67,7 @@ export const CompanyManagementComponent = (props: any) => {
   const [filterByOrganisationType, setFilterByOrganisationType] = useState<string>('All');
   const [sortOrder, setSortOrder] = useState<string>('');
   const [sortField, setSortField] = useState<string>('');
+  const { userInfoState } = useUserContext();
   const ability = useAbilityContext();
 
   document.addEventListener('mousedown', (event: any) => {
@@ -219,6 +221,16 @@ export const CompanyManagementComponent = (props: any) => {
   };
 
   const filterAnd = () => {
+    const defaultFilter =
+      userInfoState && userInfoState.companyRole !== CompanyRole.GOVERNMENT
+        ? [
+            {
+              key: 'companyId',
+              operation: '=',
+              value: userInfoState.companyId,
+            },
+          ]
+        : [];
     if (
       searchByTermOrganisation !== null &&
       searchByTermOrganisation !== '' &&
@@ -227,6 +239,7 @@ export const CompanyManagementComponent = (props: any) => {
       filterByOrganisationType !== 'All'
     ) {
       return [
+        ...defaultFilter,
         {
           key: searchByTermOrganisation,
           operation: 'like',
@@ -240,13 +253,14 @@ export const CompanyManagementComponent = (props: any) => {
       ];
     } else if (filterByOrganisationType !== 'All') {
       return [
+        ...defaultFilter,
         {
           key: 'companyRole',
           operation: '=',
           value: filterByOrganisationType,
         },
       ];
-    } else return undefined;
+    } else return defaultFilter.length > 0 ? defaultFilter : undefined;
   };
 
   const sort = () => {
