@@ -14,6 +14,8 @@
   "filterByCompany": "Filter by Mgmnt Company Type",
   "gov": "Government",
   "certifier": "Certifier",
+  "trader": "Trader",
+  "devBank": "DevBank",
   "all": "All",
   "searchMail": "Search by email",
   "searchName": "Search by name"

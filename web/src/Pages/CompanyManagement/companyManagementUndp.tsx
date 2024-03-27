@@ -343,7 +343,8 @@ export const CompanyManagementComponent = (props: any) => {
             <Space direction="vertical">
               <Radio value="All">{t('company:all')}</Radio>
               <Radio value="Government">{t('company:gov')}</Radio>
-              <Radio value="Ministry">{t('company:min')}</Radio>
+              <Radio value="Trader">{t('company:trader')}</Radio>
+              <Radio value="DevBank">{t('company:devBank')}</Radio>
               <Radio value="ProgrammeDeveloper">{t('company:developer')}</Radio>
               <Radio value="Certifier">{t('company:certifier')}</Radio>
             </Space>
@@ -452,7 +453,7 @@ export const CompanyManagementComponent = (props: any) => {
           <Col span={24}>
             <div className="userManagement-table-container">
               <Table
-                dataSource={tableData}
+                dataSource={tableData.map((item, index) => ({ ...item, key: index }))}
                 columns={columns}
                 className="common-table-class"
                 loading={loading}
