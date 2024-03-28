@@ -24,6 +24,7 @@ import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import { useTranslation } from 'react-i18next';
 import {
   addCommSep,
+  CompanyRole,
   getCompanyBgColor,
   getStageEnumVal,
   getStageTagType,
@@ -249,7 +250,16 @@ const ProgrammeManagement = () => {
   const getAllProgramme = async () => {
     setLoading(true);
 
-    const filter: any[] = [];
+    const filter: any[] =
+      userInfoState && userInfoState.companyRole !== CompanyRole.GOVERNMENT
+        ? [
+            {
+              key: 'companyId',
+              operation: '@>',
+              value: `{${userInfoState.companyId}}`,
+            },
+          ]
+        : [];
 
     if (dataFilter) {
       filter.push(dataFilter);
@@ -287,16 +297,8 @@ const ProgrammeManagement = () => {
         sort: sort,
       });
 
-      if (userInfoState?.companyRole !== 'Government') {
-        const filteredData = (response.data || []).filter((item: any) =>
-          item.companyId.includes(userInfoState?.companyId + '')
-        );
-        setTableData(filteredData);
-        setTotalProgramme(filteredData.length);
-      } else {
-        setTableData(response.data);
-        setTotalProgramme(response.response.data.total);
-      }
+      setTableData(response.data);
+      setTotalProgramme(response.response.data.total);
 
       setLoading(false);
     } catch (error: any) {
