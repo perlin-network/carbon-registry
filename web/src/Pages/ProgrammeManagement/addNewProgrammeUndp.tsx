@@ -811,14 +811,14 @@ const ProgrammeCreationComponent = () => {
                                             <div className="ownership-list-item">
                                               <Form.Item
                                                 {...restField}
-                                                label={t('addProgramme:company')}
+                                                label={'OMGE & SOP Allocations'}
                                                 name={[name, 'organisation']}
                                                 wrapperCol={{ span: 24 }}
                                                 className="organisation"
                                                 rules={[
                                                   {
                                                     required: true,
-                                                    message: `${t('addProgramme:company')} ${t(
+                                                    message: `${'OMGE & SOP Allocations'} ${t(
                                                       'isRequired'
                                                     )}`,
                                                     validateTrigger: 'onBlur',
@@ -859,7 +859,7 @@ const ProgrammeCreationComponent = () => {
                                               </Form.Item>
                                               <Form.Item
                                                 {...restField}
-                                                label={t('addProgramme:proponentPercentage')}
+                                                label={'Percentage Allocated'}
                                                 className="ownership-percent"
                                                 name={[name, 'proponentPercentage']}
                                                 labelCol={{ span: 24 }}
