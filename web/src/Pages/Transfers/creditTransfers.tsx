@@ -696,7 +696,7 @@ const CreditTransfer = () => {
       <div className="title-bar">
         <Row justify="space-between" align="middle">
           <Col span={20}>
-            <div className="body-title">{t('creditTransfer:viewCreditsTransfers')}</div>
+            <div className="body-title">{'Accounts'}</div>
             <div className="body-sub-title">{t('creditTransfer:desc')}</div>
           </Col>
           <Col span={4}>
