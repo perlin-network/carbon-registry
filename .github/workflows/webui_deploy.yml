@@ -8,6 +8,7 @@ on:
         options:
         - uat
         - prod
+        - ner
 
 env:
   REACT_APP_MAP_TYPE : "Mapbox"
