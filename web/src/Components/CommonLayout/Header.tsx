@@ -79,7 +79,7 @@ const Header = () => {
             ))}
           </div>
           <div className="header-signin">
-            <Button type="primary" onClick={() => navigate('/signUp')}>
+            <Button type="primary" onClick={() => navigate('/signupSwitchView')}>
               Sign Up
             </Button>
           </div>

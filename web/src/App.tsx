@@ -15,6 +15,8 @@ import CommonLayout from './Components/CommonLayout/CommonLayout';
 
 import Login from './Pages/Login/login';
 import SignUp from './Pages/Signup/signup';
+import SignupSwitchView from './Pages/SignupSwitchView/signupSwitchView';
+import FrameView from './Pages/FrameView/frameView';
 import CustomLayout from './Components/Layout/layout';
 import AddUser from './Pages/AddUser/addUser';
 import UserManagement from './Pages/UserManagement/userManagement';
@@ -71,6 +73,7 @@ const App = () => {
             <BrowserRouter>
               <Routes>
                 <Route path="help" element={<CarbonHelp />} />
+                <Route path="frameView" element={<FrameView />} />
                 <Route path="codeconduct" element={<CodeOfConduct />} />
                 <Route path="cookie" element={<CookiePolicy />} />
                 <Route path="terms" element={<TermsOfUse />} />
@@ -89,6 +92,7 @@ const App = () => {
                   <Route path="forgotPassword" element={<Login forgotPassword={true} />} />
                   <Route path="resetPassword/:requestid" element={<Login resetPassword={true} />} />
                   <Route path="signUp" element={<SignUp />} />
+                  <Route path="signupSwitchView" element={<SignupSwitchView />} />
                 </Route>
                 <Route path="/" element={<PrivateRoute />}>
                   <Route path="/dashboard" element={<CustomLayout selectedKey="dashboard" />}>
