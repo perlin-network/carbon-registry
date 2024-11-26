@@ -5,7 +5,7 @@ import LogoPng from '../../Assets/Images/logo.png';
 
 const menuItems = [
   {
-    text: 'About',
+    text: 'Our News',
     link: '/about',
   },
   {

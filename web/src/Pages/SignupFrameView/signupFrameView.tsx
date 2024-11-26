@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import AboutUsJpg from '../../Assets/Images/home-about-us.jpg';
-import './signupSwitchView.scss';
 
-const SignupSwitchView = () => {
+const SignupFrameView = () => {
   const navigate = useNavigate();
   const { i18n, t } = useTranslation(['common', 'homepage']);
   const [Visible, setVisible] = useState(true);
@@ -42,25 +41,11 @@ const SignupSwitchView = () => {
   }, []);
 
   return (
-    <div className="page-button-container">
-      <div className="button-container">
-        <div className="div-container">
-          <Button type="primary" onClick={() => navigate('/signUp')}>
-            Management Company
-          </Button>
-          Sign-up as a Management Company to develop and trade carbon credits or ITMOs recognised in
-          the Commonwealth of The Bahamas
-        </div>
-        <div className="div-container">
-          <Button type="primary" onClick={() => navigate('/signupFrameView')}>
-            Domestic Reporting Entity
-          </Button>
-          Sign-up as a Domestic Reporting Entity to report activity data relating to greenhouse gas
-          emissions in the Commonwealth of The Bahamas
-        </div>
-      </div>
-    </div>
+    <iframe
+      src="https://carbon-app.mtckarn7q2.com/signup"
+      style={{ width: '100%', height: '100%', flex: 1, border: 'none' }}
+    ></iframe>
   );
 };
 
-export default SignupSwitchView;
+export default SignupFrameView;

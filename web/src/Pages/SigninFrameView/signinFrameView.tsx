@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import AboutUsJpg from '../../Assets/Images/home-about-us.jpg';
 
-const FrameView = () => {
+const SigninFrameView = () => {
   const navigate = useNavigate();
   const { i18n, t } = useTranslation(['common', 'homepage']);
   const [Visible, setVisible] = useState(true);
@@ -42,10 +42,10 @@ const FrameView = () => {
 
   return (
     <iframe
-      src="https://prod-bio-app.mtckarn7q2.com/"
+      src="https://carbon-app.mtckarn7q2.com/continue-application"
       style={{ width: '100%', height: '100%', flex: 1, border: 'none' }}
     ></iframe>
   );
 };
 
-export default FrameView;
+export default SigninFrameView;
