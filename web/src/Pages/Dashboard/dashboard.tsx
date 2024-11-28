@@ -1027,7 +1027,7 @@ const Dashboard = () => {
         if (
           response?.data?.stats?.MY_AGG_AUTH_PROGRAMME_BY_STATUS?.all?.creditUpdateTime &&
           String(response?.data?.stats?.MY_AGG_AUTH_PROGRAMME_BY_STATUS?.all?.creditUpdateTime) !==
-          '0'
+            '0'
         ) {
           setLastUpdateProgrammesCreditsStatsEpoch(
             parseInt(response?.data?.stats?.MY_AGG_AUTH_PROGRAMME_BY_STATUS?.all?.creditUpdateTime)
@@ -1572,12 +1572,12 @@ ${total}
             row.count < 2
               ? `#4da6ff`
               : row.count < 10
-                ? '#0080ff'
-                : row.count < 50
-                  ? '#0059b3'
-                  : row.count < 100
-                    ? '#003366'
-                    : '#000d1a';
+              ? '#0080ff'
+              : row.count < 50
+              ? '#0059b3'
+              : row.count < 100
+              ? '#003366'
+              : '#000d1a';
 
           matchExpression.push(row.country, color);
           txLocationMap[row.country] = row.count;
@@ -1706,22 +1706,22 @@ ${total}
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? pendingProjectsWithoutTimeRange
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? transferRequestReceived
-                    : programmesUnCertifed
+                  ? transferRequestReceived
+                  : programmesUnCertifed
               }
               title={t(
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? 'programmesPending'
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? 'trasnferReqReceived'
-                    : 'programmesUnCertified'
+                  ? 'trasnferReqReceived'
+                  : 'programmesUnCertified'
               )}
               updatedDate={
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? lastUpdateProgrammesStats
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? lastUpdatePendingTransferReceived
-                    : lastUpdateProgrammesCertifiable
+                  ? lastUpdatePendingTransferReceived
+                  : lastUpdateProgrammesCertifiable
               }
               icon={
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT ? (
@@ -1742,22 +1742,22 @@ ${total}
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? transferRequestSent
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? transferRequestSent
-                    : programmesCertifed
+                  ? transferRequestSent
+                  : programmesCertifed
               }
               title={t(
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? 'trasnferReqInit'
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? 'trasnferReqInit'
-                    : 'programmesCertified'
+                  ? 'trasnferReqInit'
+                  : 'programmesCertified'
               )}
               updatedDate={
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? lastUpdatePendingTransferSent
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? lastUpdatePendingTransferSent
-                    : lastUpdateProgrammesCertified
+                  ? lastUpdatePendingTransferSent
+                  : lastUpdateProgrammesCertified
               }
               icon={
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT ? (
@@ -1778,22 +1778,22 @@ ${total}
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? creditBalanceWithoutTimeRange
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? creditBalanceWithoutTimeRange
-                    : creditCertiedBalanceWithoutTimeRange
+                  ? creditBalanceWithoutTimeRange
+                  : creditCertiedBalanceWithoutTimeRange
               }
               title={t(
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? 'creditBal'
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? 'creditBal'
-                    : 'creditCertified'
+                  ? 'creditBal'
+                  : 'creditCertified'
               )}
               updatedDate={
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? lastUpdateCreditBalance
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? lastUpdateCreditBalance
-                    : lastUpdateProgrammesCertified
+                  ? lastUpdateCreditBalance
+                  : lastUpdateProgrammesCertified
               }
               icon={
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT ? (
@@ -1852,10 +1852,10 @@ ${total}
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? 'tTProgrammesGoverment'
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? 'tTProgrammesProgrammeDev'
-                    : categoryType === 'mine'
-                      ? 'tTProgrammesCertifierMine'
-                      : 'tTProgrammesCertifierOverall'
+                  ? 'tTProgrammesProgrammeDev'
+                  : categoryType === 'mine'
+                  ? 'tTProgrammesCertifierMine'
+                  : 'tTProgrammesCertifierOverall'
               )}
             />
           </Col>
@@ -1871,10 +1871,10 @@ ${total}
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? 'tTCreditsGovernment'
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? 'tTCreditsProgrammeDev'
-                    : categoryType === 'mine'
-                      ? 'tTCreditsCertifierMine'
-                      : 'tTCreditsCertifierOverall'
+                  ? 'tTCreditsProgrammeDev'
+                  : categoryType === 'mine'
+                  ? 'tTCreditsCertifierMine'
+                  : 'tTCreditsCertifierOverall'
               )}
             />
           </Col>
@@ -1890,10 +1890,10 @@ ${total}
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? 'tTCertifiedCreditsGovernment'
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? 'tTCertifiedCreditsProgrammeDev'
-                    : categoryType === 'mine'
-                      ? 'tTCertifiedCreditsCertifierMine'
-                      : 'tTCertifiedCreditsCertifierOverall'
+                  ? 'tTCertifiedCreditsProgrammeDev'
+                  : categoryType === 'mine'
+                  ? 'tTCertifiedCreditsCertifierMine'
+                  : 'tTCertifiedCreditsCertifierOverall'
               )}
             />
           </Col>
@@ -1913,10 +1913,10 @@ ${total}
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? 'tTTotalProgrammesGovernment'
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? 'tTTotalProgrammesProgrammeDev'
-                    : categoryType === 'mine'
-                      ? 'tTTotalProgrammesCertifierMine'
-                      : 'tTTotalProgrammesCertifierOverall'
+                  ? 'tTTotalProgrammesProgrammeDev'
+                  : categoryType === 'mine'
+                  ? 'tTTotalProgrammesCertifierMine'
+                  : 'tTTotalProgrammesCertifierOverall'
               )}
             />
           </Col>
@@ -1932,10 +1932,10 @@ ${total}
                 userInfoState?.companyRole === CompanyRole.GOVERNMENT
                   ? 'tTTotalProgrammesSectorGovernment'
                   : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                    ? 'tTTotalProgrammesSecProgrammeDev'
-                    : categoryType === 'mine'
-                      ? 'tTTotalProgrammesSecCertifierMine'
-                      : 'tTTotalProgrammesSecCertifierOverall'
+                  ? 'tTTotalProgrammesSecProgrammeDev'
+                  : categoryType === 'mine'
+                  ? 'tTTotalProgrammesSecCertifierMine'
+                  : 'tTTotalProgrammesSecCertifierOverall'
               )}
             />
           </Col>
@@ -2000,10 +2000,10 @@ ${total}
                           userInfoState?.companyRole === CompanyRole.GOVERNMENT
                             ? 'tTProgrammeLocationsGovernment'
                             : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                              ? 'tTProgrammeLocationsProgrammeDev'
-                              : categoryType === 'mine'
-                                ? 'tTProgrammeLocationsCertifierMine'
-                                : 'tTProgrammeLocationsCertifierOverall'
+                            ? 'tTProgrammeLocationsProgrammeDev'
+                            : categoryType === 'mine'
+                            ? 'tTProgrammeLocationsCertifierMine'
+                            : 'tTProgrammeLocationsCertifierOverall'
                         )}
                       >
                         <InfoCircle color="#000000" size={17} />
@@ -2036,12 +2036,12 @@ ${total}
                         userInfoState?.companyRole === CompanyRole.CERTIFIER &&
                         categoryType === 'mine'
                       ) && (
-                          <>
-                            <LegendItem text="Rejected" color="#FF8183" />
-                            <LegendItem text="Pending" color="#CDCDCD" />
-                            <LegendItem text="New" color="#B7A4FE" />
-                          </>
-                        )}
+                        <>
+                          <LegendItem text="Rejected" color="#FF8183" />
+                          <LegendItem text="Pending" color="#CDCDCD" />
+                          <LegendItem text="New" color="#B7A4FE" />
+                        </>
+                      )}
                     </div>
                     <div className="updated-on margin-top-1">
                       <div className="updated-moment-container">
@@ -2065,10 +2065,10 @@ ${total}
                         userInfoState?.companyRole === CompanyRole.GOVERNMENT
                           ? 'tTTransferLocationsGovernment'
                           : userInfoState?.companyRole === CompanyRole.PROGRAMME_DEVELOPER
-                            ? 'tTTrasnferLocationsProgrammeDev'
-                            : categoryType === 'mine'
-                              ? 'tTTrasnferLocationsCertifierMine'
-                              : 'tTTrasnferLocationsCertifierOverall'
+                          ? 'tTTrasnferLocationsProgrammeDev'
+                          : categoryType === 'mine'
+                          ? 'tTTrasnferLocationsCertifierMine'
+                          : 'tTTrasnferLocationsCertifierOverall'
                       )}
                     >
                       <InfoCircle color="#000000" size={17} />
