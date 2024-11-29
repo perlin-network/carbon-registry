@@ -56,13 +56,18 @@ const Homepage = () => {
                   </h1>
                   <p className="homepage-hero-subtitle">
                     {t(
-                      "Welcome to The Bahamas' National Emission Registry, the official platform for carbon credits international mitigation outcomes, and emission reduction transfers of The Commonwealth of the Bahamas."
+                      'Welcome to the official website of the National Emission Registry of The Bahamas. The Registry tracks and records the issuance and transfer of carbon credits and International Transfer of Mitigation Outcomes (ITMOs) recognised by and/or issued by The Commonwealth of The Bahamas.'
+                    )}
+                  </p>
+                  <p className="homepage-hero-subtitle">
+                    {t(
+                      'The Registry also records individuals, programmes, and activities involved in greenhouse gas management in The Bahamas.'
                     )}
                   </p>
                   <Button
                     className="homepage-hero-button"
                     type="primary"
-                    onClick={() => navigate('/login')}
+                    onClick={() => navigate('/signinSwitchView')}
                   >
                     Sign In
                   </Button>

@@ -1605,7 +1605,7 @@ ${total}
       setProgrammeLocationsMapCenter(
         programmeLocations?.features[0]?.geometry?.coordinates
           ? programmeLocations?.features[0]?.geometry?.coordinates
-          : [7.4924165, 5.5324032]
+          : [-75.5666777250324, 25.24328103008085]
       );
 
       const mapSource: MapSourceData = {

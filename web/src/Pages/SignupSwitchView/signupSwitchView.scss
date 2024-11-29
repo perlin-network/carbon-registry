@@ -1,0 +1,46 @@
+@import '../../Styles/variables.scss';
+
+
+.page-button-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid #eee;
+    border-radius: 24px;
+    background: #fff;
+}
+
+.button-container {
+    display: flex;
+    gap: 100px;
+
+    .ant-btn {
+        padding: 60px 60px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        height: auto;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .button:active {
+        transform: scale(0.95);
+    }
+}

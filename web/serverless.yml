@@ -34,8 +34,10 @@ custom:
             - 'fonts/**/*.*'
   stages:
     uat:
-      domainName: bs-carbon-registry.perlin.net
-      certificateArn: arn:aws:acm:us-east-1:909101490035:certificate/b10e0588-ab7f-4f83-8088-7da4b64d25a0
+      # domainName: bs-carbon-registry.perlin.net
+      # certificateArn: arn:aws:acm:us-east-1:909101490035:certificate/b10e0588-ab7f-4f83-8088-7da4b64d25a0
+      domainName: bahamasemissionregistry.org
+      certificateArn: arn:aws:acm:us-east-1:909101490035:certificate/cf25bae5-ce5c-4867-b404-d87305858826
     ner:
       domainName: ner.bahamas.gov.bs
       certificateArn: arn:aws:acm:us-east-1:909101490035:certificate/cb326f80-7e4e-4f7f-b952-dc97b7c50f55

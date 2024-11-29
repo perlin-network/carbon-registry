@@ -5,7 +5,7 @@ import LogoPng from '../../Assets/Images/logo.png';
 
 const menuItems = [
   {
-    text: 'About',
+    text: 'Our News',
     link: '/about',
   },
   {
@@ -79,7 +79,7 @@ const Header = () => {
             ))}
           </div>
           <div className="header-signin">
-            <Button type="primary" onClick={() => navigate('/signUp')}>
+            <Button type="primary" onClick={() => navigate('/signupSwitchView')}>
               Sign Up
             </Button>
           </div>
