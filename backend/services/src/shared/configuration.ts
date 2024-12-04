@@ -49,7 +49,7 @@ export default () => ({
   s3CommonBucket: {
     name: "bs-cr-perlin-common-" + (process.env.NODE_ENV || "prod"),
   },
-  host: process.env.HOST || "https://bs-carbon-registry.perlin.net",
+  host: process.env.HOST || "https://bahamasemissionregistry.org",
   liveChat: "https://undp2020cdo.typeform.com/to/emSWOmDo",
   mapbox: {
     key: process.env.MAPBOX_PK,

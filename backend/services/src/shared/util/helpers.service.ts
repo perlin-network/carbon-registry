@@ -437,7 +437,7 @@ export class HelperService {
     }
 
     if(isSubject)
-      return `Perlin Carbon Registry: ${template}`;
+      return `Emission Registry: ${template}`;
     else 
       return template;
 }
