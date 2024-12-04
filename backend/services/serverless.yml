@@ -11,7 +11,7 @@ provider:
     FILE_SERVICE: 'S3'
     LOG_LEVEL: 'info'
     DOMAIN_MAP: 'false'
-    SOURCE_EMAIL: 'National Emission Registry <official@bahamasbioregistry.org>'
+    SOURCE_EMAIL: 'official@bahamasbioregistry.org'
     NODE_PATH: './:/opt/node_modules'
     STAGE: ${self:provider.stage}
     LEDGER_TYPE: QLDB #QLDB, PGSQL
