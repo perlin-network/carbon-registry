@@ -42,7 +42,7 @@ const SignupFrameView = () => {
 
   return (
     <iframe
-      src="https://carbon-app.mtckarn7q2.com/signup"
+      src="https://prod-carbon-app.mtckarn7q2.com/signup"
       style={{ width: '100%', height: '100%', flex: 1, border: 'none' }}
     ></iframe>
   );
