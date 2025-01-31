@@ -5,12 +5,16 @@ import LogoPng from '../../Assets/Images/logo.png';
 
 const menuItems = [
   {
-    text: 'Our News',
+    text: 'Reports',
     link: '/about',
   },
   {
-    text: 'Nationally Determined Contributions',
+    text: 'NDCs',
     link: '/nationallyDeterminedContributions',
+  },
+  {
+    text: 'Incentives/Initiatives',
+    link: '/incentives',
   },
 ];
 

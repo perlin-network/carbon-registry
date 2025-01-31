@@ -97,8 +97,14 @@ const Homepage = () => {
                 <p>
                   The National Emission Registry of The Commonwealth of the Bahamas was established
                   under Section VII of the{' '}
-                  <a href="#">Climate Change and Carbon Market Initiatives Act 2022</a> (Carbon
-                  Trading Act) to meet the Bahamas obligations under the Paris Climate Agreement.
+                  <a
+                    target="_blank"
+                    href="https://opm.gov.bs/wp-content/uploads/2022/04/Climate-Change-and-Carbon-Market-Initiatives-Bill-2022-19-April-2022.pdf"
+                  >
+                    Climate Change and Carbon Market Initiatives Act 2022
+                  </a>{' '}
+                  (Carbon Trading Act) to meet the Bahamas obligations under the Paris Climate
+                  Agreement.
                 </p>
                 <p>The Act provides for the Establishment of National Emission Registry:</p>
                 <ul className="check-list">

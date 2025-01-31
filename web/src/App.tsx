@@ -43,6 +43,7 @@ import About from './Pages/About/about';
 import AccessibilityStatement from './Pages/AccessibilityStatement/accessibilityStatement';
 import RegistrarFunctions from './Pages/RegistrarFunctions/registrarFunctions';
 import Contact from './Pages/Contact/contact';
+import Incentives from './Pages/Incentives/incentives';
 
 // message.config({
 //   duration: 60,
@@ -87,6 +88,7 @@ const App = () => {
                     path="nationallyDeterminedContributions"
                     element={<NationallyDeterminedContributions />}
                   />
+                  <Route path="incentives" element={<Incentives />} />
                   <Route path="accessibilityStatement" element={<AccessibilityStatement />} />
                   <Route path="registrarFunctions" element={<RegistrarFunctions />} />
                   <Route path="privacy" element={<PrivacyPolicy />} />

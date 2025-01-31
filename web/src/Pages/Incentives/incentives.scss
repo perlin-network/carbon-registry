@@ -1,0 +1,54 @@
+@import '../../Assets/Fonts/fonts.scss';
+@import '../../Styles/variables.scss';
+
+.incentive-container {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: $background-color;
+  scroll-behavior: smooth;
+  color: #333336;
+  font-family: $font-family-regular;
+  font-size: 1.125rem;
+
+  .incentives-section {
+    padding-top: 20px;
+    ul {
+      padding: 0;
+    }
+    ol {
+      padding-left: 1rem;
+    }
+  }
+
+  .incentive-section-title {
+    margin: 12px 0;
+    color: $color-green;
+    border-bottom: 1px solid $color-green;
+    font-size: 1.25rem;
+  }
+
+  .item {
+    display: flex;
+    margin-top: 12px;
+
+    .item-image {
+      margin-right: 24px;
+      width: 128px;
+    }
+
+    .item-body {
+      max-width: 50%;
+    }
+
+    .item-title {
+      color: $color-link;
+      text-decoration: underline;
+    }
+
+    .item-date {
+      margin-top: 8px;
+      color: $color-midnight-green;
+    }
+  }
+}

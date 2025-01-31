@@ -52,7 +52,7 @@ const PrivacyPolicy = () => {
             </li>
             <li>
               <strong>Company</strong> (referred to as either “the Company”, “We”, “Us” or “Our” in
-              this Agreement) refers to the National Emission Registry of the Commonwealth of the
+              this Agreement) refers to the National Emission Registry of the Commonwealth of The
               Bahamas, Cecil Wallace-Whitfield Centre, P.O. Box CB-10980 Nassau, Bahamas.
             </li>
             <li>
@@ -89,7 +89,7 @@ const PrivacyPolicy = () => {
             <li>
               <strong>Website</strong> refers to National Emissions Registry of the Commonwealth of
               The Bahamas, accessible from{' '}
-              <a href="https://emissionsregistry.gov.bs">https://emissionsregistry.gov.bs</a>
+              <a href="https://ner.bahamas.gov.bs">https://NER.bahamas.gov.bs</a>
             </li>
             <li>
               <strong>You</strong> means the individual accessing or using the Service, or the
@@ -418,7 +418,7 @@ const PrivacyPolicy = () => {
           <p>
             If you have any questions about this Privacy Policy, You can contact us:
             <br />
-            <a href="mailto:emissionsregistry@gov.bs">emissionsregistry@gov.bs</a>
+            <a href="mailto:ner@bahamas.gov.bs">ner@bahamas.gov.bs</a>
           </p>
         </div>
       </div>
