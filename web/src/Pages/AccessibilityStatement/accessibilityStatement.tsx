@@ -15,7 +15,7 @@ const AccessibilityStatement = () => {
         <div className="container">
           <p>
             This is an accessibility statement from the National Emissions Registry of The
-            Commonwealth of the Bahamas.
+            Commonwealth of The Bahamas.
           </p>
           <h4>Conformance Status</h4>
           <p>
