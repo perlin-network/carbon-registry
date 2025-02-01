@@ -15,7 +15,7 @@ const AccessibilityStatement = () => {
         <div className="container">
           <p>
             This is an accessibility statement from the National Emissions Registry of The
-            Commonwealth of the Bahamas.
+            Commonwealth of The Bahamas.
           </p>
           <h4>Conformance Status</h4>
           <p>
@@ -40,9 +40,7 @@ const AccessibilityStatement = () => {
               Centre, P.O. Box CB-10980 Nassau, Bahamas
             </li>
             <li>
-              <a href="https://emissionsregistry.gov.bs/contact">
-                https://emissionsregistry.gov.bs/contact
-              </a>
+              <a href="https://ner.bahamas.gov.bs/contact">https://NER.bahamas.gov.bs/contact</a>
             </li>
           </ul>
           <br />
