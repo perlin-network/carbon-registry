@@ -49,8 +49,8 @@ const CookiePolicy = () => {
               This Cookie Policy explains how Bahamas (<b>"Company"</b>, "<b>we</b>","<b>us</b>",
               and "<b>our</b>") uses cookies and similar technologies to recognize you when you
               visit our websites at{' '}
-              <a target="_blank" href="https://carbon-registry.perlin.net">
-                https://carbon-registry.perlin.net
+              <a target="_blank" href="https://ner.bahamas.gov.bs">
+                https://ner.bahamas.gov.bs
               </a>
               , ("<b>Websites</b>"). It explains what these technologies are and why we use them, as
               well as your rights to control our use of them.
@@ -283,10 +283,7 @@ const CookiePolicy = () => {
                 <tr>
                   <td>Provider:</td>
                   <td>
-                    <a href="https://carbon-registry.perlin.net">
-                      https://carbon-registry.perlin.net
-                    </a>
-                    /
+                    <a href="https://ner.bahamas.gov.bs">https://ner.bahamas.gov.bs</a>/
                   </td>
                 </tr>
                 <tr>
@@ -322,7 +319,7 @@ const CookiePolicy = () => {
                 </tr>
                 <tr>
                   <td>Provider:</td>
-                  <td>.perlin.net</td>
+                  <td>.bahamas.gov.bs</td>
                 </tr>
                 <tr>
                   <td>Service:</td>
@@ -363,7 +360,7 @@ const CookiePolicy = () => {
                 </tr>
                 <tr>
                   <td>Provider:</td>
-                  <td>.perlin.net</td>
+                  <td>.bahamas.gov.bs</td>
                 </tr>
                 <tr>
                   <td>Service:</td>
@@ -415,9 +412,7 @@ const CookiePolicy = () => {
                 <tr>
                   <td>Provider:</td>
                   <td>
-                    <a href="https://carbon-registry.perlin.net">
-                      https://carbon-registry.perlin.net
-                    </a>
+                    <a href="https://ner.bahamas.gov.bs">https://ner.bahamas.gov.bs</a>
                   </td>
                 </tr>
                 <tr>
@@ -457,7 +452,7 @@ const CookiePolicy = () => {
                 </tr>
                 <tr>
                   <td>Provider:</td>
-                  <td>.perlin.net</td>
+                  <td>.bahamas.gov.bs</td>
                 </tr>
                 <tr>
                   <td>Service:</td>
@@ -507,9 +502,7 @@ const CookiePolicy = () => {
                 <tr>
                   <td>Provider:</td>
                   <td>
-                    <a href="https://carbon-registry.perlin.net">
-                      https://carbon-registry.perlin.net
-                    </a>
+                    <a href="https://ner.bahamas.gov.bs">https://ner.bahamas.gov.bs</a>
                   </td>
                 </tr>
                 <tr>

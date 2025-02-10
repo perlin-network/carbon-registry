@@ -136,8 +136,8 @@ const TermsOfUse = () => {
                 personally or on behalf of an entity (“you”) and United Nations Development
                 Programme ("Company," “we," “us," or “our”), concerning your access to and use of
                 the{' '}
-                <a target="_blank" href="https://carbon-registry.perlin.net">
-                  https://carbon-registry.perlin.net
+                <a target="_blank" href="https://ner.bahamas.gov.bs">
+                  https://ner.bahamas.gov.bs
                 </a>{' '}
                 website as well as any other media form, media channel, mobile website or mobile
                 application related, linked, or otherwise connected thereto (collectively, the

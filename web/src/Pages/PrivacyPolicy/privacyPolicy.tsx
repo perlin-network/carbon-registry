@@ -434,7 +434,7 @@ const PrivacyPolicy = () => {
               as when you:
               <ul>
                 <li>
-                  Visit our website at https://carbon-registry.perlin.net, or any website of ours
+                  Visit our website at https://ner.bahamas.gov.bs, or any website of ours
                   that links to this privacy notice
                 </li>
                 <li>

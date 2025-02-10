@@ -10,7 +10,7 @@ const publications = [
       'First Biennial Update Report (BUR1)of the Commonwealth of The Bahamas to the United Nations Framework Convention on Climate Change (UNFCCC)',
     date: 'December 2022',
     image: 'http://placehold.it/128x160',
-    url: 'https://unfccc.int/documents/624761'
+    url: 'https://unfccc.int/documents/624761',
   },
 ];
 
@@ -64,10 +64,7 @@ const About = () => {
       <HeroHeader title="Our News" breadcrumbs={['Our News']} backgroundImage={BackgroundJpg} />
       <div className="page-content">
         <div className="container">
-          <p>
-            The National Emission Registrar can be found in this
-            section...
-          </p>
+          <p>The National Emission Registrar can be found in this section...</p>
           <div className="about-publications">
             <h2 className="about-section-title">Publications:</h2>
             <ul>

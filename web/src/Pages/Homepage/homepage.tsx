@@ -95,25 +95,19 @@ const Homepage = () => {
               </h2>
               <div className="homepagebody">
                 <p>
-                The National Emissions Registry of the Commonwealth of The Bahamas was
-                established under Section VII of the {' '}
-                  <a
-                    target="_blank"
-                    href="https://faolex.fao.org/docs/pdf/bha211771.pdf"
-                  >
+                  The National Emissions Registry of the Commonwealth of The Bahamas was established
+                  under Section VII of the{' '}
+                  <a target="_blank" href="https://faolex.fao.org/docs/pdf/bha211771.pdf">
                     Climate Change and Carbon Market Initiatives Act 2022.
                   </a>{' '}
                 </p>
                 <p>The National Emissions Registry is mandated by law to:</p>
                 <ul className="check-list">
+                  <li>Manage, report, and track Greenhouse gas emissions within the country</li>
+                  <li>Issue Greenhouse gas emission allocations</li>
                   <li>
-                    Manage, report, and track Greenhouse gas emissions within the country
-                  </li>
-                  <li>
-                    Issue Greenhouse gas emission allocations
-                  </li>
-                  <li>
-                    Develop Greenhouse gas emission reduction initiatives and incentives for The Bahamas.
+                    Develop Greenhouse gas emission reduction initiatives and incentives for The
+                    Bahamas.
                   </li>
                 </ul>
               </div>
