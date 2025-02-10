@@ -56,7 +56,7 @@ const Homepage = () => {
                   </h1>
                   <p className="homepage-hero-subtitle">
                     {t(
-                      'Welcome to the official website of the National Emission Registry of The Bahamas. The Registry tracks and records the issuance and transfer of carbon credits and International Transfer of Mitigation Outcomes (ITMOs) recognised by and/or issued by The Commonwealth of The Bahamas.'
+                      'Welcome to the official website of the National Emission Registry of The Bahamas. The Registry tracks and records the issuance and transfer of carbon credits and International Transfer of Mitigation Outcomes (ITMOs) recognised by and/or issued by the Commonwealth of The Bahamas.'
                     )}
                   </p>
                   <p className="homepage-hero-subtitle">
@@ -95,34 +95,25 @@ const Homepage = () => {
               </h2>
               <div className="homepagebody">
                 <p>
-                  The National Emission Registry of The Commonwealth of the Bahamas was established
-                  under Section VII of the{' '}
+                The National Emissions Registry of the Commonwealth of The Bahamas was
+                established under Section VII of the {' '}
                   <a
                     target="_blank"
-                    href="https://opm.gov.bs/wp-content/uploads/2022/04/Climate-Change-and-Carbon-Market-Initiatives-Bill-2022-19-April-2022.pdf"
+                    href="https://faolex.fao.org/docs/pdf/bha211771.pdf"
                   >
-                    Climate Change and Carbon Market Initiatives Act 2022
+                    Climate Change and Carbon Market Initiatives Act 2022.
                   </a>{' '}
-                  (Carbon Trading Act) to meet the Bahamas obligations under the Paris Climate
-                  Agreement.
                 </p>
-                <p>The Act provides for the Establishment of National Emission Registry:</p>
+                <p>The National Emissions Registry is mandated by law to:</p>
                 <ul className="check-list">
                   <li>
-                    A national registry shall be established for the purposes of this Act
-                    (hereinafter referred to as “the National Emission Registry”).
+                    Manage, report, and track Greenhouse gas emissions within the country
                   </li>
                   <li>
-                    The Prime Minister shall appoint a registrar who shall have the responsibility
-                    for the day-to-day management of the Registry.
+                    Issue Greenhouse gas emission allocations
                   </li>
                   <li>
-                    The National Emission Registry shall be appointed as the Designated Operating
-                    Entity under Article 6 of the Paris Agreement.
-                  </li>
-                  <li>
-                    The Registrar shall be assisted by such numbers of persons as the Minister may
-                    appoint.
+                    Develop Greenhouse gas emission reduction initiatives and incentives for The Bahamas.
                   </li>
                 </ul>
               </div>

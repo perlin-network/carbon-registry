@@ -2,7 +2,7 @@
 @import '../../Styles/variables.scss';
 
 .homepage-footer-container {
-  padding: 32px 0;
+  padding: 1rem;
   color: #fff;
   background: $color-primary-dark;
 
@@ -13,16 +13,20 @@
     @media (max-width: $md-size) {
       display: block;
     }
+    @media (max-width: $sm-size) {
+      padding: 0;
+    }
   }
 
   .credits {
     max-width: 320px;
-    font-size: 1.125rem;
-    line-height: 1.55;
+    font-size: 0.75rem;
+    line-height: 1rem;
     img {
       display: block;
-      height: 56px;
-      margin-bottom: 14px;
+      // height: 56px;
+      width: 8rem;
+      // margin-bottom: 14px;
     }
   }
 
@@ -117,6 +121,22 @@
       color: $dark-text-color;
       font-family: 'MuseoSans';
       margin-left: 0.6rem;
+    }
+  }
+
+  .credits-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .container-copyright {
+    justify-content: flex-end;
+
+    @media (max-width: $sm-size) {
+      text-align: center;
+      margin-top: 16px;
     }
   }
 }

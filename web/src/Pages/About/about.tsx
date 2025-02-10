@@ -7,9 +7,10 @@ import BackgroundJpg from '../../Assets/Images/news-bg.jpg';
 const publications = [
   {
     title:
-      'First Biennial Update Report (BUR1)of The Commonwealth of The Bahamasto the United Nations Framework Convention on Climate Change (UNFCCC)',
+      'First Biennial Update Report (BUR1)of the Commonwealth of The Bahamas to the United Nations Framework Convention on Climate Change (UNFCCC)',
     date: 'December 2022',
     image: 'http://placehold.it/128x160',
+    url: 'https://unfccc.int/documents/624761'
   },
 ];
 
@@ -40,13 +41,14 @@ interface PublicationItemProps {
   title: string;
   date: string;
   image: string;
+  url: string;
 }
 
-const PublicationItem: React.FC<PublicationItemProps> = ({ title, date, image }) => (
+const PublicationItem: React.FC<PublicationItemProps> = ({ title, date, image, url }) => (
   <li className="publication-item">
     <img src={image} alt="" className="publication-image" />
     <div className="publication-body">
-      <a href="#" className="publication-title">
+      <a href={url} target="_blank" className="publication-title">
         {title}
       </a>
       <div className="publication-date">{date}</div>
@@ -63,7 +65,7 @@ const About = () => {
       <div className="page-content">
         <div className="container">
           <p>
-            News and Publications from the National Emission Registrar can be found in this
+            The National Emission Registrar can be found in this
             section...
           </p>
           <div className="about-publications">

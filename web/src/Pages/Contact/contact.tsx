@@ -15,7 +15,6 @@ const Contact = () => {
         <div className="container">
           <div className="section-row">
             <div className="section-column">
-              <div>Contact Us</div>
               <h2>Hello, Any Questions?</h2>
               <Form name="contact" layout="vertical">
                 <Form.Item label="Name" name="name">
