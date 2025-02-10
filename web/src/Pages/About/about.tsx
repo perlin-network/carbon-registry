@@ -61,10 +61,9 @@ const About = () => {
 
   return (
     <div className="about-container">
-      <HeroHeader title="Our News" breadcrumbs={['Our News']} backgroundImage={BackgroundJpg} />
+      <HeroHeader title="Reports" breadcrumbs={['Reports']} backgroundImage={BackgroundJpg} />
       <div className="page-content">
         <div className="container">
-          <p>The National Emission Registrar can be found in this section...</p>
           <div className="about-publications">
             <h2 className="about-section-title">Publications:</h2>
             <ul>
