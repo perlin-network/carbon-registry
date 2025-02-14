@@ -37,12 +37,11 @@ const Incentives = () => {
       <div className="page-content">
         <div className="container">
           <p>
-            The National Emission Registrar, on instruction from the Prime Minister, can issue
-            incentives to promote decarbonization and lower greenhouse gas emissions, details of the
-            latest incentives can be found here…
+            The Prime Minister may create and implement incentives and initiatives to promote
+            decarbonization and lower greenhouse gas emissions.
           </p>
           <div className="incentives-section">
-            <h2 className="incentive-section-title">Incentives:</h2>
+            <h2 className="incentive-section-title">2025 Incentives</h2>
             <ul>
               {incentives.map((item) => (
                 <IncentiveItem key={item.title} {...item} />
