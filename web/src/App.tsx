@@ -77,11 +77,11 @@ const App = () => {
               <Routes>
                 <Route path="help" element={<CarbonHelp />} />
                 <Route path="signinFrameView" element={<SigninFrameView />} />
-                <Route path="signupFrameView" element={<SignupFrameView />} />
                 <Route path="codeconduct" element={<CodeOfConduct />} />
                 <Route path="cookie" element={<CookiePolicy />} />
                 <Route path="terms" element={<TermsOfUse />} />
                 <Route path="/" element={<CommonLayout />}>
+                  <Route path="signupFrameView" element={<SignupFrameView />} />
                   <Route index element={<Homepage />} />
                   <Route path="about" element={<About />} />
                   <Route

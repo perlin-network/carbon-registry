@@ -6,6 +6,8 @@ import MapComponent from '../../Components/Maps/MapComponent';
 import config from '../../config';
 
 const mapType = config.mapType;
+const contactIframeUrl =
+  (process.env.REACT_APP_IFRAME_BASE_URL || 'http://localhost:3000/carbon/app') + '/contact';
 
 const Contact = () => {
   return (
@@ -16,7 +18,7 @@ const Contact = () => {
           <div className="section-row">
             <div className="section-column">
               <h2>Hello, Any Questions?</h2>
-              <Form name="contact" layout="vertical">
+              {/* <Form name="contact" layout="vertical">
                 <Form.Item label="Name" name="name">
                   <Input placeholder="Enter your name" />
                 </Form.Item>
@@ -27,7 +29,11 @@ const Contact = () => {
                   <Input.TextArea placeholder="Your message..." rows={6} />
                 </Form.Item>
                 <Button size="large">Send Message</Button>
-              </Form>
+              </Form> */}
+              <iframe
+                src={contactIframeUrl}
+                style={{ width: '100%', height: '450px', flex: 1, border: 'none' }}
+              ></iframe>
             </div>
             <div className="section-column">
               <MapComponent
