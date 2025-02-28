@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './signupFrameView.scss';
-const signupIframeUrl =
-  (process.env.REACT_APP_IFRAME_BASE_URL || 'http://localhost:3000/carbon/app') + '/signup';
+import config from '../../config';
+const signupIframeUrl = config.iframurl + '/signup';
 const SignupFrameView = () => {
   return (
     <div

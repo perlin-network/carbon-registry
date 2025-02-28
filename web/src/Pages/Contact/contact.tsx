@@ -6,8 +6,7 @@ import MapComponent from '../../Components/Maps/MapComponent';
 import config from '../../config';
 
 const mapType = config.mapType;
-const contactIframeUrl =
-  (process.env.REACT_APP_IFRAME_BASE_URL || 'http://localhost:3000/carbon/app') + '/contact';
+const contactIframeUrl = config.iframurl + '/contact';
 
 const Contact = () => {
   return (
