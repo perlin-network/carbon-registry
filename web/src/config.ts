@@ -9,7 +9,7 @@ const config = {
     'https://bs-cr-perlin-common-prod.s3.amazonaws.com/flag.png',
   mapBoxToken: process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN,
   mapType: process.env.REACT_APP_MAP_TYPE || 'None',
-  iframurl: 'https://carbon-app.mtckarn7q2.com', // process.env.REACT_APP_IFRAME_BASE_URL || 'http://localhost:3000/carbon/app',
+  iframurl: process.env.REACT_APP_IFRAME_BASE_URL || 'http://localhost:3000/carbon/app',
 };
 
 export default config;
